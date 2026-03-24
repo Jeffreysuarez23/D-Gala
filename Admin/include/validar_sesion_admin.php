@@ -1,5 +1,11 @@
 <?php
 /**
+ * ESTA TAREA LA HIZO: Jhon Perna
+ * SU REQUERIMIENTO FUE: RF-007 - Log de Accesos Admin (validación de sesión y estado del administrador)
+ * PERTENECE A ESTE ARCHIVO: Admin/include/validar_sesion_admin.php
+ */
+
+/**
  * Validar que el administrador con sesión activa siga siendo válido
  * Incluir este archivo en la cabecera del Admin panel
  * para asegurar que administradores deshabilitados no puedan usar el sistema

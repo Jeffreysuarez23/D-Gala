@@ -1,5 +1,11 @@
 <?php
 /**
+ * ESTA TAREA LA HIZO: Jhon Perna
+ * SU REQUERIMIENTO FUE: RF-005 - Editar Administrador / RF-006 - Eliminar (desactivar) Administrador
+ * PERTENECE A ESTE ARCHIVO: Admin/include/admin_crud.php
+ */
+
+/**
  * CRUD de Administrador
  * Funciones para gestionar el perfil del administrador
  */

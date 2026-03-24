@@ -1,4 +1,10 @@
 <?php
+/**
+ * ESTA TAREA LA HIZO: Jhon Perna
+ * SU REQUERIMIENTO FUE: RF-005 - Editar Administrador (nombre, email, estado) / RF-006 - Eliminar Administrador
+ * PERTENECE A ESTE ARCHIVO: Admin/modulos/editar_admin.php
+ */
+
 require_once("include/db.php");
 require_once("include/admin_crud.php");
 

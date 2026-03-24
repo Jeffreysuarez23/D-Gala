@@ -1,4 +1,11 @@
 <?php
+/**
+ * ESTA TAREA LA HIZO: Jhon Perna
+ * SU REQUERIMIENTO FUE: RF-005 - Editar Administrador / RF-006 - Eliminar Admin / 
+ *                       RF-007 - Log de Accesos Admin / RF-008 - Búsqueda de Acciones Admin
+ * PERTENECE A ESTE ARCHIVO: Admin/modulos/GestionarUsuarios.php
+ */
+
 require_once("include/db.php");
 require_once("include/configuracionesAD.php");
 require_once("include/admin.php");
