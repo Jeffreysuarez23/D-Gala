@@ -1,0 +1,6 @@
+alertas
+redireccion del usuario en dashboar mis productos
+restricciones en los inputs
+categoria duplicada
+super admin 
+validacion de roles

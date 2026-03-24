@@ -1,0 +1,153 @@
+╔══════════════════════════════════════════════════════════════════════════════╗
+║                         🚀 QUICKSTART - 5 MINUTOS                            ║
+╚══════════════════════════════════════════════════════════════════════════════╝
+
+⏱️  PASOS RÁPIDOS PARA EMPEZAR (5 minutos):
+═════════════════════════════════════════════════════════════════════════════
+
+PASO 1: EJECUTAR SQL (2 minutos)
+────────────────────────────────────────────────────────────────────────────
+
+1. Abre http://localhost/phpmyadmin
+2. Selecciona BD "tienda_online"
+3. Tab "SQL"
+4. Abre archivo: DataBase/datos_variantes_ejemplo.sql
+5. Copia TODO el contenido
+6. Pégalo en phpMyAdmin
+7. Ejecuta (Botón "Continuar")
+
+✓ LISTO - Ya tienes tallas, colores y variantes en la BD
+
+PASO 2: PROBAR DETALLES.PHP (3 minutos)
+────────────────────────────────────────────────────────────────────────────
+
+1. En tu navegador, ve a:
+   http://localhost/e-comerse2/public/detalles.php?id=9&token=CUALQUIER_TOKEN
+
+   ⚠️  Nota: El token puede ser cualquiera si estás en desarrollo
+   
+2. Deberías ver:
+   ✓ Botones de Tallas (S, M, L, XL)
+   ✓ Círculos de Colores (Negro, Azul, Rojo, Verde, etc.)
+   ✓ Cuando selecciones Talla → Los colores se filtran
+   ✓ Cuando selecciones Color → Aparece el precio y stock
+
+3. Prueba:
+   - Selecciona Talla S
+   - Selecciona Color Negro
+   - Click "Agregar esta variante"
+   - Verás notificación ✓
+   - La variante aparece en carrito temporal
+
+4. Agrega más variantes del mismo producto (paso 3 otra vez)
+
+5. Haz clic "Agregar todas al carrito"
+   - Notificación final
+   - Contador del carrito actualiza
+
+✓ LISTO - Sistema completo funcionando!
+
+═════════════════════════════════════════════════════════════════════════════
+
+🎯 LO QUE ACABAS DE HACER:
+═════════════════════════════════════════════════════════════════════════════
+
+✅ Sistema de variantes (Talla + Color + Precio + Stock)
+✅ Filtrado dinámico bidireccional
+✅ AJAX sin recargas de página
+✅ Carrito temporal para múltiples variantes
+✅ Interfaz visual mejorada
+✅ Sistema completamente funcional
+
+═════════════════════════════════════════════════════════════════════════════
+
+📚 DOCUMENTACIÓN (Léela después):
+═════════════════════════════════════════════════════════════════════════════
+
+1. README_VARIANTES.txt
+   → Resumen visual y fácil de entender
+
+2. GUIA_VARIANTES.md
+   → Guía técnica completa
+
+3. ARQUITECTURA_SISTEMA.txt
+   → Diagramas de flujo y estructura
+
+4. VERIFICACION.txt
+   → Checklist para asegurar que todo funcione
+
+═════════════════════════════════════════════════════════════════════════════
+
+🔧 PERSONALIZACIÓN (Opcional):
+═════════════════════════════════════════════════════════════════════════════
+
+Agregar más tallas/colores:
+  1. En phpmyadmin, ve a tabla c_tallas
+  2. Agrega nuevas filas (ej: "XXL", "XXXL")
+  3. Ve a tabla c_colores
+  4. Agrega nuevos colores con código hex (ej: "Turquesa", "#40E0D0")
+  5. Crea variantes en productos_variantes
+
+Cambiar precios de variantes:
+  1. Tabla: productos_variantes
+  2. Edita columna "precio" para cada variante
+  3. El nuevo precio aparecerá automáticamente cuando selecciones esa variante
+
+Cambiar stock de variantes:
+  1. Tabla: productos_variantes
+  2. Edita columna "stock" para cada variante
+  3. Si stock=0, el botón se desactiva automáticamente
+
+═════════════════════════════════════════════════════════════════════════════
+
+❓ PREGUNTAS RÁPIDAS:
+═════════════════════════════════════════════════════════════════════════════
+
+P: ¿Dónde está todo el código?
+R: En la carpeta raíz del proyecto:
+   - include/api_variantes.php
+   - include/carrito_variantes.php
+   - public/detalles.php
+   - public/carrito_nuevo.php
+
+P: ¿Necesito cambiar algo más?
+R: No, el sistema ya está completamente integrado. Solo prueba!
+
+P: ¿Funciona con productos sin variantes?
+R: Sí, el sistema es compatible hacia atrás. Sigue funcionando todo.
+
+P: ¿Cómo hago checkout con variantes?
+R: Similar al sistema anterior, pero ahora lees $_SESSION['carrito']['variantes']
+   en lugar de (o además de) $_SESSION['carrito']['productos']
+
+P: ¿Puedo editar los estilos?
+R: Sí, en public/detalles.php hay un bloque <style> al principio.
+
+═════════════════════════════════════════════════════════════════════════════
+
+🎉 ¡LISTO! El sistema está 100% funcional.
+
+═════════════════════════════════════════════════════════════════════════════
+
+📝 RECORDATORIO:
+═════════════════════════════════════════════════════════════════════════════
+
+El SQL de ejemplo agrega variantes a productos 9, 10, 11 y 12.
+Si quieres agregar variantes a otros productos:
+
+INSERT INTO productos_variantes (id_producto, id_talla, id_color, precio, stock)
+VALUES 
+(ID_PRODUCTO, ID_TALLA, ID_COLOR, PRECIO, STOCK),
+(ID_PRODUCTO, ID_TALLA, ID_COLOR, PRECIO, STOCK);
+
+Ejemplo:
+INSERT INTO productos_variantes (id_producto, id_talla, id_color, precio, stock)
+VALUES 
+(15, 6, 1, 30000.00, 12),  -- Producto 15, S, Negro, 30000, 12 unidades
+(15, 7, 2, 32000.00, 8);   -- Producto 15, M, Blanco, 32000, 8 unidades
+
+═════════════════════════════════════════════════════════════════════════════
+
+🚀 ¡AHORA SÍ, A VENDER! 🎊
+
+═════════════════════════════════════════════════════════════════════════════

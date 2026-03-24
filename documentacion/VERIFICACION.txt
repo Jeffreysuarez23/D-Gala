@@ -1,0 +1,367 @@
+╔═══════════════════════════════════════════════════════════════════════════════╗
+║          CHECKLIST DE VERIFICACIÓN - SISTEMA DE VARIANTES                      ║
+╚═══════════════════════════════════════════════════════════════════════════════╝
+
+⚠️  ANTES DE EMPEZAR:
+═════════════════════════════════════════════════════════════════════════════
+
+□ XAMPP está corriendo
+  - Apache: ON
+  - MySQL: ON
+  - http://localhost/phpmyadmin accesible
+
+□ Base de datos "tienda_online" existe
+  - Si no: Crearla o importar tienda_online(uso).sql
+
+□ Archivos existentes sin conflictos
+  - public/detalles.php original resguardado (si necesario)
+  - include/carrito.php funciona actualmente
+
+═════════════════════════════════════════════════════════════════════════════
+
+✅ PASO 1: VERIFICAR TABLAS EN BD
+═════════════════════════════════════════════════════════════════════════════
+
+En phpMyAdmin, ejecuta estas consultas:
+
+□ Verificar c_tallas existe:
+  SELECT * FROM c_tallas LIMIT 1;
+  Resultado esperado: Tabla con columnas (id, nombre)
+  
+□ Verificar c_colores existe:
+  SELECT * FROM c_colores LIMIT 1;
+  Resultado esperado: Tabla con columnas (id, nombre, codigo_hex, estado)
+
+□ Verificar productos_variantes existe:
+  SELECT * FROM productos_variantes LIMIT 1;
+  Resultado esperado: Tabla con columnas (id, id_producto, id_talla, id_color, precio, stock)
+
+□ Si alguna tabla NO existe:
+  → Ejecutar: DataBase/datos_variantes_ejemplo.sql
+  → Esto creará las tablas y agregará datos
+
+═════════════════════════════════════════════════════════════════════════════
+
+✅ PASO 2: CARGAR DATOS DE EJEMPLO
+═════════════════════════════════════════════════════════════════════════════
+
+□ Abrir: DataBase/datos_variantes_ejemplo.sql en editor
+
+□ Copiar TODO el contenido
+
+□ Ir a http://localhost/phpmyadmin
+  → Seleccionar BD "tienda_online"
+  → Tab "SQL"
+  → Pegar contenido
+  → Ejecutar
+
+□ Verificar que se insertaron los datos:
+  SELECT COUNT(*) FROM c_tallas;
+  SELECT COUNT(*) FROM c_colores;
+  SELECT COUNT(*) FROM productos_variantes;
+  
+  Resultado esperado:
+  - c_tallas: ~10 registros
+  - c_colores: ~10 registros
+  - productos_variantes: ~15+ registros
+
+═════════════════════════════════════════════════════════════════════════════
+
+✅ PASO 3: VERIFICAR ARCHIVOS CREADOS
+═════════════════════════════════════════════════════════════════════════════
+
+En el navegador de archivos, verificar que existen:
+
+□ c:\xampp\htdocs\e-comerse2\include\api_variantes.php (NUEVO)
+  - Tamaño: ~5-6 KB
+  - Contiene: function getVariantes, filtrarVariantes
+
+□ c:\xampp\htdocs\e-comerse2\include\carrito_variantes.php (NUEVO)
+  - Tamaño: ~6-7 KB
+  - Contiene: action=agregarVariante, actualizarCantidad, etc.
+
+□ c:\xampp\htdocs\e-comerse2\public\carrito_nuevo.php (NUEVO)
+  - Tamaño: ~10-12 KB
+  - Contiene: Vista de carrito con variantes
+
+□ c:\xampp\htdocs\e-comerse2\public\detalles.php (MODIFICADO)
+  - Tamaño: Mayor que antes (~20 KB)
+  - Contiene: renderTallas, renderColores, AJAX
+
+□ c:\xampp\htdocs\e-comerse2\include\carrito.php (MODIFICADO)
+  - Debe actualizar ambos: 'productos' y 'variantes'
+
+═════════════════════════════════════════════════════════════════════════════
+
+✅ PASO 4: PROBAR DETALLES.PHP
+═════════════════════════════════════════════════════════════════════════════
+
+1. Abrir navegador: http://localhost/e-comerse2/public/detalles.php?id=9&token=[ACTUALIZAR]
+
+   ⚠️  IMPORTANTE: Necesitas el TOKEN válido
+   - Genera el token en tu código:
+     php: $token = hash_hmac('sha1', 9, KEY_TOKEN);
+   - O cópialo desde una página de catálogo que ya funcione
+
+2. □ Página carga sin errores
+   - Check: No hay errores en consola (F12 → Console)
+
+3. □ Se muestran las TALLAS
+   - Check: Buttons: S, M, L, XL aparecen
+   - Check: Son cuadros selectables
+
+4. □ Se muestran los COLORES
+   - Check: Círculos con colores aparecen
+   - Check: Los códigos hex funcionan (colores reales)
+
+5. □ FILTRADO DINÁMICO - Selecciona Talla S
+   - Click en botón "S"
+   - Check: Botón se pone activo (fondo obscuro)
+   - Check: Los colores cambian (solo los que tienen S disponibles)
+   - Check: SIN RECARGAR PÁGINA (AJAX)
+
+6. □ INFORMACIÓN DE VARIANTE - Selecciona Color Negro
+   - Click en círculo Negro
+   - Check: Aparece sección de "Variante info"
+   - Check: Muestra:
+     * Talla: S
+     * Color: Negro
+     * Precio: 24000.00 (o similar)
+     * Stock: X en stock
+
+7. □ AGREGAR VARIANTE
+   - Ingresa cantidad: 2
+   - Click "Agregar esta variante"
+   - Check: Notificación "2 variante(s) agregada(s)"
+   - Check: Aparece en carrito temporal
+   - Check: SIN RECARGAR (AJAX)
+
+8. □ AGREGAR MÁS VARIANTES
+   - Selecciona otra Talla (M)
+   - Selecciona otro Color (Azul)
+   - Ingresa cantidad: 1
+   - Click "Agregar esta variante"
+   - Check: Aparece segunda variante en carrito temporal
+   - Check: El total se actualiza ($$ correctos)
+
+9. □ MODIFICAR CANTIDAD EN TEMPORAL
+   - En carrito temporal, cambia cantidad de variante 1
+   - Check: Total se actualiza en tiempo real
+
+10. □ ELIMINAR VARIANTE DEL TEMPORAL
+    - Click en trash icon de una variante
+    - Check: Se elimina del carrito temporal
+    - Check: Total se actualiza
+
+11. □ AGREGAR TODO AL CARRITO PRINCIPAL
+    - Click "Agregar todas las variantes al carrito"
+    - Check: Notificación "X variante(s) agregada(s) al carrito"
+    - Check: Contador del carrito en header actualiza
+    - Check: Carrito temporal se vacía
+
+═════════════════════════════════════════════════════════════════════════════
+
+✅ PASO 5: VERIFICAR CONSOLE (F12)
+═════════════════════════════════════════════════════════════════════════════
+
+Abre las herramientas del desarrollador (F12):
+
+□ Tab "Console"
+  - No debe haber errores rojos
+  - Check: Mensajes verdes de AJAX exitosos
+  - Check: Network requests a api_variantes.php
+
+□ Tab "Network"
+  - Observa requests cuando:
+    * Carga la página → api_variantes.php?action=getVariantes ✓
+    * Selecciona talla → api_variantes.php?action=filtrarVariantes ✓
+    * Selecciona color → api_variantes.php?action=filtrarVariantes ✓
+    * Agrega variante → carrito_variantes.php (POST) ✓
+
+□ Tab "Application" → Cookies
+  - Debe existir cookie de sesión (PHPSESSID)
+  - Check: Valor no está vacío
+
+═════════════════════════════════════════════════════════════════════════════
+
+✅ PASO 6: PROBAR CARRITO_NUEVO.PHP
+═════════════════════════════════════════════════════════════════════════════
+
+1. Agrega algunas variantes en detalles.php (como en Paso 4)
+
+2. Abre: http://localhost/e-comerse2/public/carrito_nuevo.php
+
+3. □ Carrito NO está vacío
+   - Check: Muestra variantes que agregaste
+
+4. □ Sección "Variantes seleccionadas" existe
+   - Check: Muestra todas las variantes con:
+     * Talla - Color
+     * Precio unitario
+     * Cantidad
+     * Botón eliminar
+
+5. □ Resumen del carrito muestra:
+   - Check: Subtotal correcto
+   - Check: IVA calculado
+   - Check: TOTAL final
+
+6. □ Puedes modificar cantidad
+   - Cambia cantidad en input
+   - Check: Se actualiza automáticamente
+
+7. □ Puedes eliminar variantes
+   - Click en botón trash
+   - Check: Se elimina del carrito
+
+8. □ Botón "Proceder al pago"
+   - Click
+   - Check: Redirige a checkout.php (o tu página de pago)
+
+═════════════════════════════════════════════════════════════════════════════
+
+✅ PASO 7: VERIFICAR SESIÓN
+═════════════════════════════════════════════════════════════════════════════
+
+Crear archivo temporal: test_sesion.php en public/
+
+```php
+<?php
+session_start();
+echo '<pre>';
+echo 'SESIÓN ACTUAL:';
+print_r($_SESSION);
+echo '</pre>';
+?>
+```
+
+□ Abre: http://localhost/e-comerse2/public/test_sesion.php
+
+□ Debe mostrar:
+  Array (
+    [carrito] => Array (
+      [productos] => Array ( )
+      [variantes] => Array (
+        [variante_1] => Array (
+          [variante_id] => 1
+          [id_producto] => 9
+          [cantidad] => 2
+          [precio] => 24000
+          [talla] => S
+          [color] => Negro
+        )
+        ...
+      )
+    )
+  )
+
+□ Borra el archivo test_sesion.php después
+
+═════════════════════════════════════════════════════════════════════════════
+
+✅ PASO 8: PROBAR DIFERENTES PRODUCTOS
+═════════════════════════════════════════════════════════════════════════════
+
+Repite los pasos 4-7 con otros productos:
+
+□ Producto 10: http://localhost/e-comerse2/public/detalles.php?id=10&token=[TOKEN]
+  - Check: Tiene variantes diferentes
+  - Check: Tallas: S, M, L
+  - Check: Colores: diferentes a producto 9
+
+□ Producto 11: http://localhost/e-comerse2/public/detalles.php?id=11&token=[TOKEN]
+  - Check: Tiene variantes
+  - Check: Tallas: 30, 32, 34
+  - Check: Filtrado funciona
+
+□ Producto sin variantes: (opcional)
+  - Check: No muestra sección de variantes
+  - Check: Sistema antiguo todavía funciona
+
+═════════════════════════════════════════════════════════════════════════════
+
+⚠️  ERRORES COMUNES Y SOLUCIONES:
+═════════════════════════════════════════════════════════════════════════════
+
+PROBLEMA: "No aparecen tallas ni colores"
+SOLUCIÓN:
+  □ Verificar que api_variantes.php existe
+  □ Verificar que BD tiene datos en c_tallas y c_colores
+  □ Verificar que el producto tiene variantes en productos_variantes
+  □ Abrir F12 → Network para ver si AJAX falla
+  □ Checar por errores en Console (F12)
+
+PROBLEMA: "Errores 404 en AJAX"
+SOLUCIÓN:
+  □ Verificar rutas correcciones en detalles.php:
+    - '../include/api_variantes.php' ✓
+    - '../include/carrito_variantes.php' ✓
+  □ Verificar que archivos existen en include/
+  □ Checar permisos de archivo
+
+PROBLEMA: "La sesión se pierde"
+SOLUCIÓN:
+  □ Verificar que session_start() está en:
+    - detalles.php (al inicio)
+    - carrito_variantes.php (al inicio)
+    - carrito_nuevo.php (al inicio)
+  □ Checar que no hay output antes de session_start()
+  □ Verificar que cookies están habilitadas
+
+PROBLEMA: "El carrito temporal no guarda"
+SOLUCIÓN:
+  □ Verificar JavaScript en detalles.php
+  □ Checar Console (F12) por errores
+  □ Verificar que variantesSeleccionadas se actualiza
+  □ Checar Network en F12 para ver AJAX requests
+
+PROBLEMA: "Las variantes no se agregan al carrito principal"
+SOLUCIÓN:
+  □ Verificar que carrito_variantes.php existe
+  □ Checar que el archivo tiene la lógica correcta
+  □ Verificar permisos de archivo
+  □ Checar Console y Network en F12
+
+PROBLEMA: "Total incorrecto"
+SOLUCIÓN:
+  □ Verificar que precio en BD es correcto
+  □ Verificar que cantidad es número válido
+  □ Checar cálculos en JavaScript
+  □ Revisar IVA en configuraciones.php
+
+═════════════════════════════════════════════════════════════════════════════
+
+🎯 CHECKLIST FINAL - SISTEMA 100% OPERATIVO:
+═════════════════════════════════════════════════════════════════════════════
+
+✅ Paso 1: Tablas BD verificadas
+✅ Paso 2: Datos de ejemplo cargados
+✅ Paso 3: Archivos creados/modificados
+✅ Paso 4: detalles.php responde correctamente
+  ├─ Tallas aparecen
+  ├─ Colores aparecen
+  ├─ Filtrado funciona
+  ├─ Variante info se muestra
+  ├─ Agregar variante funciona
+  ├─ Carrito temporal actualiza
+  └─ Agregar al carrito funciona
+✅ Paso 5: Console sin errores
+✅ Paso 6: carrito_nuevo.php funciona
+✅ Paso 7: Sesión guarda datos
+✅ Paso 8: Otros productos también funcionan
+
+═════════════════════════════════════════════════════════════════════════════
+
+📊 ESTADÍSTICAS DE VERIFICACIÓN:
+═════════════════════════════════════════════════════════════════════════════
+
+Completadas:  ___ / 8 Pasos principales
+Checks OK:    ___ / 50+ Verificaciones
+
+Meta: 100% de los checks marcados ✓
+
+═════════════════════════════════════════════════════════════════════════════
+
+🚀 SI TODO ESTÁ VERDE = LISTO PARA PRODUCCIÓN
+
+═════════════════════════════════════════════════════════════════════════════

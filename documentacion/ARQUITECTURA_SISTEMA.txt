@@ -1,0 +1,386 @@
+╔════════════════════════════════════════════════════════════════════════════════════════════╗
+║                    ARQUITECTURA DEL SISTEMA DE VARIANTES                                     ║
+╚════════════════════════════════════════════════════════════════════════════════════════════╝
+
+DIAGRAMA DE FLUJO:
+═════════════════════════════════════════════════════════════════════════════════════════════
+
+                              👤 USUARIO ENTRA A DETALLES.PHP
+                                        │
+                                        ▼
+                        ┌─────────────────────────────┐
+                        │  CARGAR PÁGINA DETALLES    │
+                        │  - Datos básicos producto  │
+                        │  - HTML + JavaScript       │
+                        └──────────┬──────────────────┘
+                                   │
+                                   ▼ (AJAX)
+                        ┌─────────────────────────────┐
+                        │ api_variantes.php          │
+                        │ ?action=getVariantes       │
+                        └──────────┬──────────────────┘
+                                   │
+                    ┌──────────────┼──────────────┐
+                    │              │              │
+                    ▼              ▼              ▼
+            Obtiene Tallas  Obtiene Colores  Obtiene todo
+                    │              │              │
+                    *──────────────┴──────────────*
+                                   │
+                                   ▼ (Renderizar)
+                        ┌─────────────────────────────┐
+                        │   MOSTRAR INTERFAZ         │
+                        │ - Botones de Tallas        │
+                        │ - Círculos de Colores      │
+                        └──────────┬──────────────────┘
+                                   │
+                    ┌──────────────┘
+                    │
+    ┌───────────────▼──────────────┬────────────────────┐
+    │                              │                    │
+    │ Usuario selecciona TALLA     │                    │
+    │         │                    │                    │
+    │         ▼                    │                    │
+    │   Llama AJAX:                │                    │
+    │   filtrarVariantes           │                    │
+    │   ?id_talla=X                │                    │
+    │         │                    │                    │
+    │         ▼                    │                    │
+    │   Retorna colores            │                    │
+    │   disponibles para           │                    │
+    │   esa talla                  │                    │
+    │         │                    │                    │
+    │         ▼                    │                    │
+    │   Renderiza colores          │                    │
+    │   filtrados                  │                    │
+    │                              │                    │
+    │ Usuario selecciona COLOR     │                    │
+    │         │                    │                    │
+    │         ▼                    │                    │
+    │   Busca variante:            │                    │
+    │   id_talla + id_color        │                    │
+    │         │                    │                    │
+    │         ▼                    │                    │
+    │   Muestra:                   │                    │
+    │   - Precio exacto            │                    │
+    │   - Stock disponible         │                    │
+    │   - Botón "Agregar"          │                    │
+    │         │                    │                    │
+    │         ▼                    │                    │
+    │   Usuario ingresa CANTIDAD   │                    │
+    │         │                    │                    │
+    │         ▼                    │                    │
+    │   Hace clic "Agregar         │                    │
+    │   esta variante"             │                    │
+    │         │                    │                    │
+    │         ▼                    │                    │
+    │   ✓ Se agrega a              │                    │
+    │     carrito TEMPORAL         │                    │
+    │   ✓ Sin recargar página      │                    │
+    │   ✓ Notificación visual      │                    │
+    │         │                    │                    │
+    │         ▼                    │                    │
+    │   Usuario puede seguir       │                    │
+    │   agregando más variantes    │                    │
+    │         │                    │                    │
+    │         └────────────────┬───┘                    │
+    │                          │                        │
+    │                    ¿Agregar más?                  │
+    │                   SÍ (vuelve a │)    NO (siguiente)
+    │                          │                        │
+    └──────────────────────────┘                        │
+                                                        │
+                                    ▼
+                        ┌─────────────────────────────┐
+                        │  CARRITO TEMPORAL LLENO    │
+                        │  - Variante 1: S, Negro    │
+                        │  - Variante 2: M, Azul     │
+                        │  - Variante 3: L, Rojo     │
+                        │  Total: $XXX.XX            │
+                        └──────────┬──────────────────┘
+                                   │
+                                   ▼
+                        ┌─────────────────────────────┐
+                        │  Usuario hace clic          │
+                        │  "Agregar todas Al CARRITO" │
+                        └──────────┬──────────────────┘
+                                   │
+                                   ▼ (AJAX - Múltiples requests)
+                        ┌─────────────────────────────┐
+                        │ carrito_variantes.php       │
+                        │ action=agregarVariante      │
+                        └──────────┬──────────────────┘
+                                   │
+                    ┌──────────────┼──────────────┐
+                    │              │              │
+                    ▼              ▼              ▼
+              Variante 1      Variante 2      Variante 3
+              (AJAX POST)     (AJAX POST)     (AJAX POST)
+                    │              │              │
+                    └──────────────┴──────────────┘
+                                   │
+                                   ▼
+                        ┌─────────────────────────────┐
+                        │  SESIÓN ACTUALIZADA        │
+                        │  $_SESSION['carrito']       │
+                        │  ['variantes'] = [...]      │
+                        └──────────┬──────────────────┘
+                                   │
+                                   ▼
+                        ┌─────────────────────────────┐
+                        │  NOTIFICACIÓN AL USUARIO   │
+                        │  ✓ 3 variantes agregadas   │
+                        │  ✓ Contador actualizado    │
+                        │  ✓ Carrito temporal vacio  │
+                        └──────────┬──────────────────┘
+                                   │
+                                   ▼
+                        ┌─────────────────────────────┐
+                        │  Usuario va a               │
+                        │  carrito_nuevo.php          │
+                        └──────────┬──────────────────┘
+                                   │
+                                   ▼
+                        ┌─────────────────────────────┐
+                        │  VE RESUMEN COMPLETO       │
+                        │  - Detalles variantes      │
+                        │  - Subtotal                │
+                        │  - IVA                     │
+                        │  - TOTAL                   │
+                        └──────────┬──────────────────┘
+                                   │
+                                   ▼
+                        ┌─────────────────────────────┐
+                        │  BOTÓN "Proceder al pago"  │
+                        │  → checkout.php             │
+                        └─────────────────────────────┘
+
+═════════════════════════════════════════════════════════════════════════════════════════════
+
+ESTRUCTURA DE ARCHIVOS:
+═════════════════════════════════════════════════════════════════════════════════════════════
+
+include/
+├── api_variantes.php         🆕 [AJAX API]
+│   ├── getVariantes          → Obtiene todas las variantes de un producto
+│   ├── filtrarVariantes      → Filtra por talla/color seleccionados
+│   └── getVariante           → Obtiene una variante específica
+│
+├── carrito_variantes.php     🆕 [SESIÓN DE CARRITO]
+│   ├── agregarVariante       → Agrega variante a $_SESSION
+│   ├── obtenerCarrito        → Retorna carrito actual
+│   ├── actualizarCantidad    → Modifica cantidad de variante
+│   ├── eliminarVariante      → Elimina una variante
+│   └── vaciarCarrito         → Limpia carrito completamente
+│
+└── carrito.php               ✏️ [MODIFICADO - Compatible]
+    └── Ahora soporta ambos: productos + variantes
+
+public/
+├── detalles.php              ✏️ [MODIFICADO - COMPLETAMENTE NUEVO]
+│   ├── <Style> nuevos        → Tallas y colores visuales
+│   ├── JavaScript AJAX       → Filtrado dinámico bidireccional
+│   ├── Carrito temporal      → Agregar múltiples variantes
+│   └── Sin recargas          → AJAX 100%
+│
+└── carrito_nuevo.php         🆕 [VISTA CARRITO]
+    ├── Productos antiguos    → Compatibilidad
+    ├── Variantes nuevas      → Sistema nuevo
+    ├── Resumen y totales     → Información completa
+    └── Botón checkout        → Siguiente paso
+
+database/
+└── datos_variantes_ejemplo.sql  🆕 [DATOS DE PRUEBA]
+
+═════════════════════════════════════════════════════════════════════════════════════════════
+
+BASE DE DATOS:
+═════════════════════════════════════════════════════════════════════════════════════════════
+
+c_tallas (Catálogo de Tallas)
+├── id (PK)
+├── nombre (varchar) - "S", "M", "L", "XL", "28", "30", ...
+└── ↓ Relación a productos_variantes
+
+c_colores (Catálogo de Colores)
+├── id (PK)
+├── nombre (varchar) - "Negro", "Azul", "Rojo", ...
+├── codigo_hex (varchar) - "#000000", "#0000FF", "#FF0000", ...
+├── estado (tinyint) - Activo/Inactivo
+└── ↓ Relación a productos_variantes
+
+productos_variantes (TABLA CLAVE - Combinaciones)
+├── id (PK) - Variante ID única
+├── id_producto (FK → productos)
+├── id_talla (FK → c_tallas)
+├── id_color (FK → c_colores)
+├── precio (decimal) - Precio FINAL de esta variante
+└── stock (int) - Stock independiente de esta variante
+
+Ejemplo de datos:
+┌────┬────────────┬──────────┬──────────┬────────┬───────┐
+│ id │id_producto │id_talla  │id_color  │ precio │ stock │
+├────┼────────────┼──────────┼──────────┼────────┼───────┤
+│ 1  │     9      │    6     │    1     │ 24000  │  10   │ (Producto 9, S, Negro, 24000, 10 stock)
+│ 2  │     9      │    6     │    2     │ 24000  │   8   │ (Producto 9, S, Blanco, 24000, 8 stock)
+│ 3  │     9      │    6     │    3     │ 24000  │  12   │ (Producto 9, S, Azul, 24000, 12 stock)
+│ 4  │     9      │    6     │    4     │ 25000  │   5   │ (Producto 9, S, Rojo, 25000, 5 stock)
+│ 5  │     9      │    7     │    1     │ 24000  │  15   │ (Producto 9, M, Negro, 24000, 15 stock)
+│ ...│    ...     │   ...    │   ...    │  ...   │ ...   │
+└────┴────────────┴──────────┴──────────┴────────┴───────┘
+
+═════════════════════════════════════════════════════════════════════════════════════════════
+
+FLUJO DE DATOS (AJAX):
+═════════════════════════════════════════════════════════════════════════════════════════════
+
+1. CARGA INICIAL:
+   detalles.php ──(AJAX)──> api_variantes.php?action=getVariantes&id_producto=9
+                  <──(JSON)─< {variantes: [...], tallas: [...], colores: [...]}
+
+2. SELECCIONA TALLA:
+   detalles.php ──(AJAX)──> api_variantes.php?action=filtrarVariantes&id_talla=6
+                  <──(JSON)─< {variantes: [...], colores_disponibles: [...]}
+
+3. SELECCIONA COLOR:
+   detalles.php ──(AJAX)──> api_variantes.php?action=filtrarVariantes&id_color=1
+                  <──(JSON)─< {variantes: [...], tallas_disponibles: [...]}
+
+4. AGREGAR VARIANTE:
+   detalles.php ──(AJAX POST)──> carrito_variantes.php?action=agregarVariante
+                  <─────(JSON)──< {success: true, total_items: 3}
+
+5. VER CARRITO:
+   detalles.php ──(AJAX)──> carrito_variantes.php?action=obtenerCarrito
+                  <──(JSON)─< {carrito: [...], total_items: 3, total_precio: 73000.00}
+
+═════════════════════════════════════════════════════════════════════════════════════════════
+
+ESTRUCTURA JSON DE RESPUESTAS:
+═════════════════════════════════════════════════════════════════════════════════════════════
+
+RESPUESTA getVariantes:
+{
+  "success": true,
+  "variantes": [
+    {
+      "variante_id": 1,
+      "id_talla": 6,
+      "id_color": 1,
+      "precio": "24000.00",
+      "stock": 10,
+      "talla_nombre": "S",
+      "color_nombre": "Negro",
+      "codigo_hex": "#000000"
+    },
+    ...
+  ],
+  "tallas": [
+    {"id": 6, "nombre": "S"},
+    {"id": 7, "nombre": "M"},
+    ...
+  ],
+  "colores": [
+    {"id": 1, "nombre": "Negro", "codigo_hex": "#000000"},
+    ...
+  ]
+}
+
+RESPUESTA agregarVariante:
+{
+  "success": true,
+  "total_items": 3,
+  "message": "2 variante(s) agregada(s) al carrito"
+}
+
+═════════════════════════════════════════════════════════════════════════════════════════════
+
+ESTRUCTURA DE SESIÓN ($_SESSION):
+═════════════════════════════════════════════════════════════════════════════════════════════
+
+Sistema Antiguo (compatible):
+$_SESSION['carrito']['productos'] = [
+    1 => 5,    // Producto ID 1, cantidad 5
+    2 => 3     // Producto ID 2, cantidad 3
+]
+
+Sistema Nuevo (variantes):
+$_SESSION['carrito']['variantes'] = [
+    'variante_1' => [
+        'variante_id' => 1,
+        'id_producto' => 9,
+        'cantidad' => 2,
+        'precio' => 24000.00,
+        'talla' => 'S',
+        'color' => 'Negro'
+    ],
+    'variante_2' => [
+        'variante_id' => 2,
+        'id_producto' => 9,
+        'cantidad' => 1,
+        'precio' => 24000.00,
+        'talla' => 'S',
+        'color' => 'Blanco'
+    ],
+    ...
+]
+
+═════════════════════════════════════════════════════════════════════════════════════════════
+
+EVENTOS JAVASCRIPT:
+═════════════════════════════════════════════════════════════════════════════════════════════
+
+DOMContentLoaded
+    ├─> cargarVariantes()          Carga todas las variantes (AJAX)
+    └─> renderTallas()              Muestra botones de tallas
+    └─> renderColores()             Muestra círculos de colores
+
+Clic en Talla
+    ├─> seleccionarTalla()          Marca como activa
+    ├─> filtrarVariantes()          Filtra por talla (AJAX)
+    └─> renderColores()             Actualiza colores disponibles
+
+Clic en Color
+    ├─> seleccionarColor()          Marca como activo
+    ├─> filtrarVariantes()          Filtra por color (AJAX)
+    └─> buscarVariante()            Obtiene datos de la variante
+
+Clic "Agregar esta variante"
+    ├─> Valida cantidad
+    ├─> Agrega a variantesSeleccionadas (en memoria)
+    ├─> mostrarVariantesSeleccionadas()  Renderiza carrito temporal
+    └─> Limpia selección
+
+Clic "Agregar todas al carrito"
+    ├─> Loop en variantesSeleccionadas
+    ├─> carrito_variantes.php × N (AJAX POST múltiples)
+    ├─> Actualiza contador del carrito
+    └─> Vacía carrito temporal
+
+═════════════════════════════════════════════════════════════════════════════════════════════
+
+SEGURIDAD:
+═════════════════════════════════════════════════════════════════════════════════════════════
+
+✓ htmlspecialchars()     → Previene XSS
+✓ PDO prepared statements → Previene SQL injection
+✓ Validación de cantidad → 1-12 unidades
+✓ Validación de stock    → No permite agregar más que disponible
+✓ Validación de variante → Confirma que existe antes de usar
+✓ Sesiones seguras       → Manejo correcto de $_SESSION
+
+═════════════════════════════════════════════════════════════════════════════════════════════
+
+PUNTOS CLAVE:
+═════════════════════════════════════════════════════════════════════════════════════════════
+
+1. Cada variante es ÚNICA (Talla + Color = Variante diferente)
+2. Cada variante tiene PRECIO y STOCK independiente
+3. AJAX sin recargas = Mejor UX
+4. Carrito TEMPORAL permite agregar múltiples antes de confirmar
+5. COMPATIBLE con sistema antiguo (no rompe funcionalidad)
+6. Filtrado BIDIRECCIONAL (Talla → Colores, Colores → Tallas)
+7. Precio FINAL mostrado (sin cálculos del lado del cliente)
+8. Stock REAL validado (no permite stock negativo)
+
+═════════════════════════════════════════════════════════════════════════════════════════════

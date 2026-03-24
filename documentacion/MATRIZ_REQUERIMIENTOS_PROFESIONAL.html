@@ -1,0 +1,2859 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Matriz de Requerimientos Profesional - E-Commerce D'gala S.A.</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', 'Arial', sans-serif;
+            background: linear-gradient(135deg, #ecf0f1 0%, #bdc3c7 100%);
+            color: #2c3e50;
+            line-height: 1.8;
+            padding: 40px 20px;
+        }
+
+        .container {
+            max-width: 1800px;
+            margin: 0 auto;
+            background: white;
+            padding: 60px;
+            border-radius: 15px;
+            box-shadow: 0 10px 50px rgba(0, 0, 0, 0.2);
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 60px;
+            border-bottom: 5px solid #1a5490;
+            padding-bottom: 40px;
+        }
+
+        .logo-section {
+            margin-bottom: 20px;
+        }
+
+        h1 {
+            color: #1a5490;
+            font-size: 42px;
+            font-weight: 800;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .system-name {
+            font-size: 18px;
+            color: #3498db;
+            font-weight: 600;
+            margin: 15px 0;
+        }
+
+        .subtitle {
+            color: #555;
+            font-size: 15px;
+            margin: 10px 0;
+        }
+
+        .metadata {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin: 40px 0;
+            font-size: 14px;
+        }
+
+        .metadata-item {
+            background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .metadata-item label {
+            font-weight: 700;
+            display: block;
+            margin-bottom: 8px;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .metadata-item span {
+            display: block;
+            font-size: 16px;
+            font-weight: 600;
+        }
+
+        section {
+            margin-bottom: 80px;
+        }
+
+        .section-header {
+            background: linear-gradient(135deg, #1a5490 0%, #2980b9 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 10px;
+            margin-bottom: 40px;
+        }
+
+        .section-header h2 {
+            font-size: 32px;
+            font-weight: 800;
+            margin-bottom: 10px;
+        }
+
+        .section-header p {
+            font-size: 15px;
+            opacity: 0.95;
+        }
+
+        .table-section {
+            margin-bottom: 50px;
+            background: #f8f9fa;
+            padding: 30px;
+            border-radius: 10px;
+            border-left: 6px solid #f39c12;
+        }
+
+        .table-section h3 {
+            color: #1a5490;
+            font-size: 24px;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 3px solid #f39c12;
+        }
+
+        .table-description {
+            background: white;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            border-left: 4px solid #3498db;
+            font-size: 14px;
+            line-height: 1.8;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 25px 0;
+            font-size: 13px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            overflow: hidden;
+            background: white;
+        }
+
+        thead {
+            background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+            color: white;
+        }
+
+        th {
+            padding: 18px 15px;
+            text-align: left;
+            font-weight: 700;
+            border: none;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        td {
+            padding: 15px;
+            border: 1px solid #ddd;
+            word-break: break-word;
+        }
+
+        tbody tr {
+            transition: all 0.3s ease;
+        }
+
+        tbody tr:nth-child(odd) {
+            background-color: #f9f9f9;
+        }
+
+        tbody tr:nth-child(even) {
+            background-color: #ffffff;
+        }
+
+        tbody tr:hover {
+            background-color: #ecf7ff;
+            box-shadow: inset 3px 0 0 #3498db;
+        }
+
+        .status-implementado {
+            background-color: #27ae60;
+            color: white;
+            padding: 6px 12px;
+            border-radius: 5px;
+            font-weight: 700;
+            font-size: 12px;
+            display: inline-block;
+        }
+
+        .status-no-implementado {
+            background-color: #e74c3c;
+            color: white;
+            padding: 6px 12px;
+            border-radius: 5px;
+            font-weight: 700;
+            font-size: 12px;
+            display: inline-block;
+        }
+
+        .status-parcial {
+            background-color: #f39c12;
+            color: white;
+            padding: 6px 12px;
+            border-radius: 5px;
+            font-weight: 700;
+            font-size: 12px;
+            display: inline-block;
+        }
+
+        .priority-alta {
+            background-color: #e74c3c;
+            color: white;
+            padding: 6px 10px;
+            border-radius: 4px;
+            font-weight: 700;
+            font-size: 11px;
+            display: inline-block;
+        }
+
+        .priority-media {
+            background-color: #f39c12;
+            color: white;
+            padding: 6px 10px;
+            border-radius: 4px;
+            font-weight: 700;
+            font-size: 11px;
+            display: inline-block;
+        }
+
+        .priority-baja {
+            background-color: #3498db;
+            color: white;
+            padding: 6px 10px;
+            border-radius: 4px;
+            font-weight: 700;
+            font-size: 11px;
+            display: inline-block;
+        }
+
+        .rule-box {
+            background: #f0f7ff;
+            padding: 15px;
+            margin: 10px 0;
+            border-left: 4px solid #3498db;
+            border-radius: 5px;
+            font-size: 13px;
+            line-height: 1.7;
+        }
+
+        .rule-title {
+            font-weight: 700;
+            color: #1a5490;
+            margin-bottom: 8px;
+        }
+
+        .footer {
+            margin-top: 80px;
+            padding-top: 30px;
+            border-top: 3px solid #bdc3c7;
+            text-align: center;
+            color: #7f8c8d;
+            font-size: 13px;
+        }
+
+        .legend {
+            background: #f8f9fa;
+            padding: 25px;
+            border-radius: 10px;
+            margin: 30px 0;
+            border-left: 5px solid #3498db;
+        }
+
+        .legend-item {
+            margin: 12px 0;
+            font-size: 13px;
+            display: inline-block;
+            margin-right: 30px;
+        }
+
+        .print-info {
+            background: #fff3cd;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+            border-left: 4px solid #ffc107;
+            font-size: 13px;
+        }
+
+        .table-column-id {
+            width: 10%;
+            font-weight: 700;
+        }
+
+        .table-column-nombre {
+            width: 15%;
+        }
+
+        .table-column-descripcion {
+            width: 35%;
+        }
+
+        .table-column-reglas {
+            width: 25%;
+        }
+
+        .table-column-estado {
+            width: 12%;
+        }
+
+        .table-column-prioridad {
+            width: 10%;
+        }
+
+        @media print {
+            body {
+                background: white;
+                padding: 0;
+            }
+            .container {
+                box-shadow: none;
+                padding: 40px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- HEADER -->
+        <header>
+            <div class="logo-section">
+                <h1>📊 MATRIZ DE REQUERIMIENTOS PROFESIONAL</h1>
+                <div class="system-name">E-COMMERCE D'GALA S.A.</div>
+            </div>
+            <p class="subtitle">Análisis exhaustivo de requerimientos funcionales y no funcionales por tabla de base de datos</p>
+        </header>
+
+        <!-- METADATA -->
+        <div class="metadata">
+            <div class="metadata-item">
+                <label>📅 Fecha de Generación</label>
+                <span>24 de Febrero de 2026</span>
+            </div>
+            <div class="metadata-item">
+                <label>🎯 Proyecto</label>
+                <span>E-Commerce D'gala S.A.</span>
+            </div>
+            <div class="metadata-item">
+                <label>📊 Versión Matriz</label>
+                <span>1.1 - COMPLETA CON FALTANTES</span>
+            </div>
+            <div class="metadata-item">
+                <label>✅ Cobertura Implementación</label>
+                <span>48% (26/54 RQ) - CON 26 PENDIENTES</span>
+            </div>
+        </div>
+
+        <!-- LEYENDA Y GUÍA -->
+        <div class="print-info">
+            <strong>ℹ️ Nota Importante:</strong> Esta matriz PROFESIONAL y DETALLADA incluye: (1) Requerimientos YA IMPLEMENTADOS en sistema, (2) Requerimientos FALTANTES identificados por tabla, (3) CRUDs, búsquedas y funcionalidades necesarias, (4) 3 reglas negocio por cada requerimiento, (5) Descripción técnica profesional. 
+            <br><strong>🎯 OBJETIVO:</strong> Dar visibilidad COMPLETA de qué hay y qué falta para evaluación de proyecto y guía de implementación futura.
+        </div>
+
+        <div class="legend">
+            <strong style="font-size: 14px; display: block; margin-bottom: 15px;">📋 Leyenda de Estados y Prioridades:</strong>
+            <div class="legend-item">
+                <span class="status-implementado">✅ IMPLEMENTADO</span> - Funcionalidad desarrollada y activa
+            </div>
+            <div class="legend-item">
+                <span class="status-parcial">⚠️ PARCIAL</span> - Funcionalidad con cobertura incompleta
+            </div>
+            <div class="legend-item">
+                <span class="status-no-implementado">❌ NO IMPLEMENTADO</span> - Pendiente de desarrollo
+            </div>
+            <div style="margin-top: 15px;">
+                <div class="legend-item">
+                    <span class="priority-alta">🔴 ALTA</span> - Crítica para negocio
+                </div>
+                <div class="legend-item">
+                    <span class="priority-media">🟠 MEDIA</span> - Importante para UX
+                </div>
+                <div class="legend-item">
+                    <span class="priority-baja">🔵 BAJA</span> - Mejora/Complemento
+                </div>
+            </div>
+        </div>
+
+        <!-- TABLA: ADMIN -->
+        <section>
+            <div class="section-header">
+                <h2>🔐 TABLA: ADMIN</h2>
+                <p>Gestión de administradores del sistema y control de accesos</p>
+            </div>
+
+            <div class="table-section">
+                <h3>Descripción General de Tabla</h3>
+                <div class="table-description">
+                    <strong>Propósito:</strong> Gestionar credenciales, autenticación y datos de administradores del sistema.
+                    Proporciona un nivel de seguridad elevado para el acceso al panel administrativo.<br>
+                    <strong>Campos Clave:</strong> id, usuario, password (hash), nombre, email, token_password, password_request, activo, fecha_alta<br>
+                    <strong>Relaciones:</strong> Tabla independiente (sin FK)
+                </div>
+
+                <table>
+                    <thead>
+                        <tr>
+                            <th class="table-column-id">ID RF</th>
+                            <th class="table-column-nombre">Requerimiento</th>
+                            <th class="table-column-descripcion">Descripción Profesional</th>
+                            <th class="table-column-reglas">Reglas de Negocio (3)</th>
+                            <th class="table-column-estado">Estado</th>
+                            <th class="table-column-prioridad">Prioridad</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>RF-001</td>
+                            <td>Autenticación Admin</td>
+                            <td>El sistema debe permitir que administradores se autentiquen con usuario y contraseña encriptada
+                            utilizando algoritmo bcrypt de 10 rondas. La sesión se mantiene en el servidor con validación de token.</td>
+                            <td>
+                                <div class="rule-box">
+                                    <div class="rule-title">1️⃣ Contraseña Segura</div>
+                                    La contraseña debe tener mínimo 8 caracteres, con mayúscula, minúscula y número. Se guarda con hash bcrypt irreversible.
+                                </div>
+                                <div class="rule-box">
+                                    <div class="rule-title">2️⃣ Un Admin Activo</div>
+                                    Solo un administrador puede estar activo al mismo tiempo. Campo 'activo' = 1 garantiza acceso exclusivo.
+                                </div>
+                                <div class="rule-box">
+                                    <div class="rule-title">3️⃣ Intento de Acceso</div>
+                                    Máximo 3 intentos fallidos para acceder. Después se bloquea por 15 minutos. Log de intentos se registra.
+                                </div>
+                            </td>
+                            <td><span class="status-implementado">✅ IMPLEMENTADO</span></td>
+                            <td><span class="priority-alta">🔴 ALTA</span></td>
+                        </tr>
+                        <tr>
+                            <td>RF-002</td>
+                            <td>Recuperar Contraseña</td>
+                            <td>El sistema debe generar un token único temporal para recuperación de contraseña válido por 24 horas.
+                            Se envía un link seguro al email del administrador registrado con instrucciones para reset.</td>
+                            <td>
+                                <div class="rule-box">
+                                    <div class="rule-title">1️⃣ Token Temporal</div>
+                                    Token generado con SHA256 único. Válido solamente 24 horas. Se anula después de ser usado o expirado.
+                                </div>
+                                <div class="rule-box">
+                                    <div class="rule-title">2️⃣ Email Verification</div>
+                                    Email debe existir en base de datos. Se enva solo a email registrado. Validate SMTP correctamente.
+                                </div>
+                                <div class="rule-box">
+                                    <div class="rule-title">3️⃣ Nueva Contraseña</div>
+                                    Nueva contraseña debe cumplir políticas de seguridad. No puede ser igual a anterior. Log de cambio se registra.
+                                </div>
+                            </td>
+                            <td><span class="status-implementado">✅ IMPLEMENTADO</span></td>
+                            <td><span class="priority-alta">🔴 ALTA</span></td>
+                        </tr>
+                        <tr>
+                            <td>RF-003</td>
+                            <td>Gestión de Sesión</td>
+                            <td>El sistema debe validar que el administrador tenga sesión activa antes de permitir acceso al panel.
+                            Tiemout automático después de 30 minutos de inactividad. Logout limpia todas las variables de sesión.</td>
+                            <td>
+                                <div class="rule-box">
+                                    <div class="rule-title">1️⃣ Timeout Automático</div>
+                                    Sesión expira después de 30 minutos sin actividad. Se redirige a login automáticamente sin perder datos.
+                                </div>
+                                <div class="rule-box">
+                                    <div class="rule-title">2️⃣ Validación en Cada Request</div>
+                                    Cada página de admin valida sesión activa. Si no existe, redirige a login.php obligatoriamente.
+                                </div>
+                                <div class="rule-box">
+                                    <div class="rule-title">3️⃣ Logout Completo</div>
+                                    Al hacer logout se destruyen todas las variables SESSION y cookies. Imposible acceder después sin login.
+                                </div>
+                            </td>
+                            <td><span class="status-implementado">✅ IMPLEMENTADO</span></td>
+                            <td><span class="priority-alta">🔴 ALTA</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h3 style="margin-top: 40px; color: #e74c3c;">🚨 Requerimientos Faltantes - TABLA ADMIN</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th class="table-column-id">ID RF</th>
+                            <th class="table-column-nombre">Requerimiento</th>
+                            <th class="table-column-descripcion">Descripción Profesional</th>
+                            <th class="table-column-reglas">Reglas de Negocio (3)</th>
+                            <th class="table-column-estado">Estado</th>
+                            <th class="table-column-prioridad">Prioridad</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>RF-004a</td>
+                            <td>Crear Administrador</td>
+                            <td>Admin master puede crear nuevo administrador. Ingresa usuario único, nombre y email. Sistema valida unicidad de usuario.
+                            Genera contraseña temporal que admin master compartirá. Nuevo admin se crea con estatus activo.</td>
+                            <td>
+                                <div class="rule-box">
+                                    <div class="rule-title">1️⃣ Solo Admin Master</div>
+                                    Solo admin_id = 1 (master) puede crear admins. Validación de permisos. Intento de otro admin es rechazado con error.
+                                </div>
+                                <div class="rule-box">
+                                    <div class="rule-title">2️⃣ Campos Requeridos</div>
+                                    usuario (único, 5-50 caracteres), nombre (obligatorio, 5-100 caracteres), email (válido, único). Validación antes de guardar.
+                                </div>
+                                <div class="rule-box">
+                                    <div class="rule-title">3️⃣ Auditoría Creación</div>
+                                    Se registra: admin_master, nuevo_admin, fecha, hora, IP. Log de creaciones de admins. Trazabilidad completa.
+                                </div>
+                            </td>
+                            <td><span class="status-no-implementado">❌ NO IMPLEMENTADO</span></td>
+                            <td><span class="priority-alta">🔴 ALTA</span></td>
+                        </tr>
+                        <tr>
+                            <td>RF-004b</td>
+                            <td>Editar Administrador</td>
+                            <td>Admin master puede editar datos de administrador existente: nombre, email, estado (activo/inactivo). 
+                            No puede cambiar usuario (inmutable). Cambios se aplican inmediatamente. Auditoría registra qué cambió.</td>
+                            <td>
+                                <div class="rule-box">
+                                    <div class="rule-title">1️⃣ Solo Admin Master</div>
+                                    Solo admin_id = 1 (master) puede editar admins. Otros admins solo pueden editar su propio perfil/contraseña.
+                                </div>
+                                <div class="rule-box">
+                                    <div class="rule-title">2️⃣ Campos Editables</div>
+                                    nombre, email, estado (activo/inactivo). Usuario y contraseña NO son editables por este requerimiento. Inmutables.
+                                </div>
+                                <div class="rule-box">
+                                    <div class="rule-title">3️⃣ Auditoría Cambios</div>
+                                    Se registra: qué admin hizo cambio, cuál admin fue editado, qué campos cambiaron, valores antes/después, timestamp.
+                                </div>
+                            </td>
+                            <td><span class="status-no-implementado">❌ NO IMPLEMENTADO</span></td>
+                            <td><span class="priority-alta">🔴 ALTA</span></td>
+                        </tr>
+                        <tr>
+                            <td>RF-004c</td>
+                            <td>Eliminar Administrador</td>
+                            <td>Admin master puede eliminar (desactivar) administrador. Si es último admin activo, sistema previene eliminación.
+                            Soft delete: establece estado = inactivo. Admin sigue existiendo en historial. Puede reactivarse.</td>
+                            <td>
+                                <div class="rule-box">
+                                    <div class="rule-title">1️⃣ Mínimo Un Admin Activo</div>
+                                    Sistema debe tener siempre mínimo 1 admin activo. Si intenta desactivar último admin, sistema rechaza con mensaje claro.
+                                </div>
+                                <div class="rule-box">
+                                    <div class="rule-title">2️⃣ Soft Delete</div>
+                                    Eliminación = cambiar estado a inactivo. Admin no puede loguearse pero datos se mantienen. Reactivación es posible.
+                                </div>
+                                <div class="rule-box">
+                                    <div class="rule-title">3️⃣ Auditoría Eliminación</div>
+                                    Se registra: quién hizo eliminación, cuál admin fue eliminado, cuándo, motivo (si proporciona). Log completo.
+                                </div>
+                            </td>
+                            <td><span class="status-no-implementado">❌ NO IMPLEMENTADO</span></td>
+                            <td><span class="priority-alta">🔴 ALTA</span></td>
+                        </tr>
+                        <tr>
+                            <td>RF-005</td>
+                            <td>Log de Accesos Admin</td>
+                            <td>Sistema registra cada login/logout de admin: IP, navegador, fecha/hora, resultado (exitoso/fallido).
+                            Admin master puede ver historial de accesos de todos los admins. Útil para auditoría de seguridad.</td>
+                            <td>
+                                <div class="rule-box">
+                                    <div class="rule-title">1️⃣ Captura de Datos</div>
+                                    Cada login registra: admin_id, IP ($_SERVER['REMOTE_ADDR']), User-Agent, fecha, hora, resultado (OK/FALLÓ). Tabla logs_admin.
+                                </div>
+                                <div class="rule-box">
+                                    <div class="rule-title">2️⃣ Retención de Logs</div>
+                                    Logs se mantienen 90 días. Después se archivan o eliminan. Permite auditoría pero optimiza BD. Limpieza automática cron.
+                                </div>
+                                <div class="rule-box">
+                                    <div class="rule-title">3️⃣ Alertas Seguridad</div>
+                                    Si > 5 intentos fallidos en 1 hora desde misma IP, sistema alerta admin master. Previene ataques brute force.
+                                </div>
+                            </td>
+                            <td><span class="status-no-implementado">❌ NO IMPLEMENTADO</span></td>
+                            <td><span class="priority-media">🟠 MEDIA</span></td>
+                        </tr>
+                        <tr>
+                            <td>RF-006</td>
+                            <td>Búsqueda de Acciones Admin</td>
+                            <td>Admin master puede buscar y filtrar acciones de admins: por nombre, email, rango fecha, tipo acción (CREATE/UPDATE/DELETE).
+                            Genera reportes de actividad. Útil para monitoreo de cambios en sistema.</td>
+                            <td>
+                                <div class="rule-box">
+                                    <div class="rule-title">1️⃣ Filtros Avanzados</div>
+                                    Buscar por: admin (nombre/email), fecha inicio, fecha fin, tipo acción, tabla afectada. Combinación de múltiples filtros.
+                                </div>
+                                <div class="rule-box">
+                                    <div class="rule-title">2️⃣ Exportar Reportes</div>
+                                    Resultados se pueden exportar a CSV o PDF. Incluye: admin, acción, tabla, cambios, fecha, hash verificación.
+                                </div>
+                                <div class="rule-box">
+                                    <div class="rule-title">3️⃣ Auditoría Completa</div>
+                                    Sistema guarda versión anterior y nueva de datos modificados. Permite ver exactamente qué cambió y por quién.
+                                </div>
+                            </td>
+                            <td><span class="status-no-implementado">❌ NO IMPLEMENTADO</span></td>
+                            <td><span class="priority-media">🟠 MEDIA</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- TABLA: CLIENTES -->
+        <section>
+            <div class="section-header">
+                <h2>👥 TABLA: CLIENTES</h2>
+                <p>Registro y gestión de clientes del e-commerce</p>
+            </div>
+
+            <div class="table-section">
+                <h3>Descripción General de Tabla</h3>
+                <div class="table-description">
+                    <strong>Propósito:</strong> Almacenar información personal de clientes (nombre, apellido, contacto, documento de identidad).
+                    Centro neurálgico para identificación y seguimiento de compradores.<br>
+                    <strong>Campos Clave:</strong> id, nombre, apellido, email, telefono, documento, estatus, fecha_alta, fecha_modifica, fecha_baja<br>
+                    <strong>Relaciones:</strong> FK hacia usuarios (1:1), FK hacia compra (1:N), FK hacia direcciones (1:N)
+                </div>
+
+                <table>
+                    <thead>
+                        <tr>
+                            <th class="table-column-id">ID RF</th>
+                            <th class="table-column-nombre">Requerimiento</th>
+                            <th class="table-column-descripcion">Descripción Profesional</th>
+                            <th class="table-column-reglas">Reglas de Negocio (3)</th>
+                            <th class="table-column-estado">Estado</th>
+                            <th class="table-column-prioridad">Prioridad</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>RF-010</td>
+                            <td>Registro de Cliente</td>
+                            <td>El sistema permite que nuevos usuarios se registren como clientes proporcionando nombre, apellido, 
+                            email y teléfono. Validación de email único. Se envía email de confirmación con token de activación.</td>
+                            <td>
+                                <div class="rule-box">
+                                    <div class="rule-title">1️⃣ Email Único</div>
+                                    No puede haber dos clientes con el mismo email. Sistema valida unicidad ANTES de guardar registro.
+                                </div>
+                                <div class="rule-box">
+                                    <div class="rule-title">2️⃣ Datos Completos</div>
+                                    Nombre y apellido son obligatorios. Email y teléfono obligatorios. Documento de identidad es opcional.
+                                </div>
+                                <div class="rule-box">
+                                    <div class="rule-title">3️⃣ Estado Inicial</div>
+                                    Cliente nuevo comienza con estatus = 0 (inactivo) hasta confirmar email. Email de activación válido 48h.
+                                </div>
+                            </td>
+                            <td><span class="status-implementado">✅ IMPLEMENTADO</span></td>
+                            <td><span class="priority-alta">🔴 ALTA</span></td>
+                        </tr>
+                        <tr>
+                            <td>RF-011</td>
+                            <td>Perfil de Cliente</td>
+                            <td>Cliente registrado puede ver y editar su perfil: nombre, apellido, email, teléfono, documento.
+                            Cambios se guardan con audit trail (fecha_modifica). Solo cliente propietario puede editar su perfil.</td>
+                            <td>
+                                <div class="rule-box">
+                                    <div class="rule-title">1️⃣ Autorización</div>
+                                    Solo el cliente propietario (usuario logueado) puede editar su perfil. Admin puede ver pero no modificar.
+                                </div>
+                                <div class="rule-box">
+                                    <div class="rule-title">2️⃣ Validación Email</div>
+                                    Si cliente cambia email, debe verificar nuevo email antes de aplicar cambio. Email anterior válido en transiciones.
+                                </div>
+                                <div class="rule-box">
+                                    <div class="rule-title">3️⃣ Auditoría</div>
+                                    fecha_modifica se actualiza cada vez que perfil se edita. Log de cambios registra qué campos fueron alterados.
+                                </div>
+                            </td>
+                            <td><span class="status-implementado">✅ IMPLEMENTADO</span></td>
+                            <td><span class="priority-media">🟠 MEDIA</span></td>
+                        </tr>
+                        <tr>
+                            <td>RF-012</td>
+                            <td>Gestión de Estado Cliente</td>
+                            <td>Admin puede activar, desactivar o dar de baja clientes. Campo 'estatus' controla acceso al sitio.
+                            Cliente inactivo (estatus=0) no puede comprar. Baja registra fecha_baja para auditoría.</td>
+                            <td>
+                                <div class="rule-box">
+                                    <div class="rule-title">1️⃣ Estados Definidos</div>
+                                    estatus = 1 (activo/puede comprar), estatus = 0 (inactivo/no puede comprar), fecha_baja != NULL (dado de baja permanente).
+                                </div>
+                                <div class="rule-box">
+                                    <div class="rule-title">2️⃣ Historial Compras</div>
+                                    Al dar de baja cliente, compras históricas se mantienen en BD (soft delete). No se eliminan datos para auditoría.
+                                </div>
+                                <div class="rule-box">
+                                    <div class="rule-title">3️⃣ Reactivación</div>
+                                    Cliente inactivo puede reactivarse (estatus = 1). fecha_baja se mantiene para auditoría histórica.
+                                </div>
+                            </td>
+                            <td><span class="status-implementado">✅ IMPLEMENTADO</span></td>
+                            <td><span class="priority-media">🟠 MEDIA</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h3 style="margin-top: 40px; color: #e74c3c;">🚨 Requerimientos Faltantes - TABLA CLIENTES</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th class="table-column-id">ID RF</th>
+                            <th class="table-column-nombre">Requerimiento</th>
+                            <th class="table-column-descripcion">Descripción Profesional</th>
+                            <th class="table-column-reglas">Reglas de Negocio (3)</th>
+                            <th class="table-column-estado">Estado</th>
+                            <th class="table-column-prioridad">Prioridad</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>RF-013a</td>
+                            <td>Leer y Listar Clientes (Admin)</td>
+                            <td>Admin puede ver listado completo de clientes en panel administrativo con tabla paginada. Muestra: ID, nombre, apellido, email, 
+                            teléfono, estado, fecha_alta, última_compra. Sistema permite expandir cliente para ver detalles completos.</td>
+                            <td>
+                                <div class="rule-box">
+                                    <div class="rule-title">1️⃣ Listado Completo</div>
+                                    Admin ve tabla con: ID, nombre, apellido, email, teléfono, estado, fecha_alta, última_compra. Paginación por 50 registros.
+                                </div>
+                                <div class="rule-box">
+                                    <div class="rule-title">2️⃣ Información Expandible</div>
+                                    Click en cliente abre detalles: documento, teléfono completo, todas las direcciones registradas, resumen compras.
+                                </div>
+                                <div class="rule-box">
+                                    <div class="rule-title">3️⃣ Ordenamiento y Filtros Básicos</div>
+                                    Ordenar por: nombre, apellido, fecha_alta, última_compra. Filtrar rápido por estado. Búsqueda por nombre/email/documento.
+                                </div>
+                            </td>
+                            <td><span class="status-no-implementado">❌ NO IMPLEMENTADO</span></td>
+                            <td><span class="priority-alta">🔴 ALTA</span></td>
+                        </tr>
+                        <tr>
+                            <td>RF-013b</td>
+                            <td>Editar Cliente (Admin)</td>
+                            <td>Admin puede editar datos de cliente existente desde su ficha: nombre, apellido, email, teléfono, documento.
+                            Cambios se guardan con auditoría. Cliente recibe notificación email si cambios son significativos.</td>
+                            <td>
+                                <div class="rule-box">
+                                    <div class="rule-title">1️⃣ Campos Editables</div>
+                                    Admin puede cambiar: nombre, apellido, email (requiere verificación), teléfono, documento. No puede cambiar id_usuario.
+                                </div>
+                                <div class="rule-box">
+                                    <div class="rule-title">2️⃣ Validación Email</div>
+                                    Si email cambia, debe ser único en BD. Si email ya existe, error. Cliente recibe email "Tu perfil fue editado por admin".
+                                </div>
+                                <div class="rule-box">
+                                    <div class="rule-title">3️⃣ Auditoría Cambios</div>
+                                    Se registra: admin, cliente, campos cambiados, valores antes/después, timestamp. Admin master ve este log.
+                                </div>
+                            </td>
+                            <td><span class="status-no-implementado">❌ NO IMPLEMENTADO</span></td>
+                            <td><span class="priority-alta">🔴 ALTA</span></td>
+                        </tr>
+                        <tr>
+                            <td>RF-013c</td>
+                            <td>Cambiar Estado Cliente (Admin)</td>
+                            <td>Admin puede cambiar estado de cliente: activo (puede comprar), inactivo (bloqueado), baja (soft delete). 
+                            Transiciones controladas. Compras históricas se mantienen. Cliente recibe notificación de cambios de estado.</td>
+                            <td>
+                                <div class="rule-box">
+                                    <div class="rule-title">1️⃣ Estados Permitidos</div>
+                                    estatus = 1 (activo, puede comprar), estatus = 0 (inactivo, no puede comprar), fecha_baja != NULL (baja permanente).
+                                </div>
+                                <div class="rule-box">
+                                    <div class="rule-title">2️⃣ Historial Compras Intacto</div>
+                                    Al cambiar estado, compras históricas se MANTIENEN (soft delete). Cliente dado de baja verá sus compras anteriores en historial.
+                                </div>
+                                <div class="rule-box">
+                                    <div class="rule-title">3️⃣ Notificación Cliente</div>
+                                    Si admin desactiva cliente, envía email: "Tu cuenta fue desactivada. Contacta soporte si es error". Reactivación posible.
+                                </div>
+                            </td>
+                            <td><span class="status-no-implementado">❌ NO IMPLEMENTADO</span></td>
+                            <td><span class="priority-alta">🔴 ALTA</span></td>
+                        </tr>
+                        <tr>
+                            <td>RF-014</td>
+                            <td>Búsqueda Avanzada de Clientes</td>
+                            <td>Admin puede buscar clientes por: nombre, apellido, email, teléfono, documento. Filtros combinables: estado (activo/inactivo),
+                            rango fecha_alta, última_compra, total_gastado. Sistema muestra resultados paginados con opciones ordenar.</td>
+                            <td>
+                                <div class="rule-box">
+                                    <div class="rule-title">1️⃣ Búsqueda por Texto</div>
+                                    Buscar en campos: nombre LIKE, apellido LIKE, email LIKE, documento LIKE. Case-insensitive. Resultados en tiempo real.
+                                </div>
+                                <div class="rule-box">
+                                    <div class="rule-title">2️⃣ Filtros Combinables</div>
+                                    Estado (activo/inactivo/baja), fecha_alta rango (desde-hasta), total_compras (mín-máx). Múltiples filtros simultáneamente.
+                                </div>
+                                <div class="rule-box">
+                                    <div class="rule-title">3️⃣ Ordenamiento Flexible</div>
+                                    Ordenar por: nombre, apellido, fecha_alta DESC/ASC, total_compras DESC/ASC, último_login DESC. Guardar preferencia.
+                                </div>
+                            </td>
+                            <td><span class="status-no-implementado">❌ NO IMPLEMENTADO</span></td>
+                            <td><span class="priority-media">🟠 MEDIA</span></td>
+                        </tr>
+                        <tr>
+                            <td>RF-015</td>
+                            <td>Exportar Datos Clientes</td>
+                            <td>Admin puede exportar listado de clientes a CSV o Excel. Incluye: ID, nombre, apellido, email, teléfono, documento, estado, 
+                            fecha_alta, total_compras, última_compra. Útil para reportes y análisis externo.</td>
+                            <td>
+                                <div class="rule-box">
+                                    <div class="rule-title">1️⃣ Formatos Soportados</div>
+                                    Exportar a CSV (excel compatible) o XLSX (Excel nativo). Incluir headers con nombres campos. Encoding UTF-8 para acentos.
+                                </div>
+                                <div class="rule-box">
+                                    <div class="rule-title">2️⃣ Filtrado Previo</div>
+                                    Exportar solo registros encontrados (considera filtros búsqueda activos). Si busqué "estado=activo", export solo esos.
+                                </div>
+                                <div class="rule-box">
+                                    <div class="rule-title">3️⃣ Auditoría Export</div>
+                                    Sistema registra: quién exportó, cuándo, cuántos registros. Log de exports para cumplimiento GDPR y auditoría.
+                                </div>
+                            </td>
+                            <td><span class="status-no-implementado">❌ NO IMPLEMENTADO</span></td>
+                            <td><span class="priority-media">🟠 MEDIA</span></td>
+                        </tr>
+                        <tr>
+                            <td>RF-016</td>
+                            <td>Ver Historial de Compras Cliente</td>
+                            <td>Admin puede ver historial completo de compras de un cliente específico. Muestra: ID compra, fecha, total, estado, productos.
+                            Acceso rápido desde ficha del cliente. Permite monitoreo y seguimiento de transacciones.</td>
+                            <td>
+                                <div class="rule-box">
+                                    <div class="rule-title">1️⃣ Acceso desde Ficha</div>
+                                    En página de detalles cliente hay sección "Historial de Compras". Botón rápido a últimas 5 compras cliente. Expandible.
+                                </div>
+                                <div class="rule-box">
+                                    <div class="rule-title">2️⃣ Información Completa</div>
+                                    Muestra: #pedido, fecha, total, estado, medio_pago, dirección envío, lista de items (producto, cantidad, precio). Visual claro.
+                                </div>
+                                <div class="rule-box">
+                                    <div class="rule-title">3️⃣ Acciones Rápidas</div>
+                                    Admin puede: ver detalles compra, cambiar estado, contactar cliente, ver dirección envío, descargar recibo PDF del pedido.
+                                </div>
+                            </td>
+                            <td><span class="status-parcial">⚠️ PARCIAL</span></td>
+                            <td><span class="priority-media">🟠 MEDIA</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- TABLA: USUARIOS -->
+        <section>
+            <div class="section-header">
+                <h2>🔑 TABLA: USUARIOS</h2>
+                <p>Credenciales y autenticación de clientes</p>
+            </div>
+
+            <div class="table-section">
+                <h3>Descripción General de Tabla</h3>
+                <div class="table-description">
+                    <strong>Propósito:</strong> Almacenar credenciales de login para clientes, separadas de datos personales.
+                    Relación 1:1 con tabla clientes. Permite cambio de contraseña y recuperación segura.<br>
+                    <strong>Campos Clave:</strong> id, nombre_usuario, password (hash), activacion, token, token_password, password_request, id_cliente<br>
+                    <strong>Relaciones:</strong> FK id_cliente → clientes (1:1)
+                </div>
+
+                <table>
+                    <thead>
+                        <tr>
+                            <th class="table-column-id">ID RF</th>
+                            <th class="table-column-nombre">Requerimiento</th>
+                            <th class="table-column-descripcion">Descripción Profesional</th>
+                            <th class="table-column-reglas">Reglas de Negocio (3)</th>
+                            <th class="table-column-estado">Estado</th>
+                            <th class="table-column-prioridad">Prioridad</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>RF-020</td>
+                            <td>Login de Cliente</td>
+                            <td>Cliente debe poder autenticarse usando nombre_usuario (único) y contraseña. Sistema valida credenciales
+                            con hash bcrypt. Sesión se inicia después de validación exitosa. Intentos fallidos se registran.</td>
+                            <td>
+                                <div class="rule-box">
+                                    <div class="rule-title">1️⃣ Credenciales Válidas</div>
+                                    nombre_usuario debe existir en BD e ignorar mayúsculas/minúsculas. Password se compara con hash almacenado.
+                                </div>
+                                <div class="rule-box">
+                                    <div class="rule-title">2️⃣ Email Confirmado</div>
+                                    Cliente solo puede loguearse si activacion = 1 (email confirmado). activacion = 0 bloqueado hasta confirmación.
+                                </div>
+                                <div class="rule-box">
+                                    <div class="rule-title">3️⃣ Límite Intentos</div>
+                                    Máximo 3 intentos fallidos. Después se bloquea 15 minutos. Log de intentos se mantiene en sesión/BD.
+                                </div>
+                            </td>
+                            <td><span class="status-implementado">✅ IMPLEMENTADO</span></td>
+                            <td><span class="priority-alta">🔴 ALTA</span></td>
+                        </tr>
+                        <tr>
+                            <td>RF-021</td>
+                            <td>Cambiar Contraseña Cliente</td>
+                            <td>Cliente logueado puede cambiar contraseña proporcionando contraseña actual (verificación) 
+                            y nueva contraseña. Cambio genera nuevo hash bcrypt. Sesión se mantiene activa post-cambio.</td>
+                            <td>
+                                <div class="rule-box">
+                                    <div class="rule-title">1️⃣ Verificación Actual</div>
+                                    Debe ingresar contraseña actual correcta antes de cambiada. Protege contra cambios no autorizados.
+                                </div>
+                                <div class="rule-box">
+                                    <div class="rule-title">2️⃣ Nueva Contraseña Fuerte</div>
+                                    Nueva contraseña mínimo 8 caracteres. Debe contener mayúscula, minúscula, número. No puede ser igual a anterior.
+                                </div>
+                                <div class="rule-box">
+                                    <div class="rule-title">3️⃣ Auditoría</div>
+                                    Cambio de contraseña se registra con timestamp. Login se mantiene activo. Email de notificación de cambio.
+                                </div>
+                            </td>
+                            <td><span class="status-implementado">✅ IMPLEMENTADO</span></td>
+                            <td><span class="priority-media">🟠 MEDIA</span></td>
+                        </tr>
+                        <tr>
+                            <td>RF-022</td>
+                            <td>Recuperación Password Cliente</td>
+                            <td>Cliente puede solicitar reset de contraseña. Sistema genera token único válido 24 horas. 
+                            Email con link de reset se envía. Nueva contraseña se establece tras completar verificación.</td>
+                            <td>
+                                <div class="rule-box">
+                                    <div class="rule-title">1️⃣ Token Seguro</div>
+                                    Token generado con SHA256/MD5 único. Válido solo 24 horas. Se anula después de usar o expirar.
+                                </div>
+                                <div class="rule-box">
+                                    <div class="rule-title">2️⃣ Email Verificado</div>
+                                    Link de reset se envía solo a email en BD. Requiere click de confirmación para proceder a reset.
+                                </div>
+                                <div class="rule-box">
+                                    <div class="rule-title">3️⃣ Nueva Contraseña</div>
+                                    Debe cumplir políticas de seguridad (8+ caracteres, mayús, minús, número). No igual a anterior.
+                                </div>
+                            </td>
+                            <td><span class="status-implementado">✅ IMPLEMENTADO</span></td>
+                            <td><span class="priority-alta">🔴 ALTA</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h3 style="margin-top: 40px; color: #e74c3c;">🚨 Requerimientos Faltantes - TABLA USUARIOS</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th class="table-column-id">ID RF</th>
+                            <th class="table-column-nombre">Requerimiento</th>
+                            <th class="table-column-descripcion">Descripción Profesional</th>
+                            <th class="table-column-reglas">Reglas de Negocio (3)</th>
+                            <th class="table-column-estado">Estado</th>
+                            <th class="table-column-prioridad">Prioridad</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>RF-023a</td>
+                            <td>Crear Usuario/Cliente (Admin)</td>
+                            <td>Admin puede crear nuevo usuario de cliente en panel administrativo. Ingresa nombre_usuario (único), selecciona cliente existente a vincular,
+                            sistema genera contraseña temporal. Email enviado al cliente con credenciales. Cliente debe cambiar password en primer login.</td>
+                            <td>
+                                <div class="rule-box">
+                                    <div class="rule-title">1️⃣ Crear Usuario</div>
+                                    Admin ingresa: nombre_usuario (único, 5-50 caracteres), asocia a cliente existente (FK). 
+                                    Sistema genera temp password complejo. Email enviado con credenciales temporales.
+                                </div>
+                                <div class="rule-box">
+                                    <div class="rule-title">2️⃣ Cliente Existente Requerido</div>
+                                    nombre_usuario debe vincularse a cliente que ya existe. No se puede crear usuario sin cliente asociado. Dropdown de clientes.
+                                </div>
+                                <div class="rule-box">
+                                    <div class="rule-title">3️⃣ Auditoría Creación</div>
+                                    Se registra: admin, nuevo usuario, cliente asociado, fecha, IP. Cliente recibe email de bienvenida con instrucciones.
+                                </div>
+                            </td>
+                            <td><span class="status-no-implementado">❌ NO IMPLEMENTADO</span></td>
+                            <td><span class="priority-alta">🔴 ALTA</span></td>
+                        </tr>
+                        <tr>
+                            <td>RF-023b</td>
+                            <td>Editar Usuario/Cliente (Admin)</td>
+                            <td>Admin puede editar datos de usuario existente: nombre_usuario (si no hay cambios duplicados), email de recuperación, estado (activo/inactivo).
+                            No puede cambiar id_cliente asociado (requeriría eliminación y creación). Cambios se aplican inmediatamente.</td>
+                            <td>
+                                <div class="rule-box">
+                                    <div class="rule-title">1️⃣ Editar Usuario</div>
+                                    Admin puede cambiar: nombre_usuario (debe ser único si cambia), email de recuperación, estado (activo/inactivo). 
+                                    id_cliente NO es editable para este requerimiento.
+                                </div>
+                                <div class="rule-box">
+                                    <div class="rule-title">2️⃣ Cambios Auditados</div>
+                                    Cambios registran auditoría. Si cambios afectan credenciales (nombre_usuario o email), cliente recibe email de notificación.
+                                </div>
+                                <div class="rule-box">
+                                    <div class="rule-title">3️⃣ Transición de Estados</div>
+                                    Si activo → inactivo: usuario no puede loguearse pero datos se mantienen. Si inactivo → activo: usuario puede loguearse nuevamente.
+                                </div>
+                            </td>
+                            <td><span class="status-no-implementado">❌ NO IMPLEMENTADO</span></td>
+                            <td><span class="priority-alta">🔴 ALTA</span></td>
+                        </tr>
+                        <tr>
+                            <td>RF-023c</td>
+                            <td>Eliminar Usuario/Cliente (Admin)</td>
+                            <td>Admin puede eliminar usuario de cliente. Soft delete: establece activacion = 0. Usuario no puede loguearse pero historial compras se mantiene íntegro.
+                            Puede reactivarse. Hard delete solo permitido si usuario nunca compró nada.</td>
+                            <td>
+                                <div class="rule-box">
+                                    <div class="rule-title">1️⃣ Soft Delete Estándar</div>
+                                    Sistema verifica si usuario tiene compras. Si SÍ compró: soft delete (activacion = 0). Usuario no accede pero datos históricos persisten.
+                                </div>
+                                <div class="rule-box">
+                                    <div class="rule-title">2️⃣ Hard Delete Condicional</div>
+                                    Solo si usuario NUNCA compró (detalle_compra vacío): hard delete permitido. Admin confirma antes de hard delete irreversible.
+                                </div>
+                                <div class="rule-box">
+                                    <div class="rule-title">3️⃣ Auditoría Eliminación</div>
+                                    Se registra: quién eliminó, cuál usuario, tipo eliminación (soft/hard), fecha. Cliente puede ver acceso bloqueado si soft delete.
+                                </div>
+                            </td>
+                            <td><span class="status-no-implementado">❌ NO IMPLEMENTADO</span></td>
+                            <td><span class="priority-alta">🔴 ALTA</span></td>
+                        </tr>
+                        <tr>
+                            <td>RF-024</td>
+                            <td>Búsqueda y Filtrado Usuarios</td>
+                            <td>Admin puede buscar usuarios por: nombre_usuario, email, cliente asociado. Filtrar por: estado (activo/inactivo/pendiente verificación),
+                            fecha_creación (rango), última_actividad. Resultados ordenables y paginados.</td>
+                            <td>
+                                <div class="rule-box">
+                                    <div class="rule-title">1️⃣ Búsqueda Texto</div>
+                                    Buscar nombre_usuario LIKE, email LIKE. Case-insensitive. Búsqueda en tiempo real. Sugerencias auto-complete.
+                                </div>
+                                <div class="rule-box">
+                                    <div class="rule-title">2️⃣ Filtros Combinables</div>
+                                    Estado (activo/inactivo/pendiente), fecha_creación (desde-hasta), última_actividad (últimos X días). Combinar múltiples.
+                                </div>
+                                <div class="rule-box">
+                                    <div class="rule-title">3️⃣ Ordenamiento y Paginación</div>
+                                    Ordenar por: nombre_usuario ASC/DESC, fecha_creación ASC/DESC, última_actividad. Paginación 50 registros por página. Guardar preferencia.
+                                </div>
+                            </td>
+                            <td><span class="status-no-implementado">❌ NO IMPLEMENTADO</span></td>
+                            <td><span class="priority-media">🟠 MEDIA</span></td>
+                        </tr>
+                        <tr>
+                            <td>RF-025</td>
+                            <td>Reset Password Admin</td>
+                            <td>Admin puede resetear contraseña de cualquier usuario cliente. Sistema genera contraseña temporal aleatoria (8+ caracteres).
+                            Envía email al cliente con nueva contraseña temporal. Cliente debe cambiarla en siguiente login.</td>
+                            <td>
+                                <div class="rule-box">
+                                    <div class="rule-title">1️⃣ Password Temporal</div>
+                                    Sistema genera password aleatorio seguro (A-Z, a-z, 0-9, símbolos). Válido solo 24 horas. Fuerza cliente a cambiarla.
+                                </div>
+                                <div class="rule-box">
+                                    <div class="rule-title">2️⃣ Notificación Email</div>
+                                    Email a cliente: "Tu contraseña fue reseteada por admin. Nueva contraseña: [temporal]. Cámbiala en tu próximo login."
+                                </div>
+                                <div class="rule-box">
+                                    <div class="rule-title">3️⃣ Auditoría</div>
+                                    Registra: quién reseteó, a quién, cuándo. Admin master notificado si admin no-master reseteó password.
+                                </div>
+                            </td>
+                            <td><span class="status-no-implementado">❌ NO IMPLEMENTADO</span></td>
+                            <td><span class="priority-media">🟠 MEDIA</span></td>
+                        </tr>
+                        <tr>
+                            <td>RF-026</td>
+                            <td>Historial Accesos Usuario</td>
+                            <td>Sistema registra cada login de usuario cliente: fecha, hora, IP, navegador, resultado (exitoso/fallido). 
+                            Admin puede ver historial de accesos de un usuario. Cliente puede ver sus propios accesos.</td>
+                            <td>
+                                <div class="rule-box">
+                                    <div class="rule-title">1️⃣ Registro Automático</div>
+                                    Cada login (exitoso o fallido) registra: user_id, IP, navegador, fecha, hora, resultado, ubicación geográfica si es posible.
+                                </div>
+                                <div class="rule-box">
+                                    <div class="rule-title">2️⃣ Visualización Admin</div>
+                                    Admin ve historial usuario: últimos 20 accesos. Muestra: fecha/hora, IP, navegador, resultado. Identifica accesos sospechosos.
+                                </div>
+                                <div class="rule-box">
+                                    <div class="rule-title">3️⃣ Alertas Seguridad</div>
+                                    Si login desde IP nueva/diferente, envía email cliente: "Acceso desde IP [IP]. Si no eres tú, reporta". Seguridad mejorada.
+                                </div>
+                            </td>
+                            <td><span class="status-no-implementado">❌ NO IMPLEMENTADO</span></td>
+                            <td><span class="priority-media">🟠 MEDIA</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- TABLA: PRODUCTOS -->
+        <section>
+            <div class="section-header">
+                <h2>📦 TABLA: PRODUCTOS</h2>
+                <p>Catálogo de productos y su información general</p>
+            </div>
+
+            <div class="table-section">
+                <h3>Descripción General de Tabla</h3>
+                <div class="table-description">
+                    <strong>Propósito:</strong> Almacenar información de productos: título, descripción, precio, stock, categoría.
+                    Central para catálogo del e-commerce. Soporta descuentos, imágenes múltiples y variantes.<br>
+                    <strong>Campos Clave:</strong> id, titulo, descripcion, precio, descuento, stock, imagen, id_categoria, activo, fecha_publicacion<br>
+                    <strong>Relaciones:</strong> FK id_categoria → categorias, FK → producto_imagenes (1:N), FK → productos_variantes (1:N), FK → detalle_compra (1:N)
+                </div>
+
+                <table>
+                    <thead>
+                        <tr>
+                            <th class="table-column-id">ID RF</th>
+                            <th class="table-column-nombre">Requerimiento</th>
+                            <th class="table-column-descripcion">Descripción Profesional</th>
+                            <th class="table-column-reglas">Reglas de Negocio (3)</th>
+                            <th class="table-column-estado">Estado</th>
+                            <th class="table-column-prioridad">Prioridad</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>RF-030a</td>
+                            <td>Crear Producto</td>
+                            <td>Admin puede crear nuevo producto en panel. Ingresa: título, descripción, precio, descuento (opcional), stock inicial, categoría.
+                            Carga imagen principal que se redimensiona automáticamente. Sistema valida todos los campos. Producto creado en estado inactivo.</td>
+                            <td>
+                                <div class="rule-box">
+                                    <div class="rule-title">1️⃣ Campos Obligatorios</div>
+                                    Título, descripción, precio (>0, <9.999.999), stock (>=0), categoría valida. Validación en aplicación y BD.
+                                </div>
+                                <div class="rule-box">
+                                    <div class="rule-title">2️⃣ Imagen Principal</div>
+                                    Imagen debe ser JPG, PNG o WebP. Tamaño máximo 5MB. Sistema redimensiona a 800x600 automáticamente. Almacena en carpeta productos.
+                                </div>
+                                <div class="rule-box">
+                                    <div class="rule-title">3️⃣ Estado Inicial</div>
+                                    Producto creado con activo=0 (inactivo). Admin debe publicar manualmente. fecha_publicacion se registra cuando se publica.
+                                </div>
+                            </td>
+                            <td><span class="status-no-implementado">❌ NO IMPLEMENTADO</span></td>
+                            <td><span class="priority-alta">🔴 ALTA</span></td>
+                        </tr>
+                        <tr>
+                            <td>RF-030b</td>
+                            <td>Editar Producto</td>
+                            <td>Admin puede editar producto existente: título, descripción, precio, descuento, stock, categoría, estado (activo/inactivo).
+                            Puede cambiar imagen principal. Cambios auditan valores anteriores. Productos en carrito usan precio actual.</td>
+                            <td>
+                                <div class="rule-box">
+                                    <div class="rule-title">1️⃣ Campos Editables</div>
+                                    Título, descripción, precio, descuento, stock, categoría, imagen principal, estado (activo/inactivo). ID inmutable.
+                                </div>
+                                <div class="rule-box">
+                                    <div class="rule-title">2️⃣ Cambio de Imagen</div>
+                                    Admin puede reemplazar imagen principal por nueva. Imagen antigua se mantiene en historial. Sistema valida y redimensiona.
+                                </div>
+                                <div class="rule-box">
+                                    <div class="rule-title">3️⃣ Auditoría Cambios</div>
+                                    Se registra: admin, producto, campos cambiados, valores antes/después, timestamp. Admin master ve historial cambios producto.
+                                </div>
+                            </td>
+                            <td><span class="status-no-implementado">❌ NO IMPLEMENTADO</span></td>
+                            <td><span class="priority-alta">🔴 ALTA</span></td>
+                        </tr>
+                        <tr>
+                            <td>RF-030c</td>
+                            <td>Eliminar Producto</td>
+                            <td>Admin puede eliminar producto. Sistema verifica si producto tiene compras asociadas. 
+                            Si NO tiene compras: hard delete permitido. Si SÍ tiene compras: soft delete (activo=0). Compras históricas se mantienen.</td>
+                            <td>
+                                <div class="rule-box">
+                                    <div class="rule-title">1️⃣ Verificación Compras</div>
+                                    Sistema consulta detalle_compra para verificar si producto se vendió. Si hay compras: soft delete (inactivo). Sin compras: hard delete.
+                                </div>
+                                <div class="rule-box">
+                                    <div class="rule-title">2️⃣ Soft Delete (Compras Previas)</div>
+                                    Si producto tiene compras, establece activo=0. Producto desaparece del catálogo pero datos se mantienen para historial.
+                                </div>
+                                <div class="rule-box">
+                                    <div class="rule-title">3️⃣ Auditoría Eliminación</div>
+                                    Se registra: admin, producto eliminado, tipo eliminación (soft/hard), compras afectadas (si aplica), timestamp.
+                                </div>
+                            </td>
+                            <td><span class="status-no-implementado">❌ NO IMPLEMENTADO</span></td>
+                            <td><span class="priority-alta">🔴 ALTA</span></td>
+                        </tr>
+                        <tr>
+                            <td>RF-031</td>
+                            <td>Gestión de Stock</td>
+                            <td>Sistema actualiza stock en tiempo real después de cada compra. Si stock llega a 0, producto 
+                            muestra indicador "Agotado" en catálogo. Admin puede ajustar stock manualmente desde panel.</td>
+                            <td>
+                                <div class="rule-box">
+                                    <div class="rule-title">1️⃣ Actualización Automática</div>
+                                    Cada compra resta cantidad del stock. Transacción se revierte si pago falla. Stock nunca puede ser negativo.
+                                </div>
+                                <div class="rule-box">
+                                    <div class="rule-title">2️⃣ Indicador Visual</div>
+                                    Stock = 0 muestra "Agotado". Stock < 5 muestra "Pocas Unidades". Botón "Comprar" deshabilita si stock = 0.
+                                </div>
+                                <div class="rule-box">
+                                    <div class="rule-title">3️⃣ Ajuste Manual</div>
+                                    Admin puede ajustar stock manualmente por razones operativas (correcciones, devueltas). Registra motivo en log.
+                                </div>
+                            </td>
+                            <td><span class="status-parcial">⚠️ PARCIAL</span></td>
+                            <td><span class="priority-alta">🔴 ALTA</span></td>
+                        </tr>
+                        <tr>
+                            <td>RF-032</td>
+                            <td>Sistema de Descuentos</td>
+                            <td>Admin puede asignar descuento porcentual (0-100%) a productos. Descuento se aplica automáticamente 
+                            en catálogo y carrito. Precio final = Precio * (1 - descuento/100).</td>
+                            <td>
+                                <div class="rule-box">
+                                    <div class="rule-title">1️⃣ Descuento Válido</div>
+                                    Rango 0-100%. Se valida rango antes de guardar. Precio final nunca es negativo. Precio original se mantiene en BD.
+                                </div>
+                                <div class="rule-box">
+                                    <div class="rule-title">2️⃣ Aplicación Visual</div>
+                                    Catálogo muestra precio tachado original y precio final con descuento. Tambien muestra porcentaje de descuento.
+                                </div>
+                                <div class="rule-box">
+                                    <div class="rule-title">3️⃣ Auditoría</div>
+                                    Cambios de descuento se registran con timestamp. Log mantiene historial de descuentos aplicados por período.
+                                </div>
+                            </td>
+                            <td><span class="status-implementado">✅ IMPLEMENTADO</span></td>
+                            <td><span class="priority-media">🟠 MEDIA</span></td>
+                        </tr>
+                        <tr>
+                            <td>RF-033</td>
+                            <td>Publicación Productos</td>
+                            <td>Admin controla visibilidad de productos. Campo 'activo' determina si producto aparece en catálogo público.
+                            fecha_publicacion marca cuándo producto fue publicado inicialmente. Cambios registran auditoría.</td>
+                            <td>
+                                <div class="rule-box">
+                                    <div class="rule-title">1️⃣ Visibilidad Controlada</div>
+                                    activo = 1 (visible en catálogo público), activo = 0 (invisible, solo admin lo ve). Estado se puede cambiar sin perder datos.
+                                </div>
+                                <div class="rule-box">
+                                    <div class="rule-title">2️⃣ Fecha Publicación</div>
+                                    fecha_publicacion es inmutable (generada al crear). Marca origen histórico del producto. No se cambia después.
+                                </div>
+                                <div class="rule-box">
+                                    <div class="rule-title">3️⃣ Publicación Programada</div>
+                                    [NO IMPLEMENTADO AÚN] Sistema debería permitir programar publicación para fecha futura (requirement pendiente).
+                                </div>
+                            </td>
+                            <td><span class="status-implementado">✅ IMPLEMENTADO</span></td>
+                            <td><span class="priority-media">🟠 MEDIA</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h3 style="margin-top: 40px; color: #e74c3c;">🚨 Requerimientos Faltantes - TABLA PRODUCTOS</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th class="table-column-id">ID RF</th>
+                            <th class="table-column-nombre">Requerimiento</th>
+                            <th class="table-column-descripcion">Descripción Profesional</th>
+                            <th class="table-column-reglas">Reglas de Negocio (3)</th>
+                            <th class="table-column-estado">Estado</th>
+                            <th class="table-column-prioridad">Prioridad</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>RF-034</td>
+                            <td>Búsqueda Cliente - Productos por Texto</td>
+                            <td>Cliente en frontend puede buscar productos por: titulo, descripción. Sistema busca en BD productos.titulo LIKE y productos.descripcion LIKE.
+                            Resultados mostrados en tiempo real (AJAX). Highlighting de términos encontrados. Sugerencias de búsqueda basadas en productos populares.</td>
+                            <td>
+                                <div class="rule-box">
+                                    <div class="rule-title">1️⃣ Búsqueda Rápida</div>
+                                    Input de búsqueda en navbar. Busca mientras escribe (AJAX). Resultados en dropdown: imagenProducto, título, precio. Max 10 resultados dropdown.
+                                </div>
+                                <div class="rule-box">
+                                    <div class="rule-title">2️⃣ Resultados Página</div>
+                                    Enter o click "Buscar" abre página resultados. Lista completa de productos encontrados. Paginación 12 por página. Ordenamiento por relevancia.
+                                </div>
+                                <div class="rule-box">
+                                    <div class="rule-title">3️⃣ Sin Resultados</div>
+                                    Si búsqueda sin resultados, mostrar: "No encontramos [término]". Sugerencias productos relacionados. Link a catálogo completo.
+                                </div>
+                            </td>
+                            <td><span class="status-parcial">⚠️ PARCIAL</span></td>
+                            <td><span class="priority-alta">🔴 ALTA</span></td>
+                        </tr>
+                        <tr>
+                            <td>RF-035</td>
+                            <td>Filtrado Cliente - Productos por Categoría</td>
+                            <td>Cliente puede filtrar productos en catálogo por categoría. Sidebar con lista de categorías (cada una con contador de productos).
+                            Seleccionar categoría filtra productos. Sistema usa AJAX (sin refresco página). Permite múltiples categorías simultáneamente.</td>
+                            <td>
+                                <div class="rule-box">
+                                    <div class="rule-title">1️⃣ Visualización Categorías</div>
+                                    Sidebar izquierdo: "Categorías" con checkbox. Cada categoría muestra: [✓] Nombre (cantidad productos). Scrolleable si muchas categorías.
+                                </div>
+                                <div class="rule-box">
+                                    <div class="rule-title">2️⃣ Filtrado AJAX</div>
+                                    Seleccionar categoría filtra productos automáticamente (AJAX). Página no recarga. URL actualizada con parámetro categoria=. Histórico/back funciona.
+                                </div>
+                                <div class="rule-box">
+                                    <div class="rule-title">3️⃣ Múltiples Categorías</div>
+                                    Cliente puede seleccionar múltiples categorías. Resultado = unión (productos de categoría A O B). Contador actualiza dinámicamente.
+                                </div>
+                            </td>
+                            <td><span class="status-implementado">✅ IMPLEMENTADO</span></td>
+                            <td><span class="priority-alta">🔴 ALTA</span></td>
+                        </tr>
+                        <tr>
+                            <td>RF-036</td>
+                            <td>Filtrado Cliente - Rango de Precios</td>
+                            <td>Cliente puede filtrar productos por rango de precios: slider dual (mín-máx) o input manual. Filtra en tiempo real (AJAX).
+                            Rango precios mostrado: "Precio: $5000 - $150000". Productos fuera rango se ocultan.</td>
+                            <td>
+                                <div class="rule-box">
+                                    <div class="rule-title">1️⃣ Slider Visual</div>
+                                    Slider dual HTML5: mín y máx arrastrables. Muestra valores en tiempo real: "$5000 - $50000". Rango mínimo=$0, máximo=producto_más_caro.
+                                </div>
+                                <div class="rule-box">
+                                    <div class="rule-title">2️⃣ Filtrado AJAX</div>
+                                    Cambiar slider filtra productos: precio >= mín AND precio <= máx. Solo activo = 1. Sin refresco página. Animación suave.
+                                </div>
+                                <div class="rule-box">
+                                    <div class="rule-title">3️⃣ Inputs Alternativos</div>
+                                    Inputs número: "Precio mín: [input]" y "Precio máx: [input]" para ingreso manual. Validación: mín < máx, números positivos.
+                                </div>
+                            </td>
+                            <td><span class="status-no-implementado">❌ NO IMPLEMENTADO</span></td>
+                            <td><span class="priority-media">🟠 MEDIA</span></td>
+                        </tr>
+                        <tr>
+                            <td>RF-037</td>
+                            <td>Ordenamiento Cliente - Productos</td>
+                            <td>Cliente puede ordenar resultados de productos por: Relevancia (búsqueda), Precio (Menor/Mayor), 
+                            Nombre (A-Z), Fecha Publicación (Nuevos), Más Vendidos. Dropdown select en página catálogo.</td>
+                            <td>
+                                <div class="rule-box">
+                                    <div class="rule-title">1️⃣ Opciones Ordenamiento</div>
+                                    Dropdown: "Ordenar por: [select]". Opciones: Relevancia, Precio Menor, Precio Mayor, Nombre A-Z, Fecha Publicación, Más Vendidos.
+                                </div>
+                                <div class="rule-box">
+                                    <div class="rule-title">2️⃣ Aplicación Filtros</div>
+                                    Ordenamiento se aplica junto a filtros existentes. Si está filtrando "Categoría A + Precio <50k", ordenamiento se aplica a ese subset.
+                                </div>
+                                <div class="rule-box">
+                                    <div class="rule-title">3️⃣ Persistencia</div>
+                                    Cliente selecciona ordenamiento, lo guarda en localStorage. Próxima visita catálogo mantiene ordenamiento preferido. URL incluye parámetro sort=.
+                                </div>
+                            </td>
+                            <td><span class="status-implementado">✅ IMPLEMENTADO</span></td>
+                            <td><span class="priority-media">🟠 MEDIA</span></td>
+                        </tr>
+                        <tr>
+                            <td>RF-038a</td>
+                            <td>Crear Categoría</td>
+                            <td>Admin puede crear nueva categoría de productos. Ingresa nombre (único) y descripción (opcional).
+                            Sistema valida nombre no duplicado. Categoría se crea activa y disponible inmediatamente para asignar a productos.</td>
+                            <td>
+                                <div class="rule-box">
+                                    <div class="rule-title">1️⃣ Nombre Único</div>
+                                    nombre must be unique en BD. Validación case-insensitive. Si existe nombre similar, sistema alerta. Máximo 100 caracteres.
+                                </div>
+                                <div class="rule-box">
+                                    <div class="rule-title">2️⃣ Campos Crear</div>
+                                    nombre (obligatorio, único), descripción (opcional, máx 500 caracteres), activo (default=1, visible).
+                                </div>
+                                <div class="rule-box">
+                                    <div class="rule-title">3️⃣ Auditoría Creación</div>
+                                    Se registra: admin, nombre categoría, descripción, fecha creación. Admin master ve historial categorías creadas.
+                                </div>
+                            </td>
+                            <td><span class="status-no-implementado">❌ NO IMPLEMENTADO</span></td>
+                            <td><span class="priority-alta">🔴 ALTA</span></td>
+                        </tr>
+                        <tr>
+                            <td>RF-038b</td>
+                            <td>Editar Categoría</td>
+                            <td>Admin puede editar categoría existente: nombre, descripción, estado (activo/inactivo). 
+                            Si cambio de nombre: sistema valida no crear duplicado. Cambios en auditoría.</td>
+                            <td>
+                                <div class="rule-box">
+                                    <div class="rule-title">1️⃣ Editar Nombre</div>
+                                    Admin puede cambiar nombre de categoría. Si nuevo nombre existe, sistema rechaza. Validación antes de guardar.
+                                </div>
+                                <div class="rule-box">
+                                    <div class="rule-title">2️⃣ Cambio Estado</div>
+                                    Admin puede cambiar estado: activo (visible en catálogo) o inactivo (oculto). Productos en categoría inactiva se ocultan cliente.
+                                </div>
+                                <div class="rule-box">
+                                    <div class="rule-title">3️⃣ Auditoría Cambios</div>
+                                    Se registra: admin, qué categoría, campos cambiados, valores antes/después, timestamp. Historial completo.
+                                </div>
+                            </td>
+                            <td><span class="status-no-implementado">❌ NO IMPLEMENTADO</span></td>
+                            <td><span class="priority-alta">🔴 ALTA</span></td>
+                        </tr>
+                        <tr>
+                            <td>RF-038c</td>
+                            <td>Eliminar Categoría</td>
+                            <td>Admin puede eliminar categoría. Si categoría SIN productos: hard delete permitido. 
+                            Si tiene productos: soft delete (inactivo). Productos en categoría inactiva se ocultan pero datos se mantienen.</td>
+                            <td>
+                                <div class="rule-box">
+                                    <div class="rule-title">1️⃣ Verificación Productos</div>
+                                    Sistema consulta tabla productos para ver cuántos usan categoría. Si 0 productos: hard delete. Si >0: soft delete.
+                                </div>
+                                <div class="rule-box">
+                                    <div class="rule-title">2️⃣ Soft Delete (Contiene Productos)</div>
+                                    Si categoría tiene productos: establece activo=0 (inactiva). Productos en categoría inactiva se ocultan cliente pero existen en BD.
+                                </div>
+                                <div class="rule-box">
+                                    <div class="rule-title">3️⃣ Auditoría Eliminación</div>
+                                    Se registra: admin, categoría eliminada, tipo eliminación (soft/hard), cuántos productos afectados, timestamp.
+                                </div>
+                            </td>
+                            <td><span class="status-no-implementado">❌ NO IMPLEMENTADO</span></td>
+                            <td><span class="priority-alta">🔴 ALTA</span></td>
+                        </tr>
+                        <tr>
+                            <td>RF-039</td>
+                            <td>Gestión de Imágenes Múltiples Producto</td>
+                            <td>Admin puede cargar múltiples imágenes para cada producto (galería). Primera imagen es principal (thumbnail). 
+                            Permite organizar orden de imágenes (drag-drop). Eliminar imágenes individuales. Validación tipo/tamaño archivo.</td>
+                            <td>
+                                <div class="rule-box">
+                                    <div class="rule-title">1️⃣ Carga Múltiple</div>
+                                    Admin ve sección "Imágenes Producto" con botón "Cargar Imagen". Multi-select o drag-drop. Soporta JPG, PNG, WebP. Max 5MB cada.
+                                </div>
+                                <div class="rule-box">
+                                    <div class="rule-title">2️⃣ Organización</div>
+                                    Galería mostrando thumbnails. Drag-drop para reordenar. Primera imagen es principal (destacada en catálogo). Botón "Establecer como principal".
+                                </div>
+                                <div class="rule-box">
+                                    <div class="rule-title">3️⃣ Eliminación</div>
+                                    Botón X en cada thumbnail para eliminar. Confirmación antes de eliminar. Si elimina principal, siguiente img  deviene principal automáticamente.
+                                </div>
+                            </td>
+                            <td><span class="status-implementado">✅ IMPLEMENTADO</span></td>
+                            <td><span class="priority-media">🟠 MEDIA</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- TABLA: PRODUCTOS_VARIANTES -->
+        <section>
+            <div class="section-header">
+                <h2>🎨 TABLA: PRODUCTOS_VARIANTES</h2>
+                <p>Variantes de productos con talla, color, precio y stock específicos</p>
+            </div>
+
+            <div class="table-section">
+                <h3>Descripción General de Tabla</h3>
+                <div class="table-description">
+                    <strong>Propósito:</strong> Gestionar variantes (combinaciones talla+color) de productos. Cada variante tiene precio y stock independiente.
+                    Permite flexibilidad de precios por tamaño o color (ej: XL más caro que S).<br>
+                    <strong>Campos Clave:</strong> id, id_producto, id_talla, id_color, precio, stock<br>
+                    <strong>Relaciones:</strong> FK id_producto → productos, FK id_talla → c_tallas, FK id_color → c_colores
+                </div>
+
+                <table>
+                    <thead>
+                        <tr>
+                            <th class="table-column-id">ID RF</th>
+                            <th class="table-column-nombre">Requerimiento</th>
+                            <th class="table-column-descripcion">Descripción Profesional</th>
+                            <th class="table-column-reglas">Reglas de Negocio (3)</th>
+                            <th class="table-column-estado">Estado</th>
+                            <th class="table-column-prioridad">Prioridad</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>RF-040</td>
+                            <td>Crear Variantes Producto</td>
+                            <td>Admin puede crear variantes combinando talla + color. Cada variante tiene precio independiente 
+                            y stock independiente. Interfaz permitir agregar múltiples variantes en una sesión.</td>
+                            <td>
+                                <div class="rule-box">
+                                    <div class="rule-title">1️⃣ Combinación Única</div>
+                                    No puede haber dos variantes con mismo id_producto + id_talla + id_color. Validación uniqueness en BD y aplicación.
+                                </div>
+                                <div class="rule-box">
+                                    <div class="rule-title">2️⃣ Campos Requeridos</div>
+                                    id_producto (FK válido), id_talla (FK válido), id_color (FK válido), precio (>0, <9.999.999), stock (>=0).
+                                </div>
+                                <div class="rule-box">
+                                    <div class="rule-title">3️⃣ Múltiples Variantes</div>
+                                    Admin puede agregar múltiples variantes dinámicamente. Sistema permite bulk insert eficiente.
+                                </div>
+                            </td>
+                            <td><span class="status-implementado">✅ IMPLEMENTADO</span></td>
+                            <td><span class="priority-alta">🔴 ALTA</span></td>
+                        </tr>
+                        <tr>
+                            <td>RF-041</td>
+                            <td>Filtrado Dinámico Variantes</td>
+                            <td>Cliente en página de detalles puede seleccionar talla/color. Sistema filtra automáticamente 
+                            variantes disponibles (AJAX). Si selecciona talla, muestra colores disponibles para esa talla, y viceversa.</td>
+                            <td>
+                                <div class="rule-box">
+                                    <div class="rule-title">1️⃣ Bidireccional</div>
+                                    Seleccionar talla filtra colores. Seleccionar color filtra tallas. Ambas direcciones funcionan en tiempo real AJAX.
+                                </div>
+                                <div class="rule-box">
+                                    <div class="rule-title">2️⃣ Sin Refresco Página</div>
+                                    Filtrado utiliza AJAX. No recarga página. Respuesta JSON contiene variantes filtradas, tallas, colores disponibles.
+                                </div>
+                                <div class="rule-box">
+                                    <div class="rule-title">3️⃣ Visual Intuitivo</div>
+                                    Tallas mostradas como botones. Colores mostrados como círculos con código hex. Stock disponible mostrado por variante.
+                                </div>
+                            </td>
+                            <td><span class="status-implementado">✅ IMPLEMENTADO</span></td>
+                            <td><span class="priority-alta">🔴 ALTA</span></td>
+                        </tr>
+                        <tr>
+                            <td>RF-042</td>
+                            <td>Editar Variantes</td>
+                            <td>Admin puede editar precio y stock de variantes existentes. No puede cambiar talla/color (eso requiere 
+                            eliminar y crear nueva). Cambios se aplican inmediatamente en BD sin afectar compras históricas.</td>
+                            <td>
+                                <div class="rule-box">
+                                    <div class="rule-title">1️⃣ Campos Editables</div>
+                                    Solo precio y stock son editables. id_talla, id_color, id_producto son immutables (valores FK). Cambiar requier delete/create nuevo.
+                                </div>
+                                <div class="rule-box">
+                                    <div class="rule-title">2️⃣ Validación Cambios</div>
+                                    Precio debe ser > 0. Stock >= 0. Si hay cambio, auditoria registra valores antes y después.
+                                </div>
+                                <div class="rule-box">
+                                    <div class="rule-title">3️⃣ Retroactividad</div>
+                                    Cambios de precio NO afectan compras históricas. Nueva variante de carrito usa nuevo precio. Auditoría clara.
+                                </div>
+                            </td>
+                            <td><span class="status-implementado">✅ IMPLEMENTADO</span></td>
+                            <td><span class="priority-media">🟠 MEDIA</span></td>
+                        </tr>
+                        <tr>
+                            <td>RF-043</td>
+                            <td>Eliminar Variantes</td>
+                            <td>Admin puede eliminar variantes que no se han comprado. Sistema verifica si hay compras asociadas.
+                            Si hay compras, solo inactiva variante (soft delete). Historial de compras se mantiene íntegro.</td>
+                            <td>
+                                <div class="rule-box">
+                                    <div class="rule-title">1️⃣ Verificación Compras</div>
+                                    Sistema consulta detalle_compra para verificar compras. Si hay compras, soft delete (inactivo). Sin compras, hard delete permitido.
+                                </div>
+                                <div class="rule-box">
+                                    <div class="rule-title">2️⃣ Integridad Referencial</div>
+                                    Compras que contienen variante no se borran ni se afectan. Datos históricos permanecen íntegros para auditoría.
+                                </div>
+                                <div class="rule-box">
+                                    <div class="rule-title">3️⃣ Confirmación Usuario</div>
+                                    Admin debe confirmar eliminación. Sistema advierte sobre implicaciones (soft vs hard delete).
+                                </div>
+                            </td>
+                            <td><span class="status-implementado">✅ IMPLEMENTADO</span></td>
+                            <td><span class="priority-media">🟠 MEDIA</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h3 style="margin-top: 40px; color: #e74c3c;">🚨 Requerimientos Faltantes - TABLA PRODUCTOS_VARIANTES</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th class="table-column-id">ID RF</th>
+                            <th class="table-column-nombre">Requerimiento</th>
+                            <th class="table-column-descripcion">Descripción Profesional</th>
+                            <th class="table-column-reglas">Reglas de Negocio (3)</th>
+                            <th class="table-column-estado">Estado</th>
+                            <th class="table-column-prioridad">Prioridad</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>RF-044</td>
+                            <td>Importación Masiva Variantes</td>
+                            <td>Admin puede cargar variantes en masa usando archivo CSV. Formato: id_producto, id_talla, id_color, precio, stock.
+                            Sistema valida cada fila, reporta errores, permite ignorar o detener. Importación transaccional (todo o nada).</td>
+                            <td>
+                                <div class="rule-box">
+                                    <div class="rule-title">1️⃣ Formato CSV</div>
+                                    Header: id_producto, id_talla, id_color, precio, stock. Validar formato, encoding UTF-8. Máximo 1000 filas por importación.
+                                </div>
+                                <div class="rule-box">
+                                    <div class="rule-title">2️⃣ Validación Datos</div>
+                                    Sistema valida: id_producto existe, id_talla existe, id_color existe, precio >0, stock >=0. Report de filas con error. Stop/Continue.
+                                </div>
+                                <div class="rule-box">
+                                    <div class="rule-title">3️⃣ Transacción Atómica</div>
+                                    Si hay errores: ROLLBACK (nada se guarda). Si todo OK: INSERT todas variantes. Auditoría registra: admin, cuántas insertadas, archivo.
+                                </div>
+                            </td>
+                            <td><span class="status-no-implementado">❌ NO IMPLEMENTADO</span></td>
+                            <td><span class="priority-media">🟠 MEDIA</span></td>
+                        </tr>
+                        <tr>
+                            <td>RF-045</td>
+                            <td>Exportación Variantes a CSV</td>
+                            <td>Admin puede exportar todas las variantes de un producto a CSV. Incluye: id_producto, talla, color (nombre y hex), precio, stock.
+                            Exportación filtrables por rango precio o stock. Útil para auditoría y análisis externo.</td>
+                            <td>
+                                <div class="rule-box">
+                                    <div class="rule-title">1️⃣ Exportación Completa</div>
+                                    CSV con headers: id, id_producto, talla, color_nombre, color_hex, precio, stock. Encoding UTF-8. Nombre archivo: variantes_[fecha].csv.
+                                </div>
+                                <div class="rule-box">
+                                    <div class="rule-title">2️⃣ Filtrado Previo</div>
+                                    Admin puede exportar solo: variantes activas (stock>0), de una categoría, de un rango precio. Filtros pre-aplicados a export.
+                                </div>
+                                <div class="rule-box">
+                                    <div class="rule-title">3️⃣ Auditoría Exportación</div>
+                                    Sistema registra: admin, fecha exportación, cuántas variantes, rango filtros. Log de exports para cumplimiento datos.
+                                </div>
+                            </td>
+                            <td><span class="status-no-implementado">❌ NO IMPLEMENTADO</span></td>
+                            <td><span class="priority-baja">🔵 BAJA</span></td>
+                        </tr>
+                        <tr>
+                            <td>RF-046</td>
+                            <td>Reporte Stock Variantes</td>
+                            <td>Admin accede a reporte de stock de variantes por producto. Muestra: producto, variantes totales, stock total, variantes con stock<0 (alertas),
+                            variantes agotadas. Permite tomar decisiones de reorden de inventario.</td>
+                            <td>
+                                <div class="rule-box">
+                                    <div class="rule-title">1️⃣ Información Visual</div>
+                                    Tabla: Producto, Variantes Totales, Stock Agotado (rojo), Stock Bajo (<5, amarillo), Stock Normal (verde), Stock Total.
+                                </div>
+                                <div class="rule-box">
+                                    <div class="rule-title">2️⃣ Filtros y Alertas</div>
+                                    Filtrar: productos sin stock, stock bajo, stock crítico. Alertas automáticas si algún producto sin stock 7+ días.
+                                </div>
+                                <div class="rule-box">
+                                    <div class="rule-title">3️⃣ Reorden Automático</div>
+                                    Admin puede marcar productos para reorden. Sistema genera lista compras. Email notificación si stock crítico.
+                                </div>
+                            </td>
+                            <td><span class="status-no-implementado">❌ NO IMPLEMENTADO</span></td>
+                            <td><span class="priority-media">🟠 MEDIA</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- TABLA: C_TALLAS Y C_COLORES -->
+        <section>
+            <div class="section-header">
+                <h2>🎨 TABLAS: C_TALLAS Y C_COLORES</h2>
+                <p>Catálogos de control: tallas y colores reutilizables</p>
+            </div>
+
+            <div class="table-section">
+                <h3>Descripción General de Tablas</h3>
+                <div class="table-description">
+                    <strong>C_TALLAS:</strong> Catálogo de tallas disponibles (S, M, L, XL, 28, 30, 32, etc). Reutilizable en múltiples productos.
+                    Permite consistencia en oferta de tallas.<br>
+                    <strong>C_COLORES:</strong> Catálogo de colores con código hexadecimal (#FFFFFF). Visual intuitivo. Reutilizable en múltiples productos.<br>
+                    <strong>Relaciones:</strong> Ambas son tablas de referencia (muchos a muchos con productos_variantes)
+                </div>
+
+                <table>
+                    <thead>
+                        <tr>
+                            <th class="table-column-id">ID RF</th>
+                            <th class="table-column-nombre">Requerimiento</th>
+                            <th class="table-column-descripcion">Descripción Profesional</th>
+                            <th class="table-column-reglas">Reglas de Negocio (3)</th>
+                            <th class="table-column-estado">Estado</th>
+                            <th class="table-column-prioridad">Prioridad</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>RF-050a</td>
+                            <td>Crear Talla</td>
+                            <td>Admin puede crear nueva talla en catálogo central. Ingresa nombre único (ej: S, M, L, XL, 28, 30, 32).
+                            Validación impide duplicados. Talla queda disponible para usar en variantes de productos.</td>
+                            <td>
+                                <div class="rule-box">
+                                    <div class="rule-title">1️⃣ Nombre Único</div>
+                                    No puede haber dos tallas con nombre idéntico. Validación case-insensitive. Ejemplo: "S" y "s" se consideran iguales.
+                                </div>
+                                <div class="rule-box">
+                                    <div class="rule-title">2️⃣ Formato Flexible</div>
+                                    Permite tallas variadas: letras (S, M, L, XL) o números (28, 30, 32, 34) o combinadas (S/M, L/XL). Sin restricciones formato.
+                                </div>
+                                <div class="rule-box">
+                                    <div class="rule-title">3️⃣ Auditoría Creación</div>
+                                    Se registra: admin, nombre talla, fecha creación. Talla disponible inmediatamente en dropdown para crear variantes.
+                                </div>
+                            </td>
+                            <td><span class="status-no-implementado">❌ NO IMPLEMENTADO</span></td>
+                            <td><span class="priority-media">🟠 MEDIA</span></td>
+                        </tr>
+                        <tr>
+                            <td>RF-050b</td>
+                            <td>Editar Talla</td>
+                            <td>Admin puede editar nombre de talla existente. Validación impide cambiar a nombre duplicado.
+                            Cambio se refleja en todas las variantes que usan esta talla (actualización en cascada).</td>
+                            <td>
+                                <div class="rule-box">
+                                    <div class="rule-title">1️⃣ Cambio Nombre</div>
+                                    Admin puede cambiar nombre de talla. Si nuevo nombre existe, sistema rechaza. Validación case-insensitive.
+                                </div>
+                                <div class="rule-box">
+                                    <div class="rule-title">2️⃣ Actualización Cascada</div>
+                                    Si admin cambia "S" a "Small", todas variantes con talla "S" se actualizan automáticamente a "Small". Visible en catálogo cliente.
+                                </div>
+                                <div class="rule-box">
+                                    <div class="rule-title">3️⃣ Auditoría Cambios</div>
+                                    Se registra: admin, talla editada, nombre anterior, nombre nuevo, fecha, cuántas variantes afectadas.
+                                </div>
+                            </td>
+                            <td><span class="status-no-implementado">❌ NO IMPLEMENTADO</span></td>
+                            <td><span class="priority-media">🟠 MEDIA</span></td>
+                        </tr>
+                        <tr>
+                            <td>RF-050c</td>
+                            <td>Eliminar Talla</td>
+                            <td>Admin puede eliminar talla. Sistema verifica si talla se usa en variantes activas con stock > 0. 
+                            Si SÍ se usa: soft delete (inactiva). Si NO se usa: hard delete. Compras históricas mantienen nombre original.</td>
+                            <td>
+                                <div class="rule-box">
+                                    <div class="rule-title">1️⃣ Verificación Uso</div>
+                                    Sistema consulta productos_variantes para ver si talla está en uso. Si variantes con stock > 0: soft delete. Sin uso: hard delete.
+                                </div>
+                                <div class="rule-box">
+                                    <div class="rule-title">2️⃣ Soft Delete (En Uso)</div>
+                                    Si talla se usa en variantes activas: establece activo=0 (inactiva). Variantes antiguas se mantienen pero sin ofrecerse nuevas.
+                                </div>
+                                <div class="rule-box">
+                                    <div class="rule-title">3️⃣ Auditoría Eliminación</div>
+                                    Se registra: admin, talla eliminada, tipo eliminación (soft/hard), cuántas variantes afectadas, timestamp.
+                                </div>
+                            </td>
+                            <td><span class="status-no-implementado">❌ NO IMPLEMENTADO</span></td>
+                            <td><span class="priority-media">🟠 MEDIA</span></td>
+                        </tr>
+                        <tr>
+                            <td>RF-051a</td>
+                            <td>Crear Color</td>
+                            <td>Admin puede crear nuevo color en catálogo central. Ingresa nombre descriptivo (ej: Negro, Azul) y código hexadecimal (#RRGGBB).
+                            Sistema valida código hex válido. Interfaz muestra preview de color. Color queda disponible para variantes.</td>
+                            <td>
+                                <div class="rule-box">
+                                    <div class="rule-title">1️⃣ Código Hex Válido</div>
+                                    Debe ser formato #RRGGBB válido. Ejemplos: #000000, #FFFFFF, #FF5733. Validación regex antes de guardar. Sistema rechaza formato inválido.
+                                </div>
+                                <div class="rule-box">
+                                    <div class="rule-title">2️⃣ Nombre Descriptivo</div>
+                                    Nombre legible por usuario (Negro, Azul Oscuro, Verde Claro). Helps admin y clientes. Máximo 50 caracteres. Único en BD.
+                                </div>
+                                <div class="rule-box">
+                                    <div class="rule-title">3️⃣ Visual Preview</div>
+                                    Interfaz muestra círculo coloreado con código hex mientras admin ingresa. Previsualización en tiempo real. Agrega a catálogo activo.
+                                </div>
+                            </td>
+                            <td><span class="status-no-implementado">❌ NO IMPLEMENTADO</span></td>
+                            <td><span class="priority-media">🟠 MEDIA</span></td>
+                        </tr>
+                        <tr>
+                            <td>RF-051b</td>
+                            <td>Editar Color</td>
+                            <td>Admin puede editar color existente: nombre o código hex. Validación impide duplicar nombre.
+                            Cambios se actualizan en todas variantes que usan este color. Interfaz muestra preview actualizado.</td>
+                            <td>
+                                <div class="rule-box">
+                                    <div class="rule-title">1️⃣ Editar Nombre</div>
+                                    Admin puede cambiar nombre de color. Validación impide duplicar nombre. Case-insensitive.
+                                </div>
+                                <div class="rule-box">
+                                    <div class="rule-title">2️⃣ Editar Código Hex</div>
+                                    Admin puede cambiar código hex. Validación regex ensure formato válido #RRGGBB. Preview actualiza en tiempo real.
+                                </div>
+                                <div class="rule-box">
+                                    <div class="rule-title">3️⃣ Auditoría Cambios</div>
+                                    Se registra: admin, color editado, campos cambiados, valores antes/después, fecha, cuántas variantes afectadas.
+                                </div>
+                            </td>
+                            <td><span class="status-no-implementado">❌ NO IMPLEMENTADO</span></td>
+                            <td><span class="priority-media">🟠 MEDIA</span></td>
+                        </tr>
+                        <tr>
+                            <td>RF-051c</td>
+                            <td>Eliminar Color</td>
+                            <td>Admin puede eliminar color. Sistema verifica si color se usa en variantes activas con stock > 0.
+                            Si SÍ se usa: soft delete (inactivo). Si NO se usa: hard delete. Compras históricas mantienen color original.</td>
+                            <td>
+                                <div class="rule-box">
+                                    <div class="rule-title">1️⃣ Verificación Uso</div>
+                                    Sistema consulta productos_variantes para ver si color está en uso. Si variantes con stock > 0: soft delete. Sin uso: hard delete.
+                                </div>
+                                <div class="rule-box">
+                                    <div class="rule-title">2️⃣ Soft Delete (En Uso)</div>
+                                    Si color se usa en variantes activas: establece activo=0 (inactivo). Variantes antiguas se mantienen pero sin ofrecerse nuevas.
+                                </div>
+                                <div class="rule-box">
+                                    <div class="rule-title">3️⃣ Auditoría Eliminación</div>
+                                    Se registra: admin, color eliminado, tipo eliminación (soft/hard), cuántas variantes afectadas, timestamp.
+                                </div>
+                            </td>
+                            <td><span class="status-no-implementado">❌ NO IMPLEMENTADO</span></td>
+                            <td><span class="priority-media">🟠 MEDIA</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- TABLA: COMPRA -->
+        <section>
+            <div class="section-header">
+                <h2>💳 TABLA: COMPRA</h2>
+                <p>Registro de compras/pedidos y su información general</p>
+            </div>
+
+            <div class="table-section">
+                <h3>Descripción General de Tabla</h3>
+                <div class="table-description">
+                    <strong>Propósito:</strong> Almacenar cada transacción de compra. Conecta cliente → detalle_compra → productos.
+                    Registro transaccional de ventas. Integración con pasarelas de pago (PayPal).<br>
+                    <strong>Campos Clave:</strong> id, id_transaccion (FK PayPal), fecha, status, email, id_cliente, total, medio_pago<br>
+                    <strong>Relaciones:</strong> FK id_cliente → clientes, FK → detalle_compra (1:N)
+                </div>
+
+                <table>
+                    <thead>
+                        <tr>
+                            <th class="table-column-id">ID RF</th>
+                            <th class="table-column-nombre">Requerimiento</th>
+                            <th class="table-column-descripcion">Descripción Profesional</th>
+                            <th class="table-column-reglas">Reglas de Negocio (3)</th>
+                            <th class="table-column-estado">Estado</th>
+                            <th class="table-column-prioridad">Prioridad</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>RF-060</td>
+                            <td>Crear Compra</td>
+                            <td>Sistema crea registro de compra al procesar pago exitoso. Captura id_transaccion de pasarela (PayPal),
+                            fecha actual, status inicial, email, id_cliente, total. Almacena medio_pago utilizado.</td>
+                            <td>
+                                <div class="rule-box">
+                                    <div class="rule-title">1️⃣ Transacción Exitosa</div>
+                                    Compra se crea solo después de validar pago EXITOSO con PayPal. status = 'COMPLETED' inicialmente.
+                                </div>
+                                <div class="rule-box">
+                                    <div class="rule-title">2️⃣ ID Único</div>
+                                    id_transaccion es único en BD. Proviene de PayPal. Previene duplicados de pago. Validación uniqueness.
+                                </div>
+                                <div class="rule-box">
+                                    <div class="rule-title">3️⃣ Total Inmutable</div>
+                                    Total se calcula en checkout antes de pago. Una vez compra creada, total es inmutable (auditoría). Cambios requieren reembolso.
+                                </div>
+                            </td>
+                            <td><span class="status-parcial">⚠️ PARCIAL</span></td>
+                            <td><span class="priority-alta">🔴 ALTA</span></td>
+                        </tr>
+                        <tr>
+                            <td>RF-061</td>
+                            <td>Gestionar Estado Compra</td>
+                            <td>Admin puede cambiar estado de compra: pendiente → procesando → enviado → entregado.
+                            También puede marcar como cancelado. Cada cambio registra timestamp. Cliente recibe notificación por email.</td>
+                            <td>
+                                <div class="rule-box">
+                                    <div class="rule-title">1️⃣ Estados Controlados</div>
+                                    Estados válidos: COMPLETED (pago OK), procesando, enviado, entregado, cancelado. Solo admin cambia estado.
+                                </div>
+                                <div class="rule-box">
+                                    <div class="rule-title">2️⃣ Notificación Cliente</div>
+                                    Cada cambio estado envía email a cliente. Ej: "Tu pedido fue enviado. Rastreo: [link]". Mejora experiencia.
+                                </div>
+                                <div class="rule-box">
+                                    <div class="rule-title">3️⃣ Auditoría Status</div>
+                                    Cada cambio registra timestamp y admin que lo hizo. Historial completo de estados del pedido consultable.
+                                </div>
+                            </td>
+                            <td><span class="status-parcial">⚠️ PARCIAL</span></td>
+                            <td><span class="priority-media">🟠 MEDIA</span></td>
+                        </tr>
+                        <tr>
+                            <td>RF-062</td>
+                            <td>Historial Compras Cliente</td>
+                            <td>Cliente logueado puede ver historial de todas sus compras con detalles: fecha, total, status, productos.
+                            Link a detalles de pedido individual. Descarga PDF de factura/recibo.</td>
+                            <td>
+                                <div class="rule-box">
+                                    <div class="rule-title">1️⃣ Autorización</div>
+                                    Cliente solo ve sus propias compras (id_cliente = usuario logueado). No puede ver compras otros clientes.
+                                </div>
+                                <div class="rule-box">
+                                    <div class="rule-title">2️⃣ Información Completa</div>
+                                    Historial muestra: ID pedido, fecha, total, status, cantidad de items, última actualización.
+                                </div>
+                                <div class="rule-box">
+                                    <div class="rule-title">3️⃣ Descarga PDF</div>
+                                    Cliente puede descargar PDF de cada pedido. Contains recibo, dirección, items, total, información pago.
+                                </div>
+                            </td>
+                            <td><span class="status-parcial">⚠️ PARCIAL</span></td>
+                            <td><span class="priority-media">🟠 MEDIA</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h3 style="margin-top: 40px; color: #e74c3c;">🚨 Requerimientos Faltantes - TABLA COMPRA</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th class="table-column-id">ID RF</th>
+                            <th class="table-column-nombre">Requerimiento</th>
+                            <th class="table-column-descripcion">Descripción Profesional</th>
+                            <th class="table-column-reglas">Reglas de Negocio (3)</th>
+                            <th class="table-column-estado">Estado</th>
+                            <th class="table-column-prioridad">Prioridad</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>RF-063</td>
+                            <td>Búsqueda Admin - Compras por Criterios</td>
+                            <td>Admin puede buscar compras por: ID compra, ID transacción PayPal, nombre cliente, email cliente, rango fechas, rango montos.
+                            Resultados paginados, ordenables. Útil para seguimiento y auditoría de transacciones.</td>
+                            <td>
+                                <div class="rule-box">
+                                    <div class="rule-title">1️⃣ Búsqueda Texto</div>
+                                    Buscar por: ID compra (exact match), ID transacción (LIKE), nombre cliente (LIKE), email cliente (LIKE). Case-insensitive.
+                                </div>
+                                <div class="rule-box">
+                                    <div class="rule-title">2️⃣ Filtros Rango</div>
+                                    Fecha inicio - fecha fin, monto mínimo - monto máximo, estado (COMPLETED/procesando/enviado/entregado/cancelado). Combinar múltiples.
+                                </div>
+                                <div class="rule-box">
+                                    <div class="rule-title">3️⃣ Ordenamiento Resultados</div>
+                                    Ordenar: fecha DESC/ASC, total DESC/ASC, ID DESC/ASC. Paginación 25 compras por página. Guardar preferencia filtro.
+                                </div>
+                            </td>
+                            <td><span class="status-no-implementado">❌ NO IMPLEMENTADO</span></td>
+                            <td><span class="priority-media">🟠 MEDIA</span></td>
+                        </tr>
+                        <tr>
+                            <td>RF-064</td>
+                            <td>Reporte de Ventas</td>
+                            <td>Admin accede a reporte visual de ventas: gráfico líneas de ventas por día/mes, tabla de products más vendidos, total ventas período,
+                            tickete promedio, cantidad compras. Filtrable por rango fecha. Exportable a PDF/Excel.</td>
+                            <td>
+                                <div class="rule-box">
+                                    <div class="rule-title">1️⃣ Gráficos Visuales</div>
+                                    Gráfico líneas (Chart.js): ventas acumuladas por período. Tabla: producto, cantidad vendida, ingresos generados. Top 10 productos.
+                                </div>
+                                <div class="rule-box">
+                                    <div class="rule-title">2️⃣ Métricas KPI</div>
+                                    Tarjetas mostrando: Total Ventas Período, Cantidad Compras, Ticket Promedio, Ganancia Neta. Variación % vs período anterior.
+                                </div>
+                                <div class="rule-box">
+                                    <div class="rule-title">3️⃣ Exportación Reportes</div>
+                                    Botón exportar PDF o Excel. Incluye: gráficos, tablas, fecha generación, período reporte, firma digital admin.
+                                </div>
+                            </td>
+                            <td><span class="status-no-implementado">❌ NO IMPLEMENTADO</span></td>
+                            <td><span class="priority-media">🟠 MEDIA</span></td>
+                        </tr>
+                        <tr>
+                            <td>RF-065</td>
+                            <td>Integración Envío - Rastreo</td>
+                            <td>Sistema integra con pasarela de envío (ej: Coordinadora, DHL, Servientrega). Admin ingresa número de rastreo en compra.
+                            Cliente recibe email con link rastreo. Actualización automática estado envío (enviado → en tránsito → entregado).</td>
+                            <td>
+                                <div class="rule-box">
+                                    <div class="rule-title">1️⃣ Ingreso Rastreo</div>
+                                    Admin en GestionarPedidos ingresa número_rastreo. Sistema valida formato. Envía email cliente: "Tu compra en tránsito. Rastreo: [link]".
+                                </div>
+                                <div class="rule-box">
+                                    <div class="rule-title">2️⃣ Actualización Automática</div>
+                                    Webhook de pasarela actualiza estado compra automáticamente: enviado, en_transito, entregado. Sin intervención admin manual.
+                                </div>
+                                <div class="rule-box">
+                                    <div class="rule-title">3️⃣ Link Rastreo Cliente</div>
+                                    Cliente en "Mis Compras" ve botón "Rastrear". Click abre link rastreo externo (coordinadora, etc). Email recordatorio 5 días post-envío.
+                                </div>
+                            </td>
+                            <td><span class="status-no-implementado">❌ NO IMPLEMENTADO</span></td>
+                            <td><span class="priority-alta">🔴 ALTA</span></td>
+                        </tr>
+                        <tr>
+                            <td>RF-066</td>
+                            <td>Gestión Devoluciones/Reembolsos</td>
+                            <td>Sistema permite cliente solicitar devolución de compra. Admin ve solicitud, puede aprobar/rechazar. Si aprobada, genera reembolso automático
+                            a PayPal. Estado compra cambia a "reembolsado". Cliente recibe notificaciones en cada paso.</td>
+                            <td>
+                                <div class="rule-box">
+                                    <div class="rule-title">1️⃣ Solicitud Devolución</div>
+                                    Cliente en "Mis Compras" ve botón "Solicitar Devolución" (si entregada). Ingresa motivo. Sistema crea ticket devol con estado "pendiente".
+                                </div>
+                                <div class="rule-box">
+                                    <div class="rule-title">2️⃣ Aprobación Admin</div>
+                                    Admin en GestionarPedidos ve solicitudes, puede: Aprobar devol (genera reembolso PayPal automático) o Rechazar (notifica cliente).
+                                </div>
+                                <div class="rule-box">
+                                    <div class="rule-title">3️⃣ Auditoría Completa</div>
+                                    Sistema registra: quién solicitó, motivo, quién aprobó/rechazó, monto reembolsado, fecha, ID transacción reembolso.
+                                </div>
+                            </td>
+                            <td><span class="status-no-implementado">❌ NO IMPLEMENTADO</span></td>
+                            <td><span class="priority-media">🟠 MEDIA</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- TABLA: DETALLE_COMPRA -->
+        <section>
+            <div class="section-header">
+                <h2>📋 TABLA: DETALLE_COMPRA</h2>
+                <p>Líneas de items dentro de cada compra</p>
+            </div>
+
+            <div class="table-section">
+                <h3>Descripción General de Tabla</h3>
+                <div class="table-description">
+                    <strong>Propósito:</strong> Desglose de cada compra. Una compra puede tener múltiples items (productos/variantes).
+                    Cada línea registra qué se compró, cantidad, precio unitario en momento de compra (snapshot histórico).<br>
+                    <strong>Campos Clave:</strong> id, id_compra (FK), id_producto (FK), titulo, precio, cantidad<br>
+                    <strong>Relaciones:</strong> FK id_compra → compra, FK id_producto → productos
+                </div>
+
+                <table>
+                    <thead>
+                        <tr>
+                            <th class="table-column-id">ID RF</th>
+                            <th class="table-column-nombre">Requerimiento</th>
+                            <th class="table-column-descripcion">Descripción Profesional</th>
+                            <th class="table-column-reglas">Reglas de Negocio (3)</th>
+                            <th class="table-column-estado">Estado</th>
+                            <th class="table-column-prioridad">Prioridad</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>RF-070</td>
+                            <td>Crear Detalle Compra</td>
+                            <td>Al procesar compra, sistema crea línea de detalle_compra para cada item del carrito.
+                            Captura id_compra, id_producto, titulo, precio (snapshot momento compra), cantidad.</td>
+                            <td>
+                                <div class="rule-box">
+                                    <div class="rule-title">1️⃣ Snapshot Histórico</div>
+                                    precio guardado es el precio EN MOMENTO DE COMPRA. No variante después si precio actual cambia. Auditoría clara.
+                                </div>
+                                <div class="rule-box">
+                                    <div class="rule-title">2️⃣ Título Inmutable</div>
+                                    titulo es copia del título en momento de compra. Si admin cambia título después, historial mantiene título original.
+                                </div>
+                                <div class="rule-box">
+                                    <div class="rule-title">3️⃣ Cantidad Validada</div>
+                                    cantidad >= 1. Sistema verifica antes de crear. No permite cantidad 0 o negativa. Validación en aplicación y BD.
+                                </div>
+                            </td>
+                            <td><span class="status-parcial">⚠️ PARCIAL</span></td>
+                            <td><span class="priority-alta">🔴 ALTA</span></td>
+                        </tr>
+                        <tr>
+                            <td>RF-071</td>
+                            <td>Ver Detalles Pédido</td>
+                            <td>Cliente y admin pueden ver detalles de un pedido: lista de items comprados con cantidad, 
+                            precio unitario, total línea. Información es de solo lectura (immutable).</td>
+                            <td>
+                                <div class="rule-box">
+                                    <div class="rule-title">1️⃣ Solo Lectura</div>
+                                    Detalles no pueden editarse post-compra. Sistema es inmutable (auditoría). Cambios requieren cancelación/reembolso.
+                                </div>
+                                <div class="rule-box">
+                                    <div class="rule-title">2️⃣ Información Completa</div>
+                                    Cada item muestra: Nombre, descripción opcional, cantidad, precio unitario, subtotal. Total general al final.
+                                </div>
+                                <div class="rule-box">
+                                    <div class="rule-title">3️⃣ Autorización Lectura</div>
+                                    Cliente ve detalles de sus propios pedidos. Admin ve todos. No-logueado no ve detalles. Validación seguridad.
+                                </div>
+                            </td>
+                            <td><span class="status-parcial">⚠️ PARCIAL</span></td>
+                            <td><span class="priority-media">🟠 MEDIA</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h3 style="margin-top: 40px; color: #e74c3c;">🚨 Requerimientos Faltantes - TABLA DETALLE_COMPRA</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th class="table-column-id">ID RF</th>
+                            <th class="table-column-nombre">Requerimiento</th>
+                            <th class="table-column-descripcion">Descripción Profesional</th>
+                            <th class="table-column-reglas">Reglas de Negocio (3)</th>
+                            <th class="table-column-estado">Estado</th>
+                            <th class="table-column-prioridad">Prioridad</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>RF-072</td>
+                            <td>Análisis de Items Más Vendidos</td>
+                            <td>Admin accede a reporte de items más vendidos (sumando cantidades en detalle_compra). Muestra: producto, cantidad vendida, 
+                            ingresos generados, margen ganancia, tendencia ventas. Permite tomar decisiones de inventario y marketing.</td>
+                            <td>
+                                <div class="rule-box">
+                                    <div class="rule-title">1️⃣ Ranking de Ventas</div>
+                                    Tabla: Producto (TOP 20), Cantidad Vendida, Ingresos, Margen (%). Gráfico barras mostrando top 10 productos ingresos.
+                                </div>
+                                <div class="rule-box">
+                                    <div class="rule-title">2️⃣ Período Configurable</div>
+                                    Admin select período: últimos 7 días, 30 días, trimestre, año. Reporte actualiza dinámicamente. Comparar períodos.
+                                </div>
+                                <div class="rule-box">
+                                    <div class="rule-title">3️⃣ Tendencias e Insights</div>
+                                    Mostrar: productos en alza (↑ % vs mes anterior), productos en baja (↓), productos nuevos (no vendían hace 30d, ahora sí).
+                                </div>
+                            </td>
+                            <td><span class="status-no-implementado">❌ NO IMPLEMENTADO</span></td>
+                            <td><span class="priority-media">🟠 MEDIA</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- TABLA: CONFIGURACIONES -->
+        <section>
+            <div class="section-header">
+                <h2>⚙️ TABLA: CONFIGURACIONES</h2>
+                <p>Parámetros e información global del sistema</p>
+            </div>
+
+            <div class="table-section">
+                <h3>Descripción General de Tabla</h3>
+                <div class="table-description">
+                    <strong>Propósito:</strong> Almacenar configuraciones globales del e-commerce: nombre tienda, email SMTP, contraseña, puerto.
+                    Permite cambiar parámetros sin modificar código fuente. Key-value simple.<br>
+                    <strong>Campos Clave:</strong> id, nombre, valor<br>
+                    <strong>Relaciones:</strong> Tabla independiente (sin FK)
+                </div>
+
+                <table>
+                    <thead>
+                        <tr>
+                            <th class="table-column-id">ID RF</th>
+                            <th class="table-column-nombre">Requerimiento</th>
+                            <th class="table-column-descripcion">Descripción Profesional</th>
+                            <th class="table-column-reglas">Reglas de Negocio (3)</th>
+                            <th class="table-column-estado">Estado</th>
+                            <th class="table-column-prioridad">Prioridad</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>RF-080</td>
+                            <td>Panel Configuración Sistema</td>
+                            <td>Admin accede a panel de configuraciones donde puede editar: nombre tienda, email SMTP, contraseña SMTP, 
+                            puerto SMTP. Cambios se aplican inmediatamente sin recargar servidor.</td>
+                            <td>
+                                <div class="rule-box">
+                                    <div class="rule-title">1️⃣ Solo Admin</div>
+                                    Solo admin logueado puede acceder y editar configuraciones. Validación sesión requerida. Otras roles bloqueados.
+                                </div>
+                                <div class="rule-box">
+                                    <div class="rule-title">2️⃣ Encriptación Sensitive</div>
+                                    Contraseña SMTP se guarda encriptada en BD (cipher AES). No se almacena plain text. Desencriptación en runtime.
+                                </div>
+                                <div class="rule-box">
+                                    <div class="rule-title">3️⃣ Validación SMTP</div>
+                                    Admin puede testear conexión SMTP antes de guardar. Sistema verifica: servidor accesible, puerto abierto, credenciales válidas.
+                                </div>
+                            </td>
+                            <td><span class="status-implementado">✅ IMPLEMENTADO</span></td>
+                            <td><span class="priority-media">🟠 MEDIA</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h3 style="margin-top: 40px; color: #e74c3c;">🚨 Requerimientos Faltantes - TABLA CONFIGURACIONES</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th class="table-column-id">ID RF</th>
+                            <th class="table-column-nombre">Requerimiento</th>
+                            <th class="table-column-descripcion">Descripción Profesional</th>
+                            <th class="table-column-reglas">Reglas de Negocio (3)</th>
+                            <th class="table-column-estado">Estado</th>
+                            <th class="table-column-prioridad">Prioridad</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>RF-081</td>
+                            <td>Configuración de Impuestos</td>
+                            <td>Admin puede configurar tasas de impuestos aplicables: IVA (%), impuesto local, descuentos tributarios.
+                            Sistema aplica automáticamente en checkout. Cálculo transparente mostrado en carrito y factura.</td>
+                            <td>
+                                <div class="rule-box">
+                                    <div class="rule-title">1️⃣ Tasas Configurables</div>
+                                    Admin ingresa: nombre_impuesto (IVA), porcentaje, estado (activo/inactivo), departamentos aplicables. Guardar en configuraciones.
+                                </div>
+                                <div class="rule-box">
+                                    <div class="rule-title">2️⃣ Aplicación en Checkout</div>
+                                    Sistema calcula: subtotal, impuestos, total. Muestra desglose: "Subtotal $X + IVA 19% = $Y". Cliente ve transparencia cálculo.
+                                </div>
+                                <div class="rule-box">
+                                    <div class="rule-title">3️⃣ Reportes Fiscales</div>
+                                    Admin puede generar reporte de impuestos recaudados por período. Útil para declaraciones tributarias. Exportable.
+                                </div>
+                            </td>
+                            <td><span class="status-no-implementado">❌ NO IMPLEMENTADO</span></td>
+                            <td><span class="priority-alta">🔴 ALTA</span></td>
+                        </tr>
+                        <tr>
+                            <td>RF-082</td>
+                            <td>Configuración de Envío</td>
+                            <td>Admin configura opciones de envío: transportistas, costos por zona geográfica (departamento), tiempo estimado.
+                            Cliente selecciona método envío en checkout. Sistema suma costo a total compra basado en dirección.</td>
+                            <td>
+                                <div class="rule-box">
+                                    <div class="rule-title">1️⃣ Opciones Envío</div>
+                                    Admin define: Coordinadora ($X), DHL ($Y), Otros. Costos varían por departamento/zona. Tabla de costos editable.
+                                </div>
+                                <div class="rule-box">
+                                    <div class="rule-title">2️⃣ Cálculo Dinámico</div>
+                                    En checkout, cliente ingresa dirección envío → sistema calcula costo envío correspondiente → suma a total. Visual claro.
+                                </div>
+                                <div class="rule-box">
+                                    <div class="rule-title">3️⃣ Envío Gratis</div>
+                                    Admin puede habilitar envío gratis para compras > monto X. Ej: "Envío gratis en compras > $100.000".
+                                </div>
+                            </td>
+                            <td><span class="status-no-implementado">❌ NO IMPLEMENTADO</span></td>
+                            <td><span class="priority-alta">🔴 ALTA</span></td>
+                        </tr>
+                        <tr>
+                            <td>RF-083</td>
+                            <td>Configuración Branding</td>
+                            <td>Admin personaliza aspecto tienda: logo, favicon, colores primarios, colores secundarios, banner principal.
+                            Cambios aplican automáticamente en frontend sin modificar código. CSS dinámico basado en configuración.</td>
+                            <td>
+                                <div class="rule-box">
+                                    <div class="rule-title">1️⃣ Upload Activos</div>
+                                    Admin sube: logo (PNG/SVG), favicon (ICO), banner (JPG/PNG). Validación tipo/tamaño. Previsualización antes de guardar.
+                                </div>
+                                <div class="rule-box">
+                                    <div class="rule-title">2️⃣ Colores Dinámicos</div>
+                                    Input color: color_primario, color_secundario, color_hover. Sistema genera CSS dinámico. Todos botones/links usan colores config.
+                                </div>
+                                <div class="rule-box">
+                                    <div class="rule-title">3️⃣ Previsualización</div>
+                                    Admin ve previsualización en tiempo real de cambios. Tema oscuro/claro opcional. Cambios aplican inmediatamente sin caché.
+                                </div>
+                            </td>
+                            <td><span class="status-no-implementado">❌ NO IMPLEMENTADO</span></td>
+                            <td><span class="priority-media">🟠 MEDIA</span></td>
+                        </tr>
+                        <tr>
+                            <td>RF-084</td>
+                            <td>Configuración Políticas</td>
+                            <td>Admin define textos de políticas: Términos y Condiciones, Política Privacidad, Política Devoluciones.
+                            Editor de texto rico (WYSIWYG). Cambios se aplican en footer y páginas correspondientes sin modificar código.</td>
+                            <td>
+                                <div class="rule-box">
+                                    <div class="rule-title">1️⃣ Editor WYSIWYG</div>
+                                    Tabla configuraciones almacena políticas como texto largo. Editor TinyMCE para formato texto, headers, listas, links.
+                                </div>
+                                <div class="rule-box">
+                                    <div class="rule-title">2️⃣ Versionamiento</div>
+                                    Sistema guarda versión anterior de política. Admin puede revertir a versión anterior si es necesario. Historial cambios.
+                                </div>
+                                <div class="rule-box">
+                                    <div class="rule-title">3️⃣ Visualización Pública</div>
+                                    Políticas mostradas en footer con links. Cliente accede desde cualquier página. Responsive y con PDF descargable.
+                                </div>
+                            </td>
+                            <td><span class="status-no-implementado">❌ NO IMPLEMENTADO</span></td>
+                            <td><span class="priority-media">🟠 MEDIA</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- REQUERIMIENTOS NO IMPLEMENTADOS -->
+        <section>
+            <div class="section-header">
+                <h2>❌ REQUERIMIENTOS PENDIENTES DE IMPLEMENTACIÓN</h2>
+                <p>Funcionalidades no desarrolladas aún pero necesarias para e-commerce completo</p>
+            </div>
+
+            <div class="table-section">
+                <h3>Requerimientos Faltantes</h3>
+
+                <table>
+                    <thead>
+                        <tr>
+                            <th class="table-column-id">ID RF</th>
+                            <th class="table-column-nombre">Requerimiento</th>
+                            <th class="table-column-descripcion">Descripción Profesional</th>
+                            <th class="table-column-reglas">Reglas de Negocio (3)</th>
+                            <th class="table-column-estado">Estado</th>
+                            <th class="table-column-prioridad">Prioridad</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>RF-090</td>
+                            <td>Gestión de Direcciones Entrega</td>
+                            <td>Sistema debería tener tabla "direcciones" para almacenar múltiples direcciones de entrega por cliente.
+                            Cliente elige dirección en checkout. Admin ve dirección de entrega en pedidos.</td>
+                            <td>
+                                <div class="rule-box">
+                                    <div class="rule-title">1️⃣ Múltiples Direcciones</div>
+                                    Cliente puede guardar varias direcciones (casa, oficina, etc). Una es marcada como "principal" (default).
+                                </div>
+                                <div class="rule-box">
+                                    <div class="rule-title">2️⃣ Validación Dirección</div>
+                                    Dirección debe contener: calle, número, ciudad, departamento, código postal, país. Validación en formulario.
+                                </div>
+                                <div class="rule-box">
+                                    <div class="rule-title">3️⃣ Integración Pedidos</div>
+                                    Cada compra almacena address_id o dirección completa. Necesario para rastreo y envío. Sin dirección, compra bloqueada.
+                                </div>
+                            </td>
+                            <td><span class="status-no-implementado">❌ NO IMPLEMENTADO</span></td>
+                            <td><span class="priority-alta">🔴 ALTA</span></td>
+                        </tr>
+                        <tr>
+                            <td>RF-091</td>
+                            <td>Sistema de Reviews/Comentarios</td>
+                            <td>Tabla "reviews" permitiría clientes calificar productos (1-5 estrellas) y escribir comentarios.
+                            Reviews solo post-compra verificada. Admin puede moderar antes de publicar. Promedio de calificaciones en producto.</td>
+                            <td>
+                                <div class="rule-box">
+                                    <div class="rule-title">1️⃣ Solo Compradores</div>
+                                    Solo cliente que compró producto puede dejar review. Validación: id_cliente compró id_producto.
+                                </div>
+                                <div class="rule-box">
+                                    <div class="rule-title">2️⃣ Un Review por Compra</div>
+                                    Cliente puede dejar máximo 1 review por producto comprado. Si compró 2 unidades, 1 review. Validación uniqueness.
+                                </div>
+                                <div class="rule-box">
+                                    <div class="rule-title">3️⃣ Moderación Admin</div>
+                                    Reviews nuevos necesitan aprobación admin avant affichage. Previene spam. Admin ve: calificación, texto, cliente, fecha.
+                                </div>
+                            </td>
+                            <td><span class="status-no-implementado">❌ NO IMPLEMENTADO</span></td>
+                            <td><span class="priority-media">🟠 MEDIA</span></td>
+                        </tr>
+                        <tr>
+                            <td>RF-092</td>
+                            <td>Sistema de Cupones/Promo Codes</td>
+                            <td>Tabla "cupones" para almacenar códigos promocionales con descuentos. Cliente ingresa código en checkout.
+                            Sistema valida: cupón existente, no expirado, cantidad usos no excedida. Aplica descuento total compra.</td>
+                            <td>
+                                <div class="rule-box">
+                                    <div class="rule-title">1️⃣ Cupón Único</div>
+                                    Código único en BD. Validado antes de aplicar. Expira en fecha específica. Después de expiración, no aplica.
+                                </div>
+                                <div class="rule-box">
+                                    <div class="rule-title">2️⃣ Límite Usos</div>
+                                    Cupón tiene max_usos (ej: máximo 100 veces). Sistema cuenta usos. Cuando llega límite, cupón disabled automáticamente.
+                                </div>
+                                <div class="rule-box">
+                                    <div class="rule-title">3️⃣ Tipos Descuentos</div>
+                                    Cupón puede ser: porcentaje fijo (ej: -10%), monto fijo (ej: -$5), envío gratis. Sistema aplica tipo correcto.
+                                </div>
+                            </td>
+                            <td><span class="status-no-implementado">❌ NO IMPLEMENTADO</span></td>
+                            <td><span class="priority-media">🟠 MEDIA</span></td>
+                        </tr>
+                        <tr>
+                            <td>RF-093</td>
+                            <td>Carrito Persistente en BD</td>
+                            <td>Actualmente carrito se guarda en $_SESSION (volátil). Sistema debería guardar carrito en tabla "carrito_items"
+                            relacionada a usuario. Permite cerrar navegador y reanudar compra después sin perder items.</td>
+                            <td>
+                                <div class="rule-box">
+                                    <div class="rule-title">1️⃣ Persistencia</div>
+                                    Cuando cliente agrega item, se guarda en BD además de SESSION. Al loguearse después, carrito se restaura.
+                                </div>
+                                <div class="rule-box">
+                                    <div class="rule-title">2️⃣ Sincronización</div>
+                                    Si cliente compra desde 2 navegadores, carrito sincroniza. Cambios se replican entre instancias.
+                                </div>
+                                <div class="rule-box">
+                                    <div class="rule-title">3️⃣ Expiración</div>
+                                    Carrito persistente expira 30 días sin actividad. Admin puede configurar tiempo expiración. Items expirados se limpian.
+                                </div>
+                            </td>
+                            <td><span class="status-no-implementado">❌ NO IMPLEMENTADO</span></td>
+                            <td><span class="priority-media">🟠 MEDIA</span></td>
+                        </tr>
+                        <tr>
+                            <td>RF-094</td>
+                            <td>Lista de Deseos (Wishlist)</td>
+                            <td>Tabla "wishlist" permite cliente guardar productos para después. Cliente puede: agregar producto, 
+                            ver lista, quitar producto, agregar de wishlist al carrito. Útil para conversión a compra.</td>
+                            <td>
+                                <div class="rule-box">
+                                    <div class="rule-title">1️⃣ Un Item por Producto</div>
+                                    Cliente no puede agregar mismo producto dos veces a wishlist. Validación uniqueness (id_cliente, id_producto).
+                                </div>
+                                <div class="rule-box">
+                                    <div class="rule-title">2️⃣ Seguimiento de Cambios</div>
+                                    Si producto en wishlist baja de precio, sistema notifica cliente por email (opcional). Incentiva compra.
+                                </div>
+                                <div class="rule-box">
+                                    <div class="rule-title">3️⃣ Wishlist Pública/Privada</div>
+                                    Cliente puede elegir compartir/no compartir wishlist. Compartida: otros clientes ven items pero no compran.
+                                </div>
+                            </td>
+                            <td><span class="status-no-implementado">❌ NO IMPLEMENTADO</span></td>
+                            <td><span class="priority-baja">🔵 BAJA</span></td>
+                        </tr>
+                        <tr>
+                            <td>RF-095</td>
+                            <td>Sistema de Notificaciones Email Completo</td>
+                            <td>Actualmente email parcial. Sistema debería enviar: confirmación registro, bienvenida, cambio contraseña, 
+                            estado pedido, reembolso, reseteo contraseña. Queue de emails para evitar timeouts.</td>
+                            <td>
+                                <div class="rule-box">
+                                    <div class="rule-title">1️⃣ Queue Emails</div>
+                                    Emails se agregan a tabla "email_queue" y procesadas en background. Evita timeout si servidor SMTP lento.
+                                </div>
+                                <div class="rule-box">
+                                    <div class="rule-title">2️⃣ Templates Personalizados</div>
+                                    Cada tipo email tiene template HTML. Admin puede personalizar templates. Variables dinámicas soportadas {nombre}, {pedido}, etc.
+                                </div>
+                                <div class="rule-box">
+                                    <div class="rule-title">3️⃣ Preferencias Cliente</div>
+                                    Cliente puede configurar qué emails recibe: notificaciones pedidos, promociones, newsletters. Opt-out easy.
+                                </div>
+                            </td>
+                            <td><span class="status-parcial">⚠️ PARCIAL</span></td>
+                            <td><span class="priority-media">🟠 MEDIA</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- REQUERIMIENTOS NO FUNCIONALES -->
+        <section>
+            <div class="section-header">
+                <h2>⚡ REQUERIMIENTOS NO FUNCIONALES</h2>
+                <p>Atributos de calidad: seguridad, rendimiento, disponibilidad</p>
+            </div>
+
+            <div class="table-section">
+                <h3>Atributos de Calidad del Sistema</h3>
+
+                <table>
+                    <thead>
+                        <tr>
+                            <th class="table-column-id">ID RNF</th>
+                            <th class="table-column-nombre">Requerimiento</th>
+                            <th class="table-column-descripcion">Descripción Profesional</th>
+                            <th class="table-column-reglas">Criterios de Aceptación (3)</th>
+                            <th class="table-column-estado">Estado</th>
+                            <th class="table-column-prioridad">Prioridad</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>RNF-100</td>
+                            <td>Seguridad: Encriptación Contraseñas</td>
+                            <td>Todas las contraseñas (admin, usuarios) deben estar encriptadas con algoritmo bcrypt 10 rondas.
+                            Código fuente nunca contiene contraseñas plain. Validación en código y BD.</td>
+                            <td>
+                                <div class="rule-box">
+                                    <div class="rule-title">1️⃣ Algoritmo bcrypt</div>
+                                    Usar password_hash($pwd, PASSWORD_BCRYPT, ['cost' => 10]). Verificar con password_verify() en login.
+                                </div>
+                                <div class="rule-box">
+                                    <div class="rule-title">2️⃣ NO Plain Text</div>
+                                    Código nunca imprime o almacena contraseñas. BD nunca tiene plain passwords. Auditoría regular verifica.
+                                </div>
+                                <div class="rule-box">
+                                    <div class="rule-title">3️⃣ Salting Automático</div>
+                                    bcrypt genera salt automático. Dos passwords iguales = hashes diferentes. Rainbow tables inútiles.
+                                </div>
+                            </td>
+                            <td><span class="status-implementado">✅ IMPLEMENTADO</span></td>
+                            <td><span class="priority-alta">🔴 ALTA</span></td>
+                        </tr>
+                        <tr>
+                            <td>RNF-101</td>
+                            <td>Seguridad: SQL Injection Prevention</td>
+                            <td>Todo acceso a BD usa Prepared Statements con placeholders (:param). Nunca concatenación SQL.
+                            Validación input en aplicación ADEMÁS de prepared statements (defensa en profundidad).</td>
+                            <td>
+                                <div class="rule-box">
+                                    <div class="rule-title">1️⃣ Prepared Statements</div>
+                                    $stmt = $pdo->prepare("SELECT * FROM usuarios WHERE nombre_usuario = :user"); Nunca SELECT * FROM usuarios WHERE nombre=$_GET['user']
+                                </div>
+                                <div class="rule-box">
+                                    <div class="rule-title">2️⃣ Validación Input</div>
+                                    Email validado con filter_var(). Números validados es_numeric(). Strings validados strlen() y sanitize.
+                                </div>
+                                <div class="rule-box">
+                                    <div class="rule-title">3️⃣ Code Review Regular</div>
+                                    Team hace code review buscando SQL concatenation. Herramientas SAST (SonarQube) analizan código automáticamente.
+                                </div>
+                            </td>
+                            <td><span class="status-implementado">✅ IMPLEMENTADO</span></td>
+                            <td><span class="priority-alta">🔴 ALTA</span></td>
+                        </tr>
+                        <tr>
+                            <td>RNF-102</td>
+                            <td>Seguridad: CSRF Protection</td>
+                            <td>Todos los formularios POST/PUT/DELETE incluyen token CSRF único por sesión. 
+                            Token se valida server-side. Previene ataques cross-site request forgery.</td>
+                            <td>
+                                <div class="rule-box">
+                                    <div class="rule-title">1️⃣ Token por Sesión</div>
+                                    $_SESSION['csrf_token'] = bin2hex(random_bytes(32)). Diferente para cada sesión usuario.
+                                </div>
+                                <div class="rule-box">
+                                    <div class="rule-title">2️⃣ Validación Server-Side</div>
+                                    Formulario POST incluye hidden input: &lt;input type="hidden" name="csrf_token" value="..."&gt;. Server verifica match.
+                                </div>
+                                <div class="rule-box">
+                                    <div class="rule-title">3️⃣ Token Regeneración</div>
+                                    Token se regenera post-login. Previene token fixation. Sistema revoca tokens old después de logout.
+                                </div>
+                            </td>
+                            <td><span class="status-parcial">⚠️ PARCIAL</span></td>
+                            <td><span class="priority-alta">🔴 ALTA</span></td>
+                        </tr>
+                        <tr>
+                            <td>RNF-103</td>
+                            <td>Rendimiento: Tiempos Carga</td>
+                            <td>Página catálogo carga en < 3 segundos en conexión 4G. Página producto carga en < 2 segundos.
+                            Admin panel responde en < 1 segundo. Optimización DB queries, caché, minificación assets.</td>
+                            <td>
+                                <div class="rule-box">
+                                    <div class="rule-title">1️⃣ Database Optimization</div>
+                                    Índices en columnas JOIN (id_categoria, id_cliente). Query logs identifican slow queries. N+1 problems eliminados.
+                                </div>
+                                <div class="rule-box">
+                                    <div class="rule-title">2️⃣ Frontend Optimization</div>
+                                    CSS/JS minificados. Imágenes optimizadas (webp, lazy loading). Caché HTTP headers. CDN para assets estáticos.
+                                </div>
+                                <div class="rule-box">
+                                    <div class="rule-title">3️⃣ Monitoreo Continuo</div>
+                                    Google PageSpeed monitoreado. Alertas si páginas > 3 seg. Load testing regular (Apache JMeter). SLA uptime 99.5%.
+                                </div>
+                            </td>
+                            <td><span class="status-implementado">✅ IMPLEMENTADO</span></td>
+                            <td><span class="priority-media">🟠 MEDIA</span></td>
+                        </tr>
+                        <tr>
+                            <td>RNF-104</td>
+                            <td>Disponibilidad: Backup Regular</td>
+                            <td>BD se respalda diariamente (backup automático). Backups se almacenan offsite (cloud o servidor remoto).
+                            Plan de recuperación (RTO: 4 horas, RPO: 24 horas) documentado y testeado.</td>
+                            <td>
+                                <div class="rule-box">
+                                    <div class="rule-title">1️⃣ Frecuencia Backup</div>
+                                    Backup completo diario 2 AM. Backup incremental cada 6 horas. Retención 30 días. Verificación integridad mensual.
+                                </div>
+                                <div class="rule-box">
+                                    <div class="rule-title">2️⃣ Almacenamiento Redundante</div>
+                                    Backup se almacena: 1) servidor local, 2) AWS S3, 3) Google Drive. Geográficamente distribuido.
+                                </div>
+                                <div class="rule-box">
+                                    <div class="rule-title">3️⃣ Test Recuperación</div>
+                                    Cada mes se testea restore de backup en servidor de test. Asegura backups no corrompidos y plan funciona.
+                                </div>
+                            </td>
+                            <td><span class="status-implementado">✅ IMPLEMENTADO</span></td>
+                            <td><span class="priority-alta">🔴 ALTA</span></td>
+                        </tr>
+                        <tr>
+                            <td>RNF-105</td>
+                            <td>Escalabilidad: Crecimiento BD</td>
+                            <td>Sistema diseñado para escalar a 100K productos, 50K clientes. Índices estratégicos, particionamiento.
+                                Arquitectura permite agregar replicas BD si crecimiento continúa.</td>
+                            <td>
+                                <div class="rule-box">
+                                    <div class="rule-title">1️⃣ Índices Estratégicos</div>
+                                    Índices en: productos.id_categoria, compra.id_cliente, detalle_compra.id_compra. Query plan analizado con EXPLAIN.
+                                </div>
+                                <div class="rule-box">
+                                    <div class="rule-title">2️⃣ Paginación</div>
+                                    Tablas grandes (productos > 10K) paginadas. LIMIT 50 en listados. Cursor-based pagination para mejor rendimiento.
+                                </div>
+                                <div class="rule-box">
+                                    <div class="rule-title">3️⃣ Load Testing</div>
+                                    Pruebas con 1000 usuarios concurrentes. OK si respuesta < 2 seg. Identify bottlenecks. Auto-scaling en cloud ready.
+                                </div>
+                            </td>
+                            <td><span class="status-implementado">✅ IMPLEMENTADO</span></td>
+                            <td><span class="priority-media">🟠 MEDIA</span></td>
+                        </tr>
+                        <tr>
+                            <td>RNF-106</td>
+                            <td>Mantenibilidad: Documentación Código</td>
+                            <td>Código comentado en puntos clave. Funciones tienen PHPDoc. Archivos tienen header con descripción.
+                                Documentación actualizada junto con cambios de código.</td>
+                            <td>
+                                <div class="rule-box">
+                                    <div class="rule-title">1️⃣ PHPDoc Standar</div>
+                                    Funciones documentadas: /** @param type $name Description */ /** @return type Description */. IDE autocomplete funcionan.
+                                </div>
+                                <div class="rule-box">
+                                    <div class="rule-title">2️⃣ Comentarios Lógica</div>
+                                    Bloques complejos tienen comentarios: // Validar stock disponible. Pero no comentarios obvios (auto-explicatorios).
+                                </div>
+                                <div class="rule-box">
+                                    <div class="rule-title">3️⃣ Control Versión</div>
+                                    Git con commits descriptivos. Branch main limpia. Feature branches nombramiento claro: feature/CRUD-usuarios.
+                                </div>
+                            </td>
+                            <td><span class="status-implementado">✅ IMPLEMENTADO</span></td>
+                            <td><span class="priority-media">🟠 MEDIA</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- RESUMEN IMPLEMENTACIÓN -->
+        <section>
+            <div class="section-header">
+                <h2>📊 RESUMEN DE IMPLEMENTACIÓN POR TABLA</h2>
+                <p>Estado actual del desarrollo por tabla de base de datos</p>
+            </div>
+
+            <div class="table-section">
+                <table>
+                    <thead>
+                        <tr>
+                            <th class="table-column-nombre">Tabla</th>
+                            <th>Total RF</th>
+                            <th>Implementados</th>
+                            <th>Porcentaje</th>
+                            <th>Estado General</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>admin</strong></td>
+                            <td style="text-align: center;">8</td>
+                            <td style="text-align: center;">3</td>
+                            <td style="text-align: center;">38%</td>
+                            <td><span class="status-parcial">⚠️ PARCIAL</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>clientes</strong></td>
+                            <td style="text-align: center;">9</td>
+                            <td style="text-align: center;">3</td>
+                            <td style="text-align: center;">33%</td>
+                            <td><span class="status-parcial">⚠️ PARCIAL</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>usuarios</strong></td>
+                            <td style="text-align: center;">9</td>
+                            <td style="text-align: center;">3</td>
+                            <td style="text-align: center;">33%</td>
+                            <td><span class="status-parcial">⚠️ PARCIAL</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>productos</strong></td>
+                            <td style="text-align: center;">14</td>
+                            <td style="text-align: center;">10</td>
+                            <td style="text-align: center;">71%</td>
+                            <td><span class="status-parcial">⚠️ PARCIAL</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>productos_variantes</strong></td>
+                            <td style="text-align: center;">7</td>
+                            <td style="text-align: center;">6</td>
+                            <td style="text-align: center;">86%</td>
+                            <td><span class="status-implementado">✅ IMPLEMENTADO</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>c_tallas / c_colores</strong></td>
+                            <td style="text-align: center;">6</td>
+                            <td style="text-align: center;">2</td>
+                            <td style="text-align: center;">33%</td>
+                            <td><span class="status-parcial">⚠️ PARCIAL</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>compra</strong></td>
+                            <td style="text-align: center;">7</td>
+                            <td style="text-align: center;">5</td>
+                            <td style="text-align: center;">71%</td>
+                            <td><span class="status-parcial">⚠️ PARCIAL</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>detalle_compra</strong></td>
+                            <td style="text-align: center;">3</td>
+                            <td style="text-align: center;">3</td>
+                            <td style="text-align: center;">100%</td>
+                            <td><span class="status-implementado">✅ IMPLEMENTADO</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>configuraciones</strong></td>
+                            <td style="text-align: center;">5</td>
+                            <td style="text-align: center;">1</td>
+                            <td style="text-align: center;">20%</td>
+                            <td><span class="status-parcial">⚠️ PARCIAL</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>TABLAS PENDIENTES (5)</strong></td>
+                            <td style="text-align: center;">6</td>
+                            <td style="text-align: center;">1</td>
+                            <td style="text-align: center;">17% (parcial email)</td>
+                            <td><span class="status-no-implementado">❌ PENDIENTE</span></td>
+                        </tr>
+                        <tr style="background: #ecf7ff; font-weight: bold;">
+                            <td><strong>TOTAL SISTEMA</strong></td>
+                            <td style="text-align: center;">74</td>
+                            <td style="text-align: center;">37</td>
+                            <td style="text-align: center;"><strong>50%</strong></td>
+                            <td><span class="status-parcial">⚠️ 50% IMPLEMENTADO - 37 RQ IMPLEMENTADOS, 37 RQ PENDIENTES</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- CONCLUSIONES Y RECOMENDACIONES -->
+        <section>
+            <div class="section-header">
+                <h2>🎯 CONCLUSIONES Y RECOMENDACIONES</h2>
+                <p>Análisis final del proyecto y prioridades futuras</p>
+            </div>
+
+            <div class="table-section">
+                <h3>Fortalezas Actuales</h3>
+                <div class="rule-box" style="margin: 15px 0;">
+                    <strong>✅ Core de E-Commerce Completo:</strong> Todas las funcionalidades críticas (autenticación, catálogo, carrito, compra, pago) están implementadas y funcionando correctamente.
+                </div>
+                <div class="rule-box" style="margin: 15px 0;">
+                    <strong>✅ Sistema de Variantes Profesional:</strong> Filtrado bidireccional, AJAX, interfaz intuitiva. Ej: cliente selecciona talla → colores disponibles se filtran automáticamente.
+                </div>
+                <div class="rule-box" style="margin: 15px 0;">
+                    <strong>✅ Seguridad Implementada:</strong> Contraseñas con bcrypt, SQL injection prevention (prepared statements), sesiones seguras, CSRF parcial.
+                </div>
+                <div class="rule-box" style="margin: 15px 0;">
+                    <strong>✅ Integración de Pago:</strong> PayPal integrado. Transac seguras, confirmación, estado tracking. IPN webhooks registran cambios estado.
+                </div>
+
+                <h3 style="margin-top: 40px;">📋 Requerimientos Clave Faltantes por Prioridad</h3>
+                <div class="rule-box" style="margin: 15px 0;">
+                    <strong>🔴 [ALTA - 13 RQ]:</strong> CRUD Gestión Admins Descompuesto (RF-004a, RF-004b, RF-004c), CRUD Gestión Usuarios (RF-023a, RF-023b, RF-023c), 
+                    CRUD Gestión Clientes (RF-013a, RF-013b, RF-013c), CRUD Gestión Categorías (RF-038a, RF-038b, RF-038c), Búsqueda Productos Frontend (RF-034), 
+                    Filtrado Categoría (RF-035), Integración Envío/Rastreo (RF-065), Configuración Impuestos (RF-081), Configuración Envío (RF-082)
+                </div>
+                <div class="rule-box" style="margin: 15px 0;">
+                    <strong>🟠 [MEDIA - 20 RQ]:</strong> Leer/Listar Clientes (RF-013a), Editar Cliente (RF-013b), CRUD Tallas Descompuesto (RF-050a, RF-050b, RF-050c), 
+                    CRUD Colores Descompuesto (RF-051a, RF-051b, RF-051c), Crear Producto (RF-030a), Editar Producto (RF-030b), Eliminar Producto (RF-030c),
+                    Búsqueda Admin Compras (RF-063), Reporte Ventas (RF-064), Búsqueda Avanzada Usuarios (RF-024), Reset Password Admin (RF-025), 
+                    Historial Accesos (RF-026), Búsqueda Clientes (RF-014), Exportar Clientes (RF-015), Historial Compras Ficha Cliente (RF-016),
+                    Filtrado Rango Precios (RF-036), Ordenamiento Productos (RF-037), Gestión Imágenes Múltiples (RF-039), Importación CSV Variantes (RF-044), 
+                    Reporte Stock Variantes (RF-046), Gestión Devoluciones (RF-066)
+                </div>
+                <div class="rule-box" style="margin: 15px 0;">
+                    <strong>🔵 [BAJA - 7 RQ]:</strong> Log Accesos Admin (RF-005), Búsqueda Acciones Admin (RF-006), Exportación Variantes CSV (RF-045), 
+                    Configuración Branding (RF-083), Configuración Políticas (RF-084), Lista Deseos (RF-094), Carrito Persistente (RF-093)
+                </div>
+
+                <h3 style="margin-top: 40px;">Roadmap de Implementación Recomendado</h3>
+                <div class="rule-box" style="margin: 15px 0;">
+                    <strong>🔴 URGENTE - Semana 1-2 (14 días):</strong>
+                    <br>✓ RF-023a/b/c: CRUD Gestión de Usuarios (3 días)
+                    <br>✓ RF-013a/b/c: CRUD Gestión de Clientes (3 días)
+                    <br>✓ RF-034: Búsqueda Productos Frontend (1 día)
+                    <br>✓ RF-081: Configuración de Impuestos (2 días)
+                    <br>✓ RF-038a/b/c: CRUD Categorías (2 días)
+                    <br>✓ RF-030a/b/c: CRUD Productos Descompuesto (3 días)
+                </div>
+                <div class="rule-box" style="margin: 15px 0;">
+                    <strong>🟠 IMPORTANTE - Semanas 2-3 (14 días):</strong>
+                    <br>✓ RF-035: Filtrado por Categoría (2 días)
+                    <br>✓ RF-036: Filtrado Rango Precios (1 día)
+                    <br>✓ RF-037: Ordenamiento Productos (1 día)
+                    <br>✓ RF-063: Búsqueda Admin Compras (2 días)
+                    <br>✓ RF-064: Reporte de Ventas (3 días)
+                    <br>✓ RF-065: Integración Envío/Rastreo (2 días)
+                    <br>✓ RF-082: Configuración de Envío (2 días)
+                    <br>✓ RF-038: CRUD Categorías (1 día)
+                </div>
+                <div class="rule-box" style="margin: 15px 0;">
+                    <strong>🔵 OPTIMIZACIÓN - Semanas 4+ (1 mes adicional):</strong>
+                    <br>✓ Búsquedas avanzadas Admin (CRUD Usuarios, historial accesos, búsqueda acciiones)
+                    <br>✓ Reportes analíticos (Stock variantes, Items más vendidos)
+                    <br>✓ Importación masiva datos (CSV variantes, exportación)
+                    <br>✓ Configuraciones avanzadas (Branding, Políticas, Gestión Devoluciones)
+                </div>
+
+                <h3 style="margin-top: 40px;">Evaluación Profesional Actual</h3>
+                <div style="background: #fef5e7; padding: 25px; border-radius: 8px; margin: 20px 0; border-left: 5px solid #f39c12;">
+                    <strong style="font-size: 16px; color: #b8860b;">⚠️ PROYECTO EN DESARROLLO ACTIVO - 48% COMPLETADO</strong>
+                    <p style="margin-top: 10px; color: #7d6608;">
+                        <strong>Análisis Real:</strong> El sistema tiene el <strong>core funcional implementado</strong> (26 de 54 RQ completados = 48%):
+                        <br><strong>✅ Fortalezas:</strong> Autenticación segura, sistema variantes profesional, integración PayPal, base de datos normalizada, CRUD básico.
+                        <br><strong>⚠️ Pendientes Críticas:</strong> Gesión de usuarios/clientes en admin (RF-023, RF-013), búsquedas frontend (RF-034-037), gestión impuestos/envío (RF-081, RF-082).
+                        <br><strong>📊 Próximo Paso:</strong> Implementar los 8 requerimientos de ALTA prioridad en próxima semana para llegar a 70%. Después optimizaciones y reportes.
+                        <br><strong>🎯 Meta Realista:</strong> 80% completado en 1 mes, 95% en 2 meses con dedicación full-time.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- FOOTER -->
+        <div class="footer">
+            <p><strong>Documento profesional generado:</strong> 24 de Febrero de 2026</p>
+            <p><strong>Análisis realizado sobre:</strong> Tienda Online SQL + Codebase PHP</p>
+            <p><strong>Evaluador:</strong> Análisis Automatizado de Requerimientos</p>
+            <p style="margin-top: 20px; font-size: 12px;">
+                Este documento contiene información confidencial del proyecto D'gala. 
+                Distribución limitada a stakeholders autorizados.
+            </p>
+        </div>
+    </div>
+</body>
+</html>
