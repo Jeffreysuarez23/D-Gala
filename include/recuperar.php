@@ -1,4 +1,10 @@
 <?php
+/**
+ * ESTA TAREA LA HIZO: Alejandro Olivera
+ * SU REQUERIMIENTO FUE: RF-002 - Recuperar Contraseña (token temporal 24 horas, link seguro por email)
+ * PERTENECE A ESTE ARCHIVO: include/recuperar.php
+ */
+
 // ===== INICIO - SIN ESPACIOS ANTES =====
 ob_start(); // Buffer de salida para evitar errores de cabeceras
 

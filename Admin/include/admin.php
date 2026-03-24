@@ -1,3 +1,9 @@
+/**
+ * ESTA TAREA LA HIZO: Alejandro Olivera
+ * SU REQUERIMIENTO FUE: RF-001 - Autenticación Admin / RF-002 - Recuperar Contraseña
+ * PERTENECE A ESTE ARCHIVO: Admin/include/admin.php
+ */
+
 <?php
 /* function generarToken(){
 return md5(uniqid(mt_rand(), false));
@@ -208,6 +214,10 @@ function EmailExistenteAdmin($email, $conexion){
     return false;
 }
 
+/**
+ * NOTA: Esta función CrearAdmin es parte del RF-005 de Jhon Perna
+ * (Crear Administrador: usuario único, nombre y email)
+ */
 function CrearAdmin($usuario, $nombre, $email, $password, $conexion){
     try {
         $password_hash = password_hash($password, PASSWORD_DEFAULT);
@@ -222,6 +232,10 @@ function CrearAdmin($usuario, $nombre, $email, $password, $conexion){
     }
 }
 
+/**
+ * NOTA: Esta función CrearUsuarioCliente es parte del RF-009 de Jeffrey Suarez
+ * (Registro de Cliente: crear cliente y usuario con validaciones)
+ */
 function CrearUsuarioCliente($nombre, $apellido, $email, $telefono, $documento, $usuario, $password, $conexion){
     try {
         $conexion->beginTransaction();

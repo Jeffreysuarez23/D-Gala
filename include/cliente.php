@@ -1,4 +1,10 @@
 <?php
+/**
+ * ESTA TAREA LA HIZO: Alejandro Olivera
+ * SU REQUERIMIENTO FUE: RF-001 - Autenticación (login cliente) / RF-002 - Recuperar Contraseña
+ * PERTENECE A ESTE ARCHIVO: include/cliente.php
+ */
+
 function generarToken(){
 return md5(uniqid(mt_rand(), false));
 }
@@ -24,7 +30,10 @@ function validarPassword($password, $repassword){
     return true;
 } 
 
-
+/**
+ * NOTA: Las funciones registrarCliente y registrarUsuario son parte del RF-009 de Jeffrey Suarez
+ * (Registro de Cliente: crear cliente en BD y usuario con token de activación)
+ */
 function registrarCliente(array $datos ,$conexion){
     $token = generarToken();
     $sql = $conexion->prepare("INSERT INTO clientes 
@@ -113,6 +122,10 @@ function ActivarCliente($id ,$conexion){
     return $sql->execute([$id]);
 }
 
+/**
+ * NOTA: La función Login es parte del RF-001 de Alejandro Olivera (Autenticación Cliente)
+ * y también valida el estado del cliente (RF-011 de Jeffrey Suarez - Gestión de Estado Cliente)
+ */
 function Login($usuario, $password, $conexion , $proceso) {
     $sql = $conexion->prepare("
         SELECT u.id, u.nombre_usuario, u.id_cliente, u.password, u.activacion 

@@ -1,4 +1,10 @@
 <?php
+/**
+ * ESTA TAREA LA HIZO: Alejandro Olivera
+ * SU REQUERIMIENTO FUE: RF-001 - Autenticación Admin (usuario y contraseña encriptada con bcrypt)
+ * PERTENECE A ESTE ARCHIVO: Admin/login.php
+ */
+
 require_once 'include/db.php';
 require_once 'include/admin.php';
 require_once 'include/configuracionesAD.php';

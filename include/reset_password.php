@@ -1,4 +1,10 @@
 <?php
+/**
+ * ESTA TAREA LA HIZO: Alejandro Olivera
+ * SU REQUERIMIENTO FUE: RF-002 - Recuperar Contraseña (cambio de contraseña con token validado)
+ * PERTENECE A ESTE ARCHIVO: include/reset_password.php
+ */
+
 require_once '../include/db.php';
 require_once '../include/configuraciones.php';
 require_once '../include/cliente.php';

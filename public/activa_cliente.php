@@ -1,4 +1,10 @@
 <?php
+/**
+ * ESTA TAREA LA HIZO: Alejandro Olivera
+ * SU REQUERIMIENTO FUE: RF-001 - Autenticación Cliente (activación de cuenta con token)
+ * PERTENECE A ESTE ARCHIVO: public/activa_cliente.php
+ */
+
 require_once '../include/db.php';
 require_once '../include/configuraciones.php';
 require_once '../include/cliente.php';
