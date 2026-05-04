@@ -248,7 +248,7 @@ p {
 }
 .scroll-top:hover {
   color: #fff;
-  background: rgba(54, 92, 245, 0.8);
+  background: none;
 }
 
 .form-control:focus {

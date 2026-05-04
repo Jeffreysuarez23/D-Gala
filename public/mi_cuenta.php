@@ -12,8 +12,10 @@ if (!isset($_SESSION['user_id']) || !isset($_SESSION['user_cliente'])) {
     exit();
 }
 
-$token = generarToken();
-$_SESSION['token'] = $token;
+if (empty($_SESSION['token'])) {
+    $_SESSION['token'] = generarToken();
+}
+$token = $_SESSION['token'];
 $idCliente = $_SESSION['user_cliente'];
 
 // Obtener información del cliente
@@ -774,7 +776,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                 <input type="text" id="documento" name="documento" 
                                        value="<?php echo htmlspecialchars($cliente['documento']); ?>" 
                                        placeholder="DNI / Pasaporte"
-                                       readonly>
+                                       required>
                             </div>
                         </div>
 

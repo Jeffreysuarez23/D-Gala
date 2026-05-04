@@ -248,7 +248,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['cambiar_password'])) 
 <style>
 /* ====== Variables de Color ====== */
 :root {
-    --primary-color: #365cf5;
+    --primary-color: #ffd700;
+    --primary-black: #000000;
+    --black-light: #1a1a1a;
+    --black-dark: #0a0a0a;
+    --gold-dark: #e6c300;
     --success-color: #4caf50;
     --warning-color: #ff9800;
     --danger-color: #f44336;
@@ -299,14 +303,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['cambiar_password'])) 
     width: 120px;
     height: 120px;
     border-radius: 50%;
-    background: linear-gradient(135deg, var(--primary-color) 0%, #4a7bff 100%);
+    background: linear-gradient(135deg, var(--primary-black) 0%, var(--black-light) 100%);
+    border: 3px solid var(--primary-color);
     display: flex;
     align-items: center;
     justify-content: center;
-    color: white;
+    color: var(--primary-color);
     font-size: 48px;
     font-weight: bold;
-    box-shadow: 0 4px 12px rgba(54, 92, 245, 0.3);
+    box-shadow: 0 4px 12px rgba(255, 215, 0, 0.3);
     animation: scaleIn 0.5s ease;
 }
 
@@ -339,7 +344,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['cambiar_password'])) 
 }
 
 .text-info-username {
-    color: var(--primary-color);
+    color: var(--primary-black);
     font-size: 14px;
     font-weight: 600;
     margin-bottom: 10px;
@@ -394,7 +399,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['cambiar_password'])) 
 
 .form-control:focus {
     border-color: var(--primary-color);
-    box-shadow: 0 0 0 0.3rem rgba(54, 92, 245, 0.15);
+    box-shadow: 0 0 0 0.3rem rgba(255, 215, 0, 0.15);
     background-color: #fff;
 }
 
@@ -482,7 +487,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['cambiar_password'])) 
     font-weight: 600;
     padding: 12px 30px;
     transition: all 0.3s ease;
-    border: none;
+    border: 2px solid transparent;
     cursor: pointer;
     font-size: 14px;
     letter-spacing: 0.3px;
@@ -492,13 +497,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['cambiar_password'])) 
 }
 
 .primary-btn {
-    background: linear-gradient(135deg, var(--primary-color), #4a7bff);
-    color: white;
+    background: var(--primary-black);
+    color: var(--primary-color);
 }
 
 .main-btn:hover:not(:disabled) {
     transform: translateY(-2px);
-    box-shadow: 0 6px 16px rgba(54, 92, 245, 0.35);
+    background: var(--primary-color);
+    color: var(--primary-black);
+    box-shadow: 0 6px 16px rgba(255, 215, 0, 0.35);
 }
 
 .main-btn:active {
@@ -529,7 +536,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['cambiar_password'])) 
 }
 
 .breadcrumb-item.active {
-    color: var(--primary-color);
+    color: var(--primary-black);
     font-weight: 600;
 }
 

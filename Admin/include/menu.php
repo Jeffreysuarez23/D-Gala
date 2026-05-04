@@ -134,9 +134,9 @@
                 </div>
                 <!-- message end -->
                 <!-- profile start -->
-                <div class="profile-box ml-15">
+                <div class="dropdown profile-box ml-15">
                   <button class="dropdown-toggle bg-transparent border-0" type="button" id="profile"
-                    data-bs-toggle="dropdown" aria-expanded="false">
+                    data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">
                     <div class="profile-info">
                       <div class="info">
                         <div class="image">

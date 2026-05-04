@@ -157,16 +157,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 ?>
 
 <style>
+    /* ===== ESTILOS CREAR USUARIOS - BLANCO, NEGRO Y DORADO ===== */
+    
     :root {
-        --primary-gradient: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
-        --primary: #6366f1;
-        --secondary: #8b5cf6;
+        --primary: #ffd700;
+        --primary-dark: #e6c300;
+        --secondary: #000000;
+        --dark: #1a1a1a;
+        --light: #ffffff;
+        --gray: #f5f5f5;
+        --border: #e0e0e0;
         --success: #10b981;
         --warning: #f59e0b;
         --danger: #ef4444;
-        --info: #3b82f6;
-        --dark: #1f2937;
-        --light: #f9fafb;
     }
 
     * {
@@ -174,19 +177,31 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     body {
-        background: linear-gradient(135deg, #f9fafb 0%, #f3f4f6 100%);
+        background: var(--light);
         min-height: 100vh;
     }
 
+    /* Header Section */
     .page-header {
-        background: var(--primary-gradient);
-        color: white;
+        background: var(--secondary);
+        color: var(--primary);
         padding: 2.5rem 2rem;
-        border-radius: 16px;
+        border-radius: 20px;
         margin-bottom: 2rem;
-        box-shadow: 0 20px 50px rgba(99, 102, 241, 0.2);
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+        border: 1px solid var(--border);
         position: relative;
         overflow: hidden;
+    }
+
+    .page-header::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 4px;
+        background: linear-gradient(90deg, var(--primary), var(--primary-dark), var(--primary));
     }
 
     .page-header h1 {
@@ -196,25 +211,35 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         display: flex;
         align-items: center;
         gap: 1rem;
-        color: white;
+        color: var(--primary);
     }
 
-    .page-header i {
+    .page-header h1 i {
+        color: var(--primary);
         font-size: 2.5rem;
     }
 
+    /* Container Form */
     .container-form {
-        background: white;
-        border-radius: 12px;
-        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+        background: var(--light);
+        border-radius: 20px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
         padding: 2rem;
+        border: 1px solid var(--border);
+        transition: all 0.3s ease;
     }
 
+    .container-form:hover {
+        border-color: var(--primary);
+        box-shadow: 0 8px 25px rgba(255, 215, 0, 0.1);
+    }
+
+    /* Tabs Navigation */
     .tabs-navs {
         display: flex;
         gap: 1rem;
         margin-bottom: 2rem;
-        border-bottom: 2px solid #e5e7eb;
+        border-bottom: 2px solid var(--border);
         padding-bottom: 1rem;
     }
 
@@ -227,10 +252,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         font-weight: 600;
         position: relative;
         font-size: 1rem;
+        border-radius: 12px;
+        transition: all 0.3s ease;
+    }
+
+    .tab-button i {
+        margin-right: 8px;
+        color: var(--primary);
     }
 
     .tab-button.active {
         color: var(--primary);
+        background: rgba(255, 215, 0, 0.1);
     }
 
     .tab-button.active::after {
@@ -240,16 +273,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         left: 0;
         right: 0;
         height: 2px;
-        background: var(--primary-gradient);
+        background: var(--primary);
     }
 
+    .tab-button:hover:not(.active) {
+        background: rgba(0, 0, 0, 0.05);
+        color: var(--primary);
+    }
+
+    /* Tab Content */
     .tab-content {
         display: none;
     }
 
     .tab-content.active {
         display: block;
-        animation: fadeIn 0.3s ease;
+        animation: fadeIn 0.4s ease;
     }
 
     @keyframes fadeIn {
@@ -263,6 +302,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
     }
 
+    /* Form Groups */
     .form-group {
         margin-bottom: 1.5rem;
     }
@@ -270,7 +310,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     .form-group label {
         display: block;
         margin-bottom: 0.5rem;
-        color: var(--dark);
+        color: var(--secondary);
         font-weight: 600;
         font-size: 0.95rem;
     }
@@ -279,19 +319,27 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     .form-group select {
         width: 100%;
         padding: 0.75rem 1rem;
-        border: 2px solid #e5e7eb;
-        border-radius: 8px;
+        border: 2px solid var(--border);
+        border-radius: 12px;
         font-size: 1rem;
-        transition: all 0.3s ease;
+        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        background: var(--light);
+        color: var(--dark);
     }
 
     .form-group input:focus,
     .form-group select:focus {
         outline: none;
-        border-color: var(--primary);
-        box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+        border-color: var(--primary) !important;
+        box-shadow: 0 0 0 3px rgba(255, 215, 0, 0.2) !important;
     }
 
+    .form-group input:hover,
+    .form-group select:hover {
+        border-color: var(--primary);
+    }
+
+    /* Form Row */
     .form-row {
         display: grid;
         grid-template-columns: 1fr 1fr;
@@ -302,6 +350,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         grid-column: 1 / -1;
     }
 
+    /* Button Group */
     .button-group {
         display: flex;
         gap: 1rem;
@@ -309,42 +358,58 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         margin-top: 2rem;
     }
 
+    /* Buttons */
     .btn {
         padding: 0.75rem 2rem;
         border: none;
-        border-radius: 8px;
+        border-radius: 12px;
         font-size: 1rem;
         font-weight: 600;
         cursor: pointer;
         transition: all 0.3s ease;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
     }
 
     .btn-primary {
-        background: var(--primary-gradient);
-        color: white;
+        background: var(--secondary);
+        color: var(--light);
+        border: 2px solid var(--primary);
     }
 
     .btn-primary:hover {
+        background: var(--primary);
+        color: var(--secondary);
         transform: translateY(-2px);
-        box-shadow: 0 10px 20px rgba(99, 102, 241, 0.2);
+        box-shadow: 0 5px 15px rgba(255, 215, 0, 0.3);
+    }
+
+    .btn-primary:active {
+        transform: translateY(0);
     }
 
     .btn-secondary {
-        background: #e5e7eb;
-        color: var(--dark);
+        background: var(--light);
+        color: var(--secondary);
+        border: 2px solid var(--border);
     }
 
     .btn-secondary:hover {
-        background: #d1d5db;
+        border-color: var(--primary);
+        color: var(--primary);
+        transform: translateY(-2px);
     }
 
+    /* Error Messages */
     .error-messages {
-        background: #fee2e2;
-        border-left: 4px solid var(--danger);
-        color: #991b1b;
+        background: #fff9e6;
+        border-left: 4px solid var(--primary);
+        color: var(--secondary);
         padding: 1rem;
-        border-radius: 8px;
+        border-radius: 12px;
         margin-bottom: 1.5rem;
+        border: 1px solid rgba(255, 215, 0, 0.2);
     }
 
     .error-messages ul {
@@ -356,6 +421,28 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         margin-bottom: 0.5rem;
     }
 
+    /* Headers de sección */
+    h3 {
+        color: var(--secondary) !important;
+        margin-bottom: 1.5rem !important;
+        margin-top: 2rem !important;
+        font-weight: 700 !important;
+        position: relative;
+        display: inline-block;
+    }
+
+    h3::after {
+        content: '';
+        position: absolute;
+        bottom: -8px;
+        left: 0;
+        width: 50px;
+        height: 2px;
+        background: linear-gradient(90deg, var(--primary), transparent);
+        border-radius: 2px;
+    }
+
+    /* Responsive */
     @media (max-width: 768px) {
         .form-row {
             grid-template-columns: 1fr;
@@ -371,11 +458,46 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         .btn {
             width: 100%;
+            justify-content: center;
         }
+
+        .tabs-navs {
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .tab-button.active::after {
+            display: none;
+        }
+
+        .tab-button.active {
+            background: rgba(255, 215, 0, 0.2);
+        }
+    }
+
+    /* Placeholder styling */
+    .form-group input::placeholder {
+        color: #cccccc;
+    }
+
+    /* Password field */
+    input[type="password"] {
+        letter-spacing: 2px;
+    }
+
+    /* Focus state - solo input */
+    .form-group input:focus,
+    .form-group select:focus {
+        transition-property: border-color, box-shadow;
+        transition-duration: 0.4s;
+        transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
     }
 </style>
 
-<main class="container">
+<!-- Font Awesome Icons -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+<main class="container mt-4 mb-5">
     <div class="page-header">
         <h1>
             <i class="fas fa-user-plus"></i>
@@ -410,7 +532,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <form method="POST" action="" class="form">
                 <input type="hidden" name="tipo_usuario" value="cliente">
 
-                <h3 style="color: var(--dark); margin-bottom: 1.5rem;">Información del Cliente</h3>
+                <h3>Información del Cliente</h3>
 
                 <div class="form-row">
                     <div class="form-group">
@@ -444,7 +566,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                            value="<?php echo htmlspecialchars($_POST['documento_cliente'] ?? ''); ?>">
                 </div>
 
-                <h3 style="color: var(--dark); margin-bottom: 1.5rem; margin-top: 2rem;">Datos de Usuario</h3>
+                <h3>Datos de Usuario</h3>
 
                 <div class="form-row">
                     <div class="form-group">
@@ -481,7 +603,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <form method="POST" action="" class="form">
                 <input type="hidden" name="tipo_usuario" value="admin">
 
-                <h3 style="color: var(--dark); margin-bottom: 1.5rem;">Información del Administrador</h3>
+                <h3>Información del Administrador</h3>
 
                 <div class="form-row">
                     <div class="form-group">
