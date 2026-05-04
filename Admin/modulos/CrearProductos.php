@@ -172,8 +172,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             }
         }
 
-
-
         $conexion->commit();
         // Notificar al usuario y redirigir
         echo "<script>alert(" . json_encode("Producto creado correctamente") . "); window.location.href='index.php?mod=CrearProductos';</script>";
@@ -193,240 +191,488 @@ $tallas = $resultado->fetchAll(PDO::FETCH_ASSOC);
 $resultado = $conexion->query("SELECT id, nombre FROM c_colores");
 $colores = $resultado->fetchAll(PDO::FETCH_ASSOC);
 
-
-
-
-
-
-
-
-
-
-
-    
 ?>
 
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8" />
-    <title>Crear Producto</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" />
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css" rel="stylesheet">
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <!-- Spartan Multi Image Picker -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/spartan-multi-image-picker/dist/css/spartan-multi-image-picker.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/spartan-multi-image-picker/dist/js/spartan-multi-image-picker.min.js"></script>
+<style>
+    /* ===== ESTILOS CREAR PRODUCTOS - BLANCO, NEGRO Y DORADO ===== */
+    
+    :root {
+        --primary: #ffd700;
+        --primary-dark: #e6c300;
+        --secondary: #000000;
+        --dark: #1a1a1a;
+        --light: #ffffff;
+        --gray: #f5f5f5;
+        --border: #e0e0e0;
+        --success: #10b981;
+        --warning: #f59e0b;
+        --danger: #ef4444;
+    }
 
-    <style>
-        body {
-            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-            min-height: 100vh;
-            padding-bottom: 50px;
+    * {
+        transition: all 0.3s ease;
+    }
+
+    body {
+        background: var(--light);
+        min-height: 100vh;
+        font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+    }
+
+    /* Header Section */
+    .page-header {
+        background: var(--secondary);
+        padding: 2.5rem 2rem;
+        border-radius: 20px;
+        margin-bottom: 2rem;
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+        border: 1px solid var(--border);
+        position: relative;
+        overflow: hidden;
+    }
+
+    .page-header::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 4px;
+        background: linear-gradient(90deg, var(--primary), var(--primary-dark), var(--primary));
+    }
+
+    .page-header h1 {
+        margin: 0 0 0.5rem 0;
+        font-size: 2.5rem;
+        font-weight: 700;
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        color: var(--primary);
+    }
+
+    .page-header h1 i {
+        color: var(--primary);
+        font-size: 2.5rem;
+    }
+
+    .page-header p {
+        margin: 0;
+        color: #e0e0e0;
+        font-size: 1rem;
+    }
+
+    /* Form Container */
+    .form-container {
+        background: var(--light);
+        border-radius: 20px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+        padding: 2rem;
+        margin-bottom: 2rem;
+        border: 1px solid var(--border);
+        transition: all 0.3s ease;
+    }
+
+    .form-container:hover {
+        border-color: var(--primary);
+        box-shadow: 0 8px 25px rgba(255, 215, 0, 0.1);
+    }
+
+    /* Form Sections */
+    .form-section {
+        margin-bottom: 2rem;
+        padding-bottom: 1.5rem;
+        border-bottom: 1px solid var(--border);
+    }
+
+    .form-section:last-child {
+        border-bottom: none;
+        margin-bottom: 0;
+        padding-bottom: 0;
+    }
+
+    .form-section-title {
+        font-size: 1.2rem;
+        font-weight: 700;
+        color: var(--secondary);
+        margin-bottom: 1.5rem;
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        position: relative;
+        display: inline-block;
+    }
+
+    .form-section-title i {
+        color: var(--primary);
+        font-size: 1.3rem;
+    }
+
+    .form-section-title::after {
+        content: '';
+        position: absolute;
+        bottom: -8px;
+        left: 0;
+        width: 50px;
+        height: 2px;
+        background: linear-gradient(90deg, var(--primary), transparent);
+        border-radius: 2px;
+    }
+
+    /* Form Labels */
+    .form-label {
+        font-weight: 600;
+        color: var(--secondary);
+        margin-bottom: 0.5rem;
+        display: block;
+        font-size: 0.95rem;
+    }
+
+    /* Form Controls */
+    .form-control,
+    .form-select {
+        border: 2px solid var(--border);
+        border-radius: 12px;
+        padding: 0.75rem 1rem;
+        font-size: 1rem;
+        background: var(--light);
+        color: var(--dark);
+        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .form-control:focus,
+    .form-select:focus {
+        outline: none;
+        border-color: var(--primary) !important;
+        box-shadow: 0 0 0 3px rgba(255, 215, 0, 0.2) !important;
+    }
+
+    .form-control:hover,
+    .form-select:hover {
+        border-color: var(--primary);
+    }
+
+    textarea.form-control {
+        resize: vertical;
+        min-height: 100px;
+    }
+
+    /* Input Group */
+    .input-group {
+        display: flex;
+        align-items: stretch;
+    }
+
+    .input-group-text {
+        background: var(--gray);
+        border: 2px solid var(--border);
+        border-right: none;
+        border-radius: 12px 0 0 12px;
+        padding: 0.75rem 1rem;
+        font-weight: 600;
+        color: var(--primary);
+    }
+
+    .input-group .form-control {
+        border-radius: 0 12px 12px 0;
+        border-left: none;
+    }
+
+    .input-group .form-control:focus {
+        border-left: none;
+    }
+
+    /* Form Text */
+    .form-text,
+    .text-muted {
+        font-size: 0.75rem;
+        color: #999999 !important;
+        margin-top: 0.5rem;
+        display: block;
+    }
+
+    /* Multi Image Picker */
+    #multi_image_picker {
+        display: flex !important;
+        overflow-x: auto;
+        gap: 1rem;
+        padding: 1.5rem;
+        max-width: 100%;
+        background: var(--gray);
+        border-radius: 12px;
+        border: 2px dashed var(--primary);
+        min-height: 150px;
+        align-items: flex-start;
+    }
+    
+    #multi_image_picker .spartan_item {
+        flex: 0 0 auto;
+        width: 120px;
+        height: 120px;
+        border-radius: 12px;
+        overflow: hidden;
+        border: 2px solid var(--border);
+    }
+
+    /* Variant Items */
+    .variant-item {
+        border-left: 3px solid var(--primary) !important;
+        border-radius: 12px;
+        margin-bottom: 1rem;
+        background: var(--light);
+        padding: 1.25rem;
+        border: 1px solid var(--border);
+        transition: all 0.3s ease;
+    }
+
+    .variant-item:hover {
+        border-color: var(--primary);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    }
+
+    /* ===== ESTILOS DE BOTONES - NEGRO CON HOVER DORADO ===== */
+    
+    /* Botón primario - Crear Producto */
+    .btn-primary {
+        background: var(--secondary);
+        color: var(--light);
+        border: 2px solid var(--primary);
+        padding: 0.75rem 2rem;
+        border-radius: 12px;
+        font-size: 1rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+
+    .btn-primary:hover {
+        background: var(--primary);
+        color: var(--secondary);
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(255, 215, 0, 0.3);
+    }
+
+    .btn-primary:active {
+        transform: translateY(0);
+    }
+
+    /* Botón secundario - Cancelar */
+    .btn-secondary {
+        background: var(--secondary);
+        color: var(--light);
+        border: 2px solid var(--primary);
+        padding: 0.75rem 2rem;
+        border-radius: 12px;
+        font-size: 1rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+
+    .btn-secondary:hover {
+        background: var(--primary);
+        color: var(--secondary);
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(255, 215, 0, 0.3);
+    }
+
+    .btn-secondary:active {
+        transform: translateY(0);
+    }
+
+    /* Botón de agregar variante */
+    .btn-agregar {
+        background: var(--secondary);
+        color: var(--light);
+        border: 2px solid var(--primary);
+        padding: 0.75rem 1.5rem;
+        border-radius: 12px;
+        font-size: 0.95rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+
+    .btn-agregar:hover {
+        background: var(--primary);
+        color: var(--secondary);
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(255, 215, 0, 0.3);
+    }
+
+    .btn-agregar:active {
+        transform: translateY(0);
+    }
+
+    /* Botón de eliminar variante */
+    .btn-danger {
+        background: var(--secondary);
+        color: var(--light);
+        border: 2px solid var(--danger);
+        padding: 0.5rem 1rem;
+        border-radius: 8px;
+        font-size: 0.875rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        justify-content: center;
+    }
+
+    .btn-danger:hover {
+        background: var(--danger);
+        color: var(--light);
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(239, 68, 68, 0.3);
+    }
+
+    .btn-danger:active {
+        transform: translateY(0);
+    }
+
+    /* Button Group */
+    .button-group {
+        display: flex;
+        gap: 1rem;
+        margin-top: 2rem;
+        padding-top: 1.5rem;
+        border-top: 1px solid var(--border);
+    }
+
+    /* Contenido variantes */
+    #contenido {
+        min-height: 80px;
+        max-height: 500px;
+        overflow-y: auto;
+        background: var(--gray) !important;
+        border-radius: 12px;
+        padding: 1rem;
+    }
+
+    /* Row spacing */
+    .row {
+        margin-bottom: 0;
+    }
+    
+    .mb-3 {
+        margin-bottom: 1rem;
+    }
+    
+    .mt-3 {
+        margin-top: 1rem;
+    }
+
+    /* Error Messages */
+    .error-messages {
+        background: #fff9e6;
+        border-left: 4px solid var(--primary);
+        color: var(--secondary);
+        padding: 1rem;
+        border-radius: 12px;
+        margin-bottom: 1.5rem;
+        border: 1px solid rgba(255, 215, 0, 0.2);
+    }
+
+    .error-messages ul {
+        margin: 0;
+        padding-left: 1.5rem;
+    }
+
+    .error-messages li {
+        margin-bottom: 0.5rem;
+    }
+
+    /* Placeholder styling */
+    .form-control::placeholder,
+    textarea::placeholder {
+        color: #cccccc;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+        .page-header {
+            padding: 1.5rem;
         }
-
-        .header-section {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 40px;
-            border-radius: 10px;
-            margin-bottom: 40px;
-            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        
+        .page-header h1 {
+            font-size: 1.8rem;
         }
-
-        .header-section h1 {
-            font-weight: 700;
-            margin-bottom: 10px;
-            font-size: 2.5rem;
-        }
-
-        .header-section p {
-            margin-bottom: 0;
-            font-size: 1.05rem;
-            opacity: 0.95;
-        }
-
+        
         .form-container {
-            background: white;
-            border-radius: 10px;
-            padding: 40px;
-            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
-            margin-bottom: 30px;
+            padding: 1.25rem;
         }
-
-        .form-section {
-            margin-bottom: 35px;
-            padding-bottom: 25px;
-            border-bottom: 2px solid #f0f0f0;
-        }
-
-        .form-section:last-child {
-            border-bottom: none;
-        }
-
+        
         .form-section-title {
-            font-size: 1.3rem;
-            font-weight: 700;
-            color: #667eea;
-            margin-bottom: 20px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
+            font-size: 1rem;
         }
-
-        .form-label {
-            font-weight: 600;
-            color: #2c3e50;
-            margin-bottom: 10px;
-            display: block;
-        }
-
-        .form-control, .form-select {
-            border: 2px solid #e9ecef;
-            border-radius: 8px;
-            padding: 12px 15px;
-            transition: all 0.3s ease;
-            font-size: 0.95rem;
-        }
-
-        .form-control:focus, .form-select:focus {
-            border-color: #667eea;
-            box-shadow: 0 0 0 0.2rem rgba(102, 126, 234, 0.25);
-        }
-
-        .form-text {
-            font-size: 0.85rem;
-            color: #7f8c8d;
-            margin-top: 5px;
-        }
-
-        .row {
-            margin-bottom: 15px;
-        }
-
-        .row .col {
-            margin-bottom: 0;
-        }
-
-        /* Contenedor horizontal con scroll para las imágenes */
-        #multi_image_picker {
-            display: flex !important;
-            overflow-x: auto;
-            gap: 10px;
-            padding: 15px;
-            max-width: 100%;
-            background: #f8f9fa;
-            border-radius: 8px;
-            border: 2px dashed #667eea;
-            min-height: 140px;
-            align-items: flex-start;
-        }
-
-        /* Para que cada imagen tenga un tamaño fijo y se vea bien */
-        #multi_image_picker .spartan_item {
-            flex: 0 0 auto;
-            width: 120px;
-            height: 120px;
-        }
-
-        .variant-item {
-            border-left: 4px solid #667eea !important;
-            transition: all 0.3s ease;
-        }
-
-        .variant-item:hover {
-            box-shadow: 0 2px 8px rgba(102, 126, 234, 0.2);
-        }
-
-        #contenido {
-            min-height: 80px;
-            max-height: 600px;
-            overflow-y: auto;
-        }
-
-        #contenido .variant-item {
-            margin-bottom: 0;
-        }
-
-        .btn-primary, .btn-secondary {
-            padding: 12px 30px;
-            border-radius: 8px;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            border: none;
-            margin-right: 10px;
-        }
-
-        .btn-primary {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-        }
-
-        .btn-primary:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
-            color: white;
-        }
-
-        .btn-secondary {
-            background: #95a5a6;
-            color: white;
-        }
-
-        .btn-secondary:hover {
-            background: #7f8c8d;
-            transform: translateY(-3px);
-            color: white;
-        }
-
-        .input-group-text {
-            background: #f8f9fa;
-            border: 2px solid #e9ecef;
-            color: #667eea;
-            font-weight: 600;
-        }
-
+        
         .button-group {
-            display: flex;
-            gap: 10px;
-            margin-top: 25px;
-            padding-top: 25px;
-            border-top: 2px solid #f0f0f0;
+            flex-direction: column;
+        }
+        
+        .button-group .btn-primary,
+        .button-group .btn-secondary {
+            width: 100%;
+            justify-content: center;
         }
 
-        @media (max-width: 768px) {
-            .header-section {
-                padding: 25px;
-            }
-
-            .header-section h1 {
-                font-size: 1.8rem;
-            }
-
-            .form-container {
-                padding: 20px;
-            }
-
-            .form-section-title {
-                font-size: 1.1rem;
-            }
-
-            .button-group {
-                flex-direction: column;
-            }
-
-            .button-group .btn {
-                width: 100%;
-            }
+        .variant-item .row > div {
+            margin-bottom: 1rem;
         }
-    </style>
-</head>
-<body>
 
-<div class="container mt-5 mb-5">
+        .variant-item .row > div:last-child {
+            margin-bottom: 0;
+        }
+
+        .btn-agregar {
+            width: 100%;
+            justify-content: center;
+        }
+    }
+
+    /* Animations */
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+            transform: translateY(10px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    .form-container {
+        animation: fadeIn 0.4s ease;
+    }
+</style>
+
+<!-- Font Awesome Icons -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<!-- Bootstrap 5 CSS -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<!-- Spartan Multi Image Picker -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/spartan-multi-image-picker/dist/css/spartan-multi-image-picker.min.css">
+<script src="https://cdn.jsdelivr.net/npm/spartan-multi-image-picker/dist/js/spartan-multi-image-picker.min.js"></script>
+
+<main class="container mt-4 mb-5">
     
     <!-- HEADER -->
-    <div class="header-section">
-        <h1><i class="bi bi-plus-circle"></i> Crear Producto</h1>
+    <div class="page-header">
+        <h1>
+            <i class="fas fa-plus-circle"></i> Crear Producto
+        </h1>
         <p>Agrega nuevos productos a tu tienda de forma rápida y sencilla</p>
     </div>
 
@@ -436,20 +682,24 @@ $colores = $resultado->fetchAll(PDO::FETCH_ASSOC);
             
             <!-- INFORMACIÓN BÁSICA -->
             <div class="form-section">
-                <h6 class="form-section-title"><i class="bi bi-info-circle"></i> Información Básica</h6>
+                <h3 class="form-section-title"><i class="fas fa-info-circle"></i> Información Básica</h3>
                 
-                <label class="form-label">Título del Producto *</label>
-                <input type="text" class="form-control" name="titulo" id="titulo" placeholder="Ej: Camiseta Azul Premium" data-validation-type="titulo" required />
-                <small class="text-muted d-block mt-1">🔒 3-100 caracteres</small>
+                <div class="form-group">
+                    <label class="form-label">Título del Producto *</label>
+                    <input type="text" class="form-control" name="titulo" id="titulo" placeholder="Ej: Camiseta Azul Premium" data-validation-type="titulo" required />
+                    <small class="form-text">🔒 3-100 caracteres</small>
+                </div>
                  
-                <label class="form-label mt-3">Descripción</label>
-                <textarea class="form-control" id="descripcion" name="descripcion" placeholder="Describe los detalles del producto..." data-validation-type="descripcion"></textarea>
-                <small class="text-muted d-block mt-1">🔒 10-5000 caracteres</small>
+                <div class="form-group mt-3">
+                    <label class="form-label">Descripción</label>
+                    <textarea class="form-control" id="descripcion" name="descripcion" placeholder="Describe los detalles del producto..." data-validation-type="descripcion" rows="4"></textarea>
+                    <small class="form-text">🔒 10-5000 caracteres</small>
+                </div>
             </div>
 
             <!-- PRECIOS Y STOCK -->
             <div class="form-section">
-                <h6 class="form-section-title"><i class="bi bi-cash-coin"></i> Precios y Stock</h6>
+                <h3 class="form-section-title"><i class="fas fa-cash-coin"></i> Precios y Stock</h3>
                 
                 <div class="row">
                     <!-- PRECIO -->
@@ -459,7 +709,7 @@ $colores = $resultado->fetchAll(PDO::FETCH_ASSOC);
                             <span class="input-group-text">$</span>
                             <input type="number" class="form-control" name="precio" id="precio" min="0" step="0.01" placeholder="0.00" data-validation-type="precio" required />
                         </div>
-                        <small class="text-muted d-block mt-1">🔒 Solo números positivos, máx 2 decimales</small>
+                        <small class="form-text">🔒 Solo números positivos, máx 2 decimales</small>
                     </div>
 
                     <!-- DESCUENTO -->
@@ -475,104 +725,116 @@ $colores = $resultado->fetchAll(PDO::FETCH_ASSOC);
                     <div class="col-md-12 mb-3">
                         <label class="form-label">Stock *</label>
                         <input type="number" class="form-control" name="stock" id="stock" placeholder="Cantidad disponible" data-validation-type="stock" required />
-                        <small class="text-muted d-block mt-1">🔒 Solo números enteros positivos</small>
+                        <small class="form-text">🔒 Solo números enteros positivos</small>
                     </div>
                 </div>
             </div>
 
             <!-- IMÁGENES -->
             <div class="form-section">
-                <h6 class="form-section-title"><i class="bi bi-image"></i> Imágenes</h6>
+                <h3 class="form-section-title"><i class="fas fa-image"></i> Imágenes</h3>
                 
-                <label class="form-label">Imagen Principal *</label>
-                <input type="file" class="form-control" name="imagen" id="imagen" accept="image/*" required />
-                <small class="form-text">Formatos: JPG, PNG, GIF, WEBP. Máximo: 2MB</small>
+                <div class="form-group">
+                    <label class="form-label">Imagen Principal *</label>
+                    <input type="file" class="form-control" name="imagen" id="imagen" accept="image/*" required />
+                    <small class="form-text">Formatos: JPG, PNG, GIF, WEBP. Máximo: 2MB</small>
+                </div>
 
-                <label class="form-label mt-3">Imágenes Adicionales</label>
-                <div id="multi_image_picker"></div>
-                <small class="form-text">Arrastra o haz clic para agregar más imágenes</small>
+                <div class="form-group mt-3">
+                    <label class="form-label">Imágenes Adicionales</label>
+                    <div id="multi_image_picker"></div>
+                    <small class="form-text">Arrastra o haz clic para agregar más imágenes</small>
+                </div>
             </div>
 
             <!-- CATEGORÍA Y ESTADO -->
             <div class="form-section">
-                <h6 class="form-section-title"><i class="bi bi-tag"></i> Categoría y Estado</h6>
+                <h3 class="form-section-title"><i class="fas fa-tag"></i> Categoría y Estado</h3>
                 
-                <label class="form-label">Categoría *</label>
-                <select class="form-select" name="categoria" id="categoria" required>
-                    <option value="">-- Seleccionar Categoría --</option>
-                    <?php foreach ($categorias as $categoria): ?>
-                        <option value="<?= $categoria['id'] ?>"><?= htmlspecialchars($categoria['nombre']) ?></option>
-                    <?php endforeach; ?>
-                </select>
+                <div class="form-group">
+                    <label class="form-label">Categoría *</label>
+                    <select class="form-select" name="categoria" id="categoria" required>
+                        <option value="">-- Seleccionar Categoría --</option>
+                        <?php foreach ($categorias as $categoria): ?>
+                            <option value="<?= $categoria['id'] ?>"><?= htmlspecialchars($categoria['nombre']) ?></option>
+                        <?php endforeach; ?>
+                    </select>
+                </div>
+
+                <div class="form-group mt-3">
+                    <label class="form-label">Estado del Producto</label>
+                    <select class="form-select" name="activo" id="activo" required>
+                        <option value="1">Disponible para la venta</option>
+                        <option value="0">Agotado</option>
+                    </select>
+                </div>
             </div>
+
             <!-- VARIANTES -->
             <div class="form-section">
-                <h6 class="form-section-title"><i class="bi bi-diagram-3"></i> Variantes Producto</h6>
-                <p class="text-muted">Agrega combinaciones de talla y color con sus precios y stocks</p>
+                <h3 class="form-section-title"><i class="fas fa-diagram-3"></i> Variantes Producto</h3>
+                <p class="form-text" style="margin-bottom: 1rem;">Agrega combinaciones de talla y color con sus precios y stocks</p>
                 
-                <button type="button" class="btn btn-primary mb-3" id="agregarVariante">
-                    <i class="bi bi-plus-circle"></i> Agregar Variante
+                <button type="button" class="btn-agregar mb-3" id="agregarVariante">
+                    <i class="fas fa-plus-circle"></i> Agregar Variante
                 </button>
 
-                <div id="contenido" class="bg-light p-3 rounded">
+                <div id="contenido">
                     <!-- Aquí se agregarán las variantes dinámicamente -->
                 </div>
 
                 <template id="plantilla_Variante">
-                    <div class="row mb-3 p-3 bg-white border rounded variant-item">
-                        <div class="col-lg-3">
-                            <label class="form-label">Talla *</label>
-                            <select class="form-select" name="talla[]" required>
-                               <option value="">-- Seleccionar Talla --</option>
-                                <?php foreach ($tallas as $talla): ?>
-                                    <option value="<?= $talla['id'] ?>"><?= htmlspecialchars($talla['nombre']) ?></option>
-                                <?php endforeach; ?>
-                            </select>
-                        </div>
-                        <div class="col-lg-3">
-                            <label class="form-label">Color *</label>
-                            <select class="form-select" name="color[]" required>
-                                <option value="">-- Seleccionar Color --</option>
+                    <div class="variant-item">
+                        <div class="row">
+                            <div class="col-lg-3 col-md-6 mb-3 mb-md-0">
+                                <label class="form-label">Talla *</label>
+                                <select class="form-select" name="talla[]" required>
+                                    <option value="">-- Seleccionar Talla --</option>
+                                    <?php foreach ($tallas as $talla): ?>
+                                        <option value="<?= $talla['id'] ?>"><?= htmlspecialchars($talla['nombre']) ?></option>
+                                    <?php endforeach; ?>
+                                </select>
+                            </div>
+                            <div class="col-lg-3 col-md-6 mb-3 mb-md-0">
+                                <label class="form-label">Color *</label>
+                                <select class="form-select" name="color[]" required>
+                                    <option value="">-- Seleccionar Color --</option>
                                     <?php foreach ($colores as $color): ?>
                                         <option value="<?= $color['id'] ?>"><?= htmlspecialchars($color['nombre']) ?></option>
                                     <?php endforeach; ?>
-                            </select>
-                        </div>
-                        <div class="col-lg-2">
-                            <label class="form-label">Precio ($)</label>
-                            <input type="number" class="form-control" name="precio_variante[]" min="0" step="0.01" placeholder="0.00" data-validation-type="precio" value="0" required />
-                        </div>
-                        <div class="col-lg-2">
-                            <label class="form-label">Stock</label>
-                            <input type="number" class="form-control" name="stock_variante[]" min="0" placeholder="0" data-validation-type="stock" value="0" required />
-                        </div>
-                        <div class="col-lg-2 d-flex align-items-end">
-                            <button type="button" class="btn btn-danger btn-sm w-100" onclick="this.closest('.variant-item').remove()">
-                                <i class="bi bi-trash"></i> Eliminar
-                            </button>
+                                </select>
+                            </div>
+                            <div class="col-lg-2 col-md-4 mb-3 mb-md-0">
+                                <label class="form-label">Precio ($)</label>
+                                <input type="number" class="form-control" name="precio_variante[]" min="0" step="0.01" placeholder="0.00" data-validation-type="precio" value="0" required />
+                            </div>
+                            <div class="col-lg-2 col-md-4 mb-3 mb-md-0">
+                                <label class="form-label">Stock</label>
+                                <input type="number" class="form-control" name="stock_variante[]" min="0" placeholder="0" data-validation-type="stock" value="0" required />
+                            </div>
+                            <div class="col-lg-2 col-md-4 d-flex align-items-end">
+                                <button type="button" class="btn-danger w-100" onclick="this.closest('.variant-item').remove()">
+                                    <i class="fas fa-trash"></i> Eliminar
+                                </button>
+                            </div>
                         </div>
                     </div>    
                 </template>
             </div>
-             <label class="form-label mt-3">Estado del Producto</label>
-                <select class="form-select" name="activo" id="activo" required>
-                    <option value="1">Disponible para la venta</option>
-                    <option value="0">Agotado</option>
-                </select>
 
             <!-- BOTONES -->
             <div class="button-group">
-                <button type="submit" class="btn btn-primary">
-                    <i class="bi bi-check-circle"></i> Crear Producto
+                <button type="submit" class="btn-primary">
+                    <i class="fas fa-check-circle"></i> Crear Producto
                 </button>
-                <a href="index.php?mod=gestionarProductos" class="btn btn-secondary">
-                    <i class="bi bi-x-circle"></i> Cancelar
+                <a href="index.php?mod=gestionarProductos" class="btn-secondary">
+                    <i class="fas fa-times-circle"></i> Cancelar
                 </a>
             </div>
         </form>
     </div>
 
-</div>
+</main>
 
 <script>
     $(document).ready(function() {
@@ -622,21 +884,10 @@ $colores = $resultado->fetchAll(PDO::FETCH_ASSOC);
     }
 </script>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
 <!-- Sistema de Validaciones -->
 <script src="../../assets/js/validaciones.js"></script>
 
 <script>
-    const btnVariante = document.getElementById('agregarVariante');
-    btnVariante.addEventListener('click', agregar_Variante);
-    
-    function agregar_Variante() {
-        const plantilla = document.getElementById('plantilla_Variante');
-        const contenido = document.getElementById('contenido');
-        const clone = plantilla.content.cloneNode(true);
-        contenido.appendChild(clone);
-    }
-
     // Mejorar validación del formulario
     document.addEventListener('DOMContentLoaded', function() {
         document.getElementById('formProducto').addEventListener('submit', function(e) {
@@ -649,60 +900,55 @@ $colores = $resultado->fetchAll(PDO::FETCH_ASSOC);
             // Validar campos requeridos
             if (!titulo) {
                 e.preventDefault();
-                AlertSystem.error('Título Requerido', '❌ El título del producto es obligatorio');
+                alert('❌ El título del producto es obligatorio');
                 return false;
             }
 
             // Validar rango de título
-            const validarTitulo = ValidationSystem.validar(titulo, 'titulo', 'Título');
-            if (validarTitulo !== true) {
-                e.preventDefault();
-                AlertSystem.error('Validación Título', validarTitulo.mensaje);
-                return false;
-            }
-
-            // Validar descripción si existe
-            if (descripcion && descripcion.length > 0) {
-                const validarDesc = ValidationSystem.validar(descripcion, 'descripcion', 'Descripción');
-                if (validarDesc !== true) {
+            if (typeof ValidationSystem !== 'undefined') {
+                const validarTitulo = ValidationSystem.validar(titulo, 'titulo', 'Título');
+                if (validarTitulo !== true) {
                     e.preventDefault();
-                    AlertSystem.error('Validación Descripción', validarDesc.mensaje);
+                    alert(validarTitulo.mensaje);
                     return false;
                 }
-            }
 
-            // Validar precio
-            if (precio <= 0) {
-                e.preventDefault();
-                AlertSystem.error('Precio Inválido', '❌ El precio debe ser mayor a 0');
-                return false;
-            }
+                // Validar descripción si existe
+                if (descripcion && descripcion.length > 0) {
+                    const validarDesc = ValidationSystem.validar(descripcion, 'descripcion', 'Descripción');
+                    if (validarDesc !== true) {
+                        e.preventDefault();
+                        alert(validarDesc.mensaje);
+                        return false;
+                    }
+                }
 
-            const validarPrecio = ValidationSystem.validar(precio.toString(), 'precio', 'Precio');
-            if (validarPrecio !== true) {
-                e.preventDefault();
-                AlertSystem.error('Validación Precio', validarPrecio.mensaje);
-                return false;
+                // Validar precio
+                if (precio <= 0) {
+                    e.preventDefault();
+                    alert('❌ El precio debe ser mayor a 0');
+                    return false;
+                }
+
+                const validarPrecio = ValidationSystem.validar(precio.toString(), 'precio', 'Precio');
+                if (validarPrecio !== true) {
+                    e.preventDefault();
+                    alert(validarPrecio.mensaje);
+                    return false;
+                }
             }
 
             // Validar descuento
             if (descuento < 0 || descuento > 100) {
                 e.preventDefault();
-                AlertSystem.error('Descuento Inválido', '❌ El descuento debe estar entre 0 y 100');
+                alert('❌ El descuento debe estar entre 0 y 100');
                 return false;
             }
 
             // Validar stock
             if (stock < 0) {
                 e.preventDefault();
-                AlertSystem.error('Stock Inválido', '❌ El stock no puede ser negativo');
-                return false;
-            }
-
-            const validarStock = ValidationSystem.validar(stock.toString(), 'stock', 'Stock');
-            if (validarStock !== true) {
-                e.preventDefault();
-                AlertSystem.error('Validación Stock', validarStock.mensaje);
+                alert('❌ El stock no puede ser negativo');
                 return false;
             }
 
@@ -723,15 +969,9 @@ $colores = $resultado->fetchAll(PDO::FETCH_ASSOC);
 
             if (variantItems.length > 0 && !variantsValid) {
                 e.preventDefault();
-                AlertSystem.warning('Variantes Incompletas', '⚠️ Completa al menos una variante con Talla, Color y (Precio o Stock)');
+                alert('⚠️ Completa al menos una variante con Talla, Color y (Precio o Stock)');
                 return false;
             }
-
-            // Si todo es válido, mostrar confirmación
-            AlertSystem.exito('Validación Correcta', '✅ Creando producto...', 1500);
         });
     });
 </script>
-</body>
-</html>
-

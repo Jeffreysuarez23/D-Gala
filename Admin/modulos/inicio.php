@@ -7,28 +7,6 @@ $api_url = $protocol . $host . '/e-comerse2/Admin/include/api_dashboard.php';
 ?>
 
 <div class="title-wrapper pt-30">
-            <div class="row align-items-center">
-              <div class="col-md-6">
-                <div class="title">
-                  <h2>Dashboard de Tienda</h2>
-                </div>
-              </div>
-              <div class="col-md-6">
-                <div class="breadcrumb-wrapper">
-                  <nav aria-label="breadcrumb">
-                    <ol class="breadcrumb">
-                      <li class="breadcrumb-item">
-                        <a href="#0">Inicio</a>
-                      </li>
-                      <li class="breadcrumb-item active" aria-current="page">
-                        Resumen General
-                      </li>
-                    </ol>
-                  </nav>
-                </div>
-              </div>
-            </div>
-          </div>
           <div class="row">
             <div class="col-xl-3 col-lg-4 col-sm-6">
               <div class="icon-card mb-30">

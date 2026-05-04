@@ -482,7 +482,7 @@ $num_cart = getCartTotal();
                         <button class="btn-user-premium" type="button" id="userMenuButton"
                                 aria-haspopup="true" aria-expanded="false">
                             <i class="bi bi-person-circle"></i>
-                            <?php echo htmlspecialchars($_SESSION['user_name']); ?>
+                            <?php echo htmlspecialchars(explode(' ', trim($_SESSION['user_name']))[0]); ?>
                         </button>
                         <div class="dropdown-menu-premium" id="userDropdown" role="menu">
                             <a class="dropdown-item-premium" href="<?php echo SITE_URL; ?>/public/mi_cuenta.php">
@@ -540,7 +540,7 @@ $num_cart = getCartTotal();
                         <button class="btn-user-premium" type="button" id="userMenuButtonMobile"
                                 aria-haspopup="true" aria-expanded="false">
                             <i class="bi bi-person-circle"></i>
-                            <?php echo htmlspecialchars($_SESSION['user_name']); ?>
+                            <?php echo htmlspecialchars(explode(' ', trim($_SESSION['user_name']))[0]); ?>
                         </button>
                         <div class="dropdown-menu-premium" id="userDropdownMobile" role="menu">
                             <a class="dropdown-item-premium" href="<?php echo SITE_URL; ?>/public/mi_cuenta.php">
